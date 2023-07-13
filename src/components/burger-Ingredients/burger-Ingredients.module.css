@@ -1,5 +1,41 @@
-.page{
-    width: 600px;
-    height: 912px;
+.page {
     border: solid red;
+}
+
+.ul {
+    padding: 0;
+    margin: 0;
+}
+
+.containerContent {
+    border: solid red;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;
+
+}
+
+.content {
+    width: 272px;
+    height: 208px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    max-width: 240px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.price {
+    display: flex;
+    margin: 0 auto;
+}
+
+.text {
+    text-align: center;
 }
