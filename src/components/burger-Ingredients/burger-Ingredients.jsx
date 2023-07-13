@@ -31,7 +31,7 @@ const BurgerIngredients = () => {
                 Соберите бургер
             </h1>
             <Tabs></Tabs>
-            <ul className={BurgerIngredientsStyles.li}>
+            <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
             <li className={BurgerIngredientsStyles.ul} >
                 <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
                 <div className={BurgerIngredientsStyles.containerContent}>
