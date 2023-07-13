@@ -5,6 +5,14 @@
 .ul {
     padding: 0;
     margin: 0;
+    max-height: 600px;
+    list-style: none;
+}
+
+.li{
+overflow: auto;
+padding: 0;
+margin: 0;
 }
 
 .containerContent {
@@ -34,6 +42,7 @@
 .price {
     display: flex;
     margin: 0 auto;
+    gap: 8px;
 }
 
 .text {

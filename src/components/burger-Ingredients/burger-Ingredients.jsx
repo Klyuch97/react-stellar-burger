@@ -2,7 +2,7 @@ import React from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import { data } from "../../utils/data";
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 const buns = data.filter((item) => item.type === 'bun');
@@ -12,7 +12,7 @@ const mains = data.filter((item) => item.type === 'main');
 const Ingredients = ({ data }) => {
     return (
 
-        <div className={`${BurgerIngredientsStyles.content}`}>
+        <div className={`${BurgerIngredientsStyles.content} `}>
             <img className={BurgerIngredientsStyles.image} src={data.image}></img>
             <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
                 <p className="text text_type_digits-default">{data.price}</p>
@@ -31,17 +31,25 @@ const BurgerIngredients = () => {
                 Соберите бургер
             </h1>
             <Tabs></Tabs>
-            <ul className={BurgerIngredientsStyles.ul}>
+            <ul className={BurgerIngredientsStyles.li}>
+            <li className={BurgerIngredientsStyles.ul} >
                 <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
                 <div className={BurgerIngredientsStyles.containerContent}>
                     {buns.map((data) => (< Ingredients data={data} key={buns} />))}
-                </div> </ul>
-
-                <ul className={BurgerIngredientsStyles.ul}>
+                </div> </li>
+                <li className={BurgerIngredientsStyles.ul}>
                 <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                 <div className={BurgerIngredientsStyles.containerContent}>
                     {sauces.map((data) => (< Ingredients data={data} key={buns} />))}
                 </div>
+                </li>
+
+                <li className={BurgerIngredientsStyles.ul}>
+                <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
+                <div className={BurgerIngredientsStyles.containerContent}>
+                    {mains.map((data) => (< Ingredients data={data} key={buns} />))}
+                </div>
+                </li>
                 </ul>
         </section>
     )
