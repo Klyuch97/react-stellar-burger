@@ -6,7 +6,8 @@ import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
 
 
 const additives= [...sauces, ...mains];
-const Ingridients = ({data})=>{
+
+const IngridientsAdditives = ({data})=>{
     return ( <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
                 <DragIcon type="primary" />
                 <ConstructorElement
@@ -18,30 +19,32 @@ const Ingridients = ({data})=>{
             )
 }
 
+
 const BurgerConstructor = () => {
     return (
             <section className={BurgerConstructorStyles.page}>
                 <div className="pt-25 pb-10">
                     <div className="pl-8 mb-4">
-                        <ConstructorElement
+                        {buns.map((data)=>( <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
+                            text={`${data.name} (верх)`}
+                            price={data.price}
+                        thumbnail={data.image}
+                        />))}
+                       
                     </div>
                     <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-{additives.map((data)=>(<Ingridients data={data}/>))}
+{additives.map((data)=>(<IngridientsAdditives data={data}/>))}
                 </ul>
                 <div className="pl-8 mt-4">
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={200}
-                    //thumbnail={img}
-                    />
+                {buns.map((data)=>( <ConstructorElement
+                             type="bottom"
+                            isLocked={true}
+                            text={`${data.name} (низ)`}
+                            price={data.price}
+                        thumbnail={data.image}
+                        />))}
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
