@@ -9,7 +9,7 @@
 
 .main{
   display: flex;
-  width: 64.59%;
+  max-width: 1440px;
   gap: 40px;
   margin: 0 auto;
 }

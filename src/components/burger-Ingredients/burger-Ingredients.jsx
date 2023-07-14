@@ -35,24 +35,24 @@ const BurgerIngredients = () => {
             <h1 className='text text_type_main-large mt-10 pb-5'>
                 Соберите бургер
             </h1>
-            <Tabs></Tabs>
+            <Tabs/>
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {buns.map((data) => (< Ingredients data={data} key={buns} />))}
+                        {buns.map((data) => (< Ingredients data={data} key={buns.type} />))}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {sauces.map((data) => (< Ingredients data={data} key={sauces.id} />))}
+                        {sauces.map((data) => (< Ingredients data={data} key={sauces.type} />))}
                     </div>
                 </li>
 
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {mains.map((data) => (< Ingredients data={data} key={mains.id} />))}
+                        {mains.map((data) => (< Ingredients data={data} key={mains.type} />))}
                     </div>
                 </li>
             </ul>

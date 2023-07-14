@@ -3,21 +3,10 @@ import BurgerConstructorStyles from '../burger-constructor/burger-constructor.mo
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { data } from '../../utils/data';
 import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
+import IngridientsAdditives from './ingridients-additives/ingridients-additives';
 
 
 const additives = [...sauces, ...mains];
-
-const IngridientsAdditives = ({ data }) => {
-    return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-        <DragIcon type="primary" />
-        <ConstructorElement
-            text={data.name}
-            price={data.price}
-            thumbnail={data.image}
-        />
-    </li>
-    )
-}
 
 
 const BurgerConstructor = () => {
@@ -32,16 +21,15 @@ const BurgerConstructor = () => {
                         price={buns[0].price}
                         thumbnail={buns[0].image}
                     />
-
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {additives.map((data) => (<IngridientsAdditives data={data} />))}
+                    {additives.map((data) => (<IngridientsAdditives data={data} key={additives.type} />))}
                 </ul>
                 <div className="pl-8 mt-4">
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
-                        text={`${buns[0].name} (верх)`}
+                        text={`${buns[0].name} (низ)`}
                         price={buns[0].price}
                         thumbnail={buns[0].image}
                     />
@@ -61,5 +49,3 @@ const BurgerConstructor = () => {
 }
 export default BurgerConstructor
 
-//в бургер конструктор сейчас должны данные передаваться из BurgerIngredients или это в следующей ветке?
-//Тот же вопрос по Counter, счетчик делать в след ветке?
