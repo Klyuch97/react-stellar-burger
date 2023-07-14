@@ -6,9 +6,9 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { ingredientPropType } from '../../utils/prop-types';
 import PropTypes from "prop-types";
 
-const buns = data.filter((item) => item.type === 'bun');
-const sauces = data.filter((item) => item.type === 'sauce');
-const mains = data.filter((item) => item.type === 'main');
+export const buns = data.filter((item) => item.type === 'bun');
+export const sauces = data.filter((item) => item.type === 'sauce');
+export const mains = data.filter((item) => item.type === 'main');
 
 
 const Ingredients = ({ data }) => {

@@ -1,69 +1,38 @@
 import React from 'react';
 import BurgerConstructorStyles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { data } from '../../utils/data';
+import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
+
+
+const additives= [...sauces, ...mains];
+const Ingridients = ({data})=>{
+    return ( <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                    text={data.name}
+                    price={data.price}
+                    thumbnail={data.image}
+                />
+            </li>
+            )
+}
 
 const BurgerConstructor = () => {
     return (
-        <section className={BurgerConstructorStyles.page}>
-            <div className="pt-25 pb-10">
-                <div className="pl-8 mb-4">
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={200}
-                    //thumbnail={img}
-                    />
-                </div>
-                <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
+            <section className={BurgerConstructorStyles.page}>
+                <div className="pt-25 pb-10">
+                    <div className="pl-8 mb-4">
                         <ConstructorElement
+                            type="top"
+                            isLocked={true}
                             text="Краторная булка N-200i (верх)"
                             price={200}
                         //thumbnail={img}
                         />
-                    </li>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
-                    </li>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
-                    </li>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
-                    </li>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
-                    </li>
-                    <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                        <DragIcon type="primary" />
-                        <ConstructorElement
-                            text="Краторная булка N-200i (верх)"
-                            price={200}
-                        //thumbnail={img}
-                        />
-                    </li>
+                    </div>
+                    <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
+{additives.map((data)=>(<Ingridients data={data}/>))}
                 </ul>
                 <div className="pl-8 mt-4">
                     <ConstructorElement
