@@ -1,7 +1,7 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyles from '../burger-constructor.module.css';
 
-const IngridientsAdditives = ({ data }) => {
+const Ingridients = ({ data }) => {
     return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
         <DragIcon type="primary" />
         <ConstructorElement
@@ -13,4 +13,4 @@ const IngridientsAdditives = ({ data }) => {
     )
 }
 
-export default IngridientsAdditives
+export default Ingridients

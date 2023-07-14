@@ -3,7 +3,7 @@ import BurgerConstructorStyles from '../burger-constructor/burger-constructor.mo
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { data } from '../../utils/data';
 import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
-import IngridientsAdditives from './ingridients-additives/ingridients-additives';
+import Ingridients from './ingridients-additives/ingridients-additives';
 
 
 const additives = [...sauces, ...mains];
@@ -23,7 +23,7 @@ const BurgerConstructor = () => {
                     />
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {additives.map((data) => (<IngridientsAdditives data={data} key={additives.type} />))}
+                    {additives.map((data) => (<Ingridients data={data} key={additives.type} />))}
                 </ul>
                 <div className="pl-8 mt-4">
                     <ConstructorElement
