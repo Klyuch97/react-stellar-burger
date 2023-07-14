@@ -5,46 +5,46 @@ import { data } from '../../utils/data';
 import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
 
 
-const additives= [...sauces, ...mains];
+const additives = [...sauces, ...mains];
 
-const IngridientsAdditives = ({data})=>{
-    return ( <li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                    text={data.name}
-                    price={data.price}
-                    thumbnail={data.image}
-                />
-            </li>
-            )
+const IngridientsAdditives = ({ data }) => {
+    return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
+        <DragIcon type="primary" />
+        <ConstructorElement
+            text={data.name}
+            price={data.price}
+            thumbnail={data.image}
+        />
+    </li>
+    )
 }
 
 
 const BurgerConstructor = () => {
     return (
-            <section className={BurgerConstructorStyles.page}>
-                <div className="pt-25 pb-10">
-                    <div className="pl-8 mb-4">
-                        {buns.map((data)=>( <ConstructorElement
-                            type="top"
-                            isLocked={true}
-                            text={`${data.name} (верх)`}
-                            price={data.price}
-                        thumbnail={data.image}
-                        />))}
-                       
-                    </div>
-                    <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-{additives.map((data)=>(<IngridientsAdditives data={data}/>))}
+        <section className={BurgerConstructorStyles.page}>
+            <div className="pt-25 pb-10">
+                <div className="pl-8 mb-4">
+                    <ConstructorElement
+                        type="top"
+                        isLocked={true}
+                        text={`${buns[0].name} (верх)`}
+                        price={buns[0].price}
+                        thumbnail={buns[0].image}
+                    />
+
+                </div>
+                <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
+                    {additives.map((data) => (<IngridientsAdditives data={data} />))}
                 </ul>
                 <div className="pl-8 mt-4">
-                {buns.map((data)=>( <ConstructorElement
-                             type="bottom"
-                            isLocked={true}
-                            text={`${data.name} (низ)`}
-                            price={data.price}
-                        thumbnail={data.image}
-                        />))}
+                    <ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text={`${buns[0].name} (верх)`}
+                        price={buns[0].price}
+                        thumbnail={buns[0].image}
+                    />
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
