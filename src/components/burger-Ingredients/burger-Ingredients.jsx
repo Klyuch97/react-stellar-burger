@@ -6,10 +6,8 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { ingredientPropType } from '../../utils/prop-types';
 import PropTypes from "prop-types";
 
-export const buns = data.filter((item) => item.type === 'bun');
-export const sauces = data.filter((item) => item.type === 'sauce');
-export const mains = data.filter((item) => item.type === 'main');
-const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
+
+export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const Ingredients = ({ data }) => {
@@ -50,9 +48,9 @@ const BurgerIngredients = () => {
     }, [])
     const { ingrid, isLoading, hasError } = state;
 
-    const bunss = ingrid.filter((item) => item.type === 'bun');
-    const saucess = ingrid.filter((item) => item.type === 'sauce');
-    const mainss = ingrid.filter((item) => item.type === 'main');
+    const buns = ingrid.filter((item) => item.type === 'bun');
+    const sauces = ingrid.filter((item) => item.type === 'sauce');
+    const mains = ingrid.filter((item) => item.type === 'main');
 
     return (
         <section className={BurgerIngredientsStyles.page}>
@@ -69,7 +67,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            bunss.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            buns.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -79,7 +77,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            saucess.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            sauces.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
@@ -90,7 +88,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mainss.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            mains.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div>
                 </li>
             </ul>

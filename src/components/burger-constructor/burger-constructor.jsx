@@ -1,37 +1,75 @@
 import React from 'react';
 import BurgerConstructorStyles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { data } from '../../utils/data';
-import { buns, sauces, mains } from '../burger-Ingredients/burger-Ingredients';
+import { baseUrl } from '../burger-Ingredients/burger-Ingredients';
 import Ingridients from './ingridients-additives/ingridients-additives';
 
 
-const additives = [...sauces, ...mains];
+
 
 const BurgerConstructor = () => {
+
+    const [state, setState] = React.useState({
+        isLoading: false,
+        hasError: false,
+        ingrid: []
+    });
+    React.useEffect(() => {
+        const Ingredients = async () => {
+            setState({ ...state, isLoading: true });
+            const res = await fetch(baseUrl);
+            const data = await res.json();
+            setState({ ingrid: data.data, isloading: false });
+        }
+
+        Ingredients();
+    }, [])
+    const { ingrid, isLoading, hasError } = state;
+
+    const buns = ingrid.filter((item) => item.type === 'bun');
+    const sauces = ingrid.filter((item) => item.type === 'sauce');
+    const mains = ingrid.filter((item) => item.type === 'main');
+    const additives = [...sauces, ...mains];
+
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
                 <div className="pl-8 mb-4">
-                    <ConstructorElement
+                {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                      <ConstructorElement
                         type="top"
                         isLocked={true}
                         text={`${buns[0].name} (верх)`}
                         price={buns[0].price}
                         thumbnail={buns[0].image}
-                    />
+                    />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {additives.map((data) => (<Ingridients data={data} key={additives.type} />))}
+                {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                            additives.map((ingrid, index) => <Ingridients key={index} data={ingrid} />)}
+                
                 </ul>
                 <div className="pl-8 mt-4">
-                    <ConstructorElement
-                        type="bottom"
+                {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                      <ConstructorElement
+                      type="bottom"
                         isLocked={true}
                         text={`${buns[0].name} (низ)`}
                         price={buns[0].price}
                         thumbnail={buns[0].image}
-                    />
+                    />}
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
