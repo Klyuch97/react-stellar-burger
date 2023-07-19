@@ -8,16 +8,14 @@ import ReactDOM from "react-dom";
 import React from "react";
 
 function App() {
-const [modalActive,setModalActive]=React.useState(false)
+
   return (
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
         <BurgerIngredients />
         <BurgerConstructor />
-        <div>
-          <Modal active={modalActive} setActive={setModalActive}><OrderDetails />
-          </Modal></div>
+        
       </main>
 
     </div>

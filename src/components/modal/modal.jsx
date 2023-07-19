@@ -6,15 +6,26 @@ import ModalOverLay from '../modal-overlay/modal-overlay';
 
 
 
-const Modal = ({ active, setActive, children }) => {
+const Modal = ({ children, onClose, active }) => {
+    React.useEffect(() => {
+        const closeEsc = (evt) => {
+            if (evt.key === "Escape") {
+                onClose();
+            }
+        };
+        document.addEventListener("keydown", closeEsc);
+
+        return () => document.removeEventListener("keydown", closeEsc);
+    }, [onClose]);
     const modals = document.getElementById('modals');
+    if (!active) { return null; }
 
     return ReactDOM.createPortal(
         <>
-            <div className={active ? ModalStyles.visibilityNone : ModalStyles.visibility}>
-                <ModalOverLay />
+            <div className={ModalStyles.visibility}>
+                <ModalOverLay onClose={onClose} />
                 <div className={ModalStyles.container}>
-                    <div className={ModalStyles.closeButton} onClick={()=>setActive(true)} >
+                    <div className={ModalStyles.closeButton} onClick={onClose} >
                         <CloseIcon type="primary" />
                     </div>
                     {children}

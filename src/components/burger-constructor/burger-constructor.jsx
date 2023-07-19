@@ -32,8 +32,10 @@ const BurgerConstructor = () => {
     const sauces = ingrid.filter((item) => item.type === 'sauce');
     const mains = ingrid.filter((item) => item.type === 'main');
     const additives = [...sauces, ...mains];
-
-  
+    const [modalActive, setModalActive] = React.useState(false);
+    const closeModal = () => {
+        setModalActive(false)
+    }
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
@@ -81,11 +83,15 @@ const BurgerConstructor = () => {
                     </div>
                     <Button htmlType="button"
                         type="primary"
-                        size="medium">
+                        size="medium"
+                        onClick={() => setModalActive(true)}>
                         Оформить заказ
                     </Button>
                 </div>
-
+                {
+                    modalActive && <Modal active={modalActive} onClose={closeModal}>
+                        <OrderDetails /></Modal>
+                }
             </div>
         </section>
     )

@@ -8,6 +8,7 @@
     display: block;
     left: 31.3%;
     top: 9.8%;
+    max-height: 700px;
 }
 
 .closeButton {
@@ -17,11 +18,9 @@
     cursor: pointer;
 }
 
-.visibilityNone{
-visibility: hidden;
+.closeButton:hover {
+    opacity: 0.5;
 }
-
-
 
 .visibility {
     visibility: visible;
