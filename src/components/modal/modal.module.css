@@ -1,0 +1,28 @@
+.container {
+    width: 37.5%;
+    border: solid red;
+    background: #1c1c21;
+    box-sizing: border-box;
+    border-radius: 40px;
+    position: fixed;
+    display: block;
+    left: 31.3%;
+    top: 9.8%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.visibilityNone{
+visibility: hidden;
+}
+
+
+
+.visibility {
+    visibility: visible;
+}
