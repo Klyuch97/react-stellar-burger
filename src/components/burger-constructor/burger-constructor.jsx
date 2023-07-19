@@ -8,7 +8,6 @@ import Ingridients from './ingridients-additives/ingridients-additives';
 
 const additives = [...sauces, ...mains];
 
-
 const BurgerConstructor = () => {
     return (
         <section className={BurgerConstructorStyles.page}>

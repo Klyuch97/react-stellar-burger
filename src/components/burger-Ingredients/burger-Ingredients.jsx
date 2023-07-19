@@ -9,9 +9,11 @@ import PropTypes from "prop-types";
 export const buns = data.filter((item) => item.type === 'bun');
 export const sauces = data.filter((item) => item.type === 'sauce');
 export const mains = data.filter((item) => item.type === 'main');
+const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const Ingredients = ({ data }) => {
+
     return (
         <div className={`${BurgerIngredientsStyles.content}`} >
             <Counter count={0} size="default" extraClass="m-1" />
@@ -25,34 +27,70 @@ const Ingredients = ({ data }) => {
     )
 }
 
-Ingredients.propTypes ={
-    data:ingredientPropType
+Ingredients.propTypes = {
+    data: ingredientPropType
 }
 
 const BurgerIngredients = () => {
+
+    const [state, setState] = React.useState({
+        isLoading: false,
+        hasError: false,
+        ingrid: []
+    });
+    React.useEffect(() => {
+        const Ingredients = async () => {
+            setState({ ...state, isLoading: true });
+            const res = await fetch(baseUrl);
+            const data = await res.json();
+            setState({ ingrid: data.data, isloading: false });
+        }
+
+        Ingredients();
+    }, [])
+    const { ingrid, isLoading, hasError } = state;
+
+    const bunss = ingrid.filter((item) => item.type === 'bun');
+    const saucess = ingrid.filter((item) => item.type === 'sauce');
+    const mainss = ingrid.filter((item) => item.type === 'main');
+
     return (
         <section className={BurgerIngredientsStyles.page}>
             <h1 className='text text_type_main-large mt-10 pb-5'>
                 Соберите бургер
             </h1>
-            <Tabs/>
+            <Tabs />
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {buns.map((data) => (< Ingredients data={data} key={buns.type} />))}
+                        {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                            bunss.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {sauces.map((data) => (< Ingredients data={data} key={sauces.type} />))}
+                        {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                            saucess.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div>
                 </li>
-
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {mains.map((data) => (< Ingredients data={data} key={mains.type} />))}
+                        {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
+                            mainss.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
                     </div>
                 </li>
             </ul>
