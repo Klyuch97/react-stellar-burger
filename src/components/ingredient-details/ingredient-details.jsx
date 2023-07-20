@@ -12,20 +12,20 @@ export const IngredientDetails = ({ data }) => {
                 <p className={"text text_type_main-medium mb-8 mt-4"}>{data.name}</p>
                 <div className={`${IngridDetailsStyles.items} mb-15`}>
                     <div className={IngridDetailsStyles.item}>
-                        <p className='text text_type_main-default'>Калории,ккал</p>
-                        <p className='text text_type_digits-default'>{data.calories}</p>
+                        <p className='text text_type_main-default text_color_inactive'>Калории,ккал</p>
+                        <p className='text text_type_digits-default text_color_inactive'>{data.calories}</p>
                     </div>
                     <div className={IngridDetailsStyles.item}>
-                        <p className='text text_type_main-default'>Белки, г</p>
-                        <p className='text text_type_digits-default'>{data.proteins}</p>
+                        <p className='text text_type_main-default text_color_inactive'>Белки, г</p>
+                        <p className='text text_type_digits-default text_color_inactive'>{data.proteins}</p>
                     </div>
                     <div className={IngridDetailsStyles.item}>
-                        <p className='text text_type_main-default'>Жиры, г</p>
-                        <p className='text text_type_digits-default'>{data.fat}</p>
+                        <p className='text text_type_main-default text_color_inactive'>Жиры, г</p>
+                        <p className='text text_type_digits-default text_color_inactive'>{data.fat}</p>
                     </div>
                     <div className={IngridDetailsStyles.item}>
-                        <p className='text text_type_main-default'>Углеводы, г</p>
-                        <p className='text text_type_digits-default'>
+                        <p className='text text_type_main-default text_color_inactive'>Углеводы, г</p>
+                        <p className='text text_type_digits-default text_color_inactive'>
                             {data.carbohydrates}</p>
                     </div>
                 </div>
