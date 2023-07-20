@@ -15,7 +15,6 @@ function App() {
       <main className={styles.main}>
         <BurgerIngredients />
         <BurgerConstructor />
-        
       </main>
 
     </div>

@@ -1,4 +1,6 @@
 import IngridDetailsStyles from './ingredient-details.module.css'
+import PropTypes from 'prop-types';
+import { ingredientPropType } from '../../utils/prop-types';
 
 
 export const IngredientDetails = ({ data }) => {
@@ -30,4 +32,8 @@ export const IngredientDetails = ({ data }) => {
             </div>
         </div>
     )
+}
+
+IngredientDetails.propTypes = {
+    data: ingredientPropType
 }
