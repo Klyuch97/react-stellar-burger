@@ -4,15 +4,20 @@ import Tabs from '../tabs/tabs';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../utils/prop-types';
 import PropTypes from "prop-types";
-
+import Modal from '../modal/modal';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const Ingredients = ({ data }) => {
-
+    const [modalActive, setModalActive] = React.useState(false);
+    const closeModal = () => {
+        setModalActive(false)
+    }
     return (
-        <div className={`${BurgerIngredientsStyles.content}`} >
+        <>
+        <div className={`${BurgerIngredientsStyles.content}`} onClick={()=>{setModalActive(true)}} >
             <Counter count={0} size="default" extraClass="m-1" />
             <img className={BurgerIngredientsStyles.image} src={data.image}></img>
             <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
@@ -20,7 +25,13 @@ const Ingredients = ({ data }) => {
                 <CurrencyIcon type="primary" />
             </div>
             <p className={`${BurgerIngredientsStyles.text} text text_type_main-default`} >{data.name}</p>
-        </div>
+       </div>
+
+       {
+            modalActive && <Modal active={modalActive} onClose={closeModal}>
+                <IngredientDetails data={data} /></Modal>
+        }
+        </>
     )
 }
 
@@ -50,6 +61,7 @@ const BurgerIngredients = () => {
     const buns = ingrid.filter((item) => item.type === 'bun');
     const sauces = ingrid.filter((item) => item.type === 'sauce');
     const mains = ingrid.filter((item) => item.type === 'main');
+   
 
     return (
         <section className={BurgerIngredientsStyles.page}>
@@ -91,6 +103,7 @@ const BurgerIngredients = () => {
                     </div>
                 </li>
             </ul>
+            
         </section>
     )
 }
