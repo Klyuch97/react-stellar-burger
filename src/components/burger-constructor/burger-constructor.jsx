@@ -59,7 +59,7 @@ const BurgerConstructor = () => {
                     {!isLoading &&
                         !hasError &&
                         ingrid.length &&
-                        additives.map((ingrid, index) => <Ingridients key={index} data={ingrid} />)}
+                        additives.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)}
 
                 </ul>
                 <div className="pl-8 mt-4">

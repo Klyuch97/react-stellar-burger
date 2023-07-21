@@ -1,43 +1,10 @@
 import React from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientPropType } from '../../utils/prop-types';
-import PropTypes from "prop-types";
-import Modal from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import Ingredients from './ingredients/ingredients';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
-
-const Ingredients = ({ data }) => {
-    const [modalActive, setModalActive] = React.useState(false);
-    const closeModal = () => {
-        setModalActive(false)
-    }
-    return (
-        <>
-        <div className={`${BurgerIngredientsStyles.content}`} onClick={()=>{setModalActive(true)}} >
-            <Counter count={0} size="default" extraClass="m-1" />
-            <img className={BurgerIngredientsStyles.image} src={data.image}></img>
-            <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
-                <p className="text text_type_digits-default">{data.price}</p>
-                <CurrencyIcon type="primary" />
-            </div>
-            <p className={`${BurgerIngredientsStyles.text} text text_type_main-default`} >{data.name}</p>
-       </div>
-
-       {
-            modalActive && <Modal active={modalActive} onClose={closeModal}>
-                <IngredientDetails data={data} /></Modal>
-        }
-        </>
-    )
-}
-
-Ingredients.propTypes = {
-    data: ingredientPropType
-}
 
 const BurgerIngredients = () => {
 
@@ -78,7 +45,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            buns.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -88,7 +55,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
@@ -99,7 +66,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mains.map((ingrid, index) => <Ingredients key={index} data={ingrid} />)}
+                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
             </ul>
