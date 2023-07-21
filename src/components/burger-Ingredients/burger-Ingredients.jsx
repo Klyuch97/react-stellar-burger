@@ -17,8 +17,12 @@ const BurgerIngredients = () => {
         const Ingredients = async () => {
             setState({ ...state, isLoading: true });
             const res = await fetch(baseUrl);
+            if (!res.ok) {
+                const message = alert(`Ошибка: ${res.status}`);
+                throw new Error(message);
+              }
             const data = await res.json();
-            setState({ ingrid: data.data, isloading: false });
+        setState({ ingrid: data.data, isloading: false });
         }
 
         Ingredients();
