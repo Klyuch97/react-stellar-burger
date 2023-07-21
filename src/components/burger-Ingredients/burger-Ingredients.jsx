@@ -19,6 +19,7 @@ const BurgerIngredients = () => {
             const res = await fetch(baseUrl);
             if (!res.ok) {
                 const message = alert(`Ошибка: ${res.status}`);
+                setState({...state, hasError: true });
                 throw new Error(message);
               }
             const data = await res.json();
