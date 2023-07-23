@@ -1,0 +1,51 @@
+.page {
+    width: 600px;
+}
+
+.ul {
+    padding: 0;
+    margin: 0;
+    max-height: 600px;
+    list-style: none;
+}
+
+.li{
+padding: 0;
+margin: 0;
+overflow: auto;
+height: 720px;
+}
+
+.containerContent {
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 32px;
+
+}
+
+.content {
+    width: 272px;
+    height: 208px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.image {
+    max-width: 240px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.price {
+    display: flex;
+    margin: 0 auto;
+    gap: 8px;
+}
+
+.text {
+    text-align: center;
+}

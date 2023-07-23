@@ -1,0 +1,28 @@
+.title {
+    width: 89%;
+    margin: 0 auto;
+}
+
+.content {
+    width: 72.53%;
+    margin: 0 auto;
+}
+
+.image {
+    width: 92.3%;
+    height: 240px;
+}
+
+.items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.item {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
