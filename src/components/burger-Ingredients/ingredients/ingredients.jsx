@@ -14,7 +14,7 @@ export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
     }
     return (
         <>
-        <div className={`${BurgerIngredientsStyles.content}`} onClick={()=>{console.log({data:data.name});}} >
+        <div className={`${BurgerIngredientsStyles.content}`} onClick={()=>{console.log({data:data});}} >
             <Counter count={0} size="default" extraClass="m-1" />
             <img className={BurgerIngredientsStyles.image} src={data.image}></img>
             <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>

@@ -1,8 +1,11 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyles from '../burger-constructor.module.css';
-import {ingredientPropType} from '../../../utils/prop-types'
+import { ingredientPropType } from '../../../utils/prop-types'
+import { useContext, useState } from 'react';
+import { BurgerContext } from '../../../services/appContext';
 
-const Ingridients = ({ data }) => {
+const Ingridients = () => {
+    const data = useContext(BurgerContext)
     return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
         <DragIcon type="primary" />
         <ConstructorElement
