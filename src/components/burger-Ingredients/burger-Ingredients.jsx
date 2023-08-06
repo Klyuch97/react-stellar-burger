@@ -29,6 +29,7 @@ const BurgerIngredients = () => {
         Ingredients();
     }, [])
     const { ingrid, isLoading, hasError } = state;
+    //console.log(state);
 
     const buns = ingrid.filter((item) => item.type === 'bun');
     const sauces = ingrid.filter((item) => item.type === 'sauce');
