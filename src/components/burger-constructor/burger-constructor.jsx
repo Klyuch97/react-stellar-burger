@@ -4,7 +4,7 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { BurgerContext } from '../../services/appContext';
+import { BurgerContext,CountContext } from '../../services/appContext';
 
 
 
@@ -12,6 +12,8 @@ import { BurgerContext } from '../../services/appContext';
 const BurgerConstructor = () => {
     const { selectedItemBuns,selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
+    const {priceState, priceDispatcher}= useContext(CountContext)
+  
     const closeModal = () => {
         setModalActive(false)
     }
@@ -42,7 +44,7 @@ const BurgerConstructor = () => {
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
-                        <p className="text text_type_digits-medium">610</p>
+                        <p className="text text_type_digits-medium">0</p>
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button"
