@@ -44,7 +44,7 @@ const BurgerConstructor = () => {
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
-                        <p className="text text_type_digits-medium">0</p>
+                        <p className="text text_type_digits-medium">{priceState.totalPrice}</p>
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button"
