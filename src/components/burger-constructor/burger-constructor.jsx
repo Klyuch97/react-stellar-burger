@@ -36,17 +36,12 @@ const BurgerConstructor = () => {
                     }
                 </ul>
                 <div className="pl-8 mt-4">
-                    {value.isLoading && 'Загрузка...'}
-                    {value.hasError && 'Произошла ошибка'}
-                    {!value.isLoading &&
-                        !value.hasError &&
-                        value.ingrid.length &&
-                        <ConstructorElement
-                            type="bottom"
+                {selectedItem && <ConstructorElement
+                            type=" bottom"
                             isLocked={true}
-                            text={`${buns[0].name} (низ)`}
-                            price={buns[0].price}
-                            thumbnail={buns[0].image}
+                            text={`${selectedItem.name} (низ)`}
+                            price={selectedItem.price}
+                            thumbnail={selectedItem.image}
                         />}
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>

@@ -16,7 +16,6 @@ function App() {
     hasError: false,
     ingrid: [],
     selectedItem: null,
-    selected: false,
   });
   React.useEffect(() => {
     const Ingredients = async () => {
