@@ -11,8 +11,7 @@ import { BurgerContext } from '../../services/appContext';
 
 
 const BurgerConstructor = () => {
-    const { selectedItemBuns, selectedItem } = useContext(BurgerContext);
-    console.log(selectedItem);
+    const { selectedItemBuns,selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
     const closeModal = () => {
         setModalActive(false)
@@ -30,8 +29,7 @@ const BurgerConstructor = () => {
                     />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {//a.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)
-                      selectedItem &&  <Ingridients key={selectedItem} data={selectedItem} />
+                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)
                     }
                 </ul>
                 <div className="pl-8 mt-4">

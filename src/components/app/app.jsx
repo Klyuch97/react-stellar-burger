@@ -15,9 +15,9 @@ function App() {
     isLoading: false,
     hasError: false,
     ingrid: [],
-    selectedItemBuns: [],
-    selectedItem: [],
+    selectedItemBuns: []
   });
+  const [selectedItems, setSelectedItems] = useState([]);
   React.useEffect(() => {
     const Ingredients = async () => {
       setState({ ...state, isLoading: true });
@@ -39,7 +39,7 @@ function App() {
       setState({ ...state, selectedItemBuns: item });
     }
     else {
-      setState({ ...state, selectedItem: item });
+      setSelectedItems((prevItems) => [...prevItems, item]);
     }
   }
 
@@ -48,7 +48,7 @@ function App() {
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <BurgerContext.Provider value={state}>
+        <BurgerContext.Provider value={{ ...state, selectedItems }}>
           <BurgerIngredients onItemClick={handleItemClick} />
           <BurgerConstructor />
         </BurgerContext.Provider>
