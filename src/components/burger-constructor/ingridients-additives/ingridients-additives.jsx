@@ -4,8 +4,8 @@ import { ingredientPropType } from '../../../utils/prop-types'
 import { useContext, useState } from 'react';
 import { BurgerContext } from '../../../services/appContext';
 
-const Ingridients = () => {
-    const data = useContext(BurgerContext)
+const Ingridients = ({data}) => {
+    //const data = useContext(BurgerContext)
     return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
         <DragIcon type="primary" />
         <ConstructorElement

@@ -7,15 +7,16 @@ import { BurgerContext } from '../../services/appContext';
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({ onItemClick }) => {
+    
+    
+    const state = useContext(BurgerContext);
 
-    const value = useContext(BurgerContext)
-   
 
-    const buns = value.ingrid.filter((item) => item.type === 'bun');
-    const sauces = value.ingrid.filter((item) => item.type === 'sauce');
-    const mains = value.ingrid.filter((item) => item.type === 'main');
 
+    const buns = state.ingrid.filter((item) => item.type === 'bun');
+    const sauces = state.ingrid.filter((item) => item.type === 'sauce');
+    const mains = state.ingrid.filter((item) => item.type === 'main');
 
     return (
         <section className={BurgerIngredientsStyles.page}>
@@ -26,33 +27,35 @@ const BurgerIngredients = () => {
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
-                    <div className={BurgerIngredientsStyles.containerContent}>
-                        {value.isLoading && 'Загрузка...'}
-                        {value.hasError && 'Произошла ошибка'}
-                        {!value.isLoading &&
-                            !value.hasError &&
-                            value.ingrid.length &&
-                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
+
+                    <div className={BurgerIngredientsStyles.containerContent} >
+                        {state.isLoading && 'Загрузка...'}
+                        {state.hasError && 'Произошла ошибка'}
+
+                        {!state.isLoading &&
+                            !state.hasError &&
+                            state.ingrid.length &&
+                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {value.isLoading && 'Загрузка...'}
-                        {value.hasError && 'Произошла ошибка'}
-                        {!value.isLoading &&
-                            !value.hasError &&
-                            value.ingrid.length &&
+                        {state.isLoading && 'Загрузка...'}
+                        {state.hasError && 'Произошла ошибка'}
+                        {!state.isLoading &&
+                            !state.hasError &&
+                            state.ingrid.length &&
                             sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {value.isLoading && 'Загрузка...'}
-                        {value.hasError && 'Произошла ошибка'}
-                        {!value.isLoading &&
-                            !value.hasError &&
-                            value.ingrid.length &&
+                        {state.isLoading && 'Загрузка...'}
+                        {state.hasError && 'Произошла ошибка'}
+                        {!state.isLoading &&
+                            !state.hasError &&
+                            state.ingrid.length &&
                             mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>

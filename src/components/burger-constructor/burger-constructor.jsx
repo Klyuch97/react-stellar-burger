@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import BurgerConstructorStyles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { baseUrl } from '../burger-Ingredients/burger-Ingredients';
@@ -11,10 +11,10 @@ import { BurgerContext } from '../../services/appContext';
 
 
 const BurgerConstructor = () => {
-
+    const {selectedItem} = useContext(BurgerContext);
     const value = useContext(BurgerContext);
     const buns = value.ingrid.filter((item) => item.type === 'bun');
-   
+    const a = value.ingrid.filter((item) => item.type === 'sauce' || item.type === 'main');
     const [modalActive, setModalActive] = React.useState(false);
     const closeModal = () => {
         setModalActive(false)
@@ -23,21 +23,17 @@ const BurgerConstructor = () => {
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
                 <div className="pl-8 mb-4">
-                    {value.isLoading && 'Загрузка...'}
-                    {value.hasError && 'Произошла ошибка'}
-                    {!value.isLoading &&
-                        !value.hasError &&
-                        value.ingrid.length &&
-                        <ConstructorElement
+                {selectedItem && <ConstructorElement
                             type="top"
                             isLocked={true}
-                            text={`${buns[0].name} (верх)`}
-                            price={buns[0].price}
-                            thumbnail={buns[0].image}
+                            text={`${selectedItem.name} (верх)`}
+                            price={selectedItem.price}
+                            thumbnail={selectedItem.image}
                         />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                  <Ingridients  key={value.ingrid._id}></Ingridients>
+                    {//a.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)
+                    }
                 </ul>
                 <div className="pl-8 mt-4">
                     {value.isLoading && 'Загрузка...'}
