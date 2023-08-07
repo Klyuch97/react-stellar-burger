@@ -15,7 +15,8 @@ function App() {
     isLoading: false,
     hasError: false,
     ingrid: [],
-    selectedItem: null,
+    selectedItemBuns: [],
+    selectedItem: [],
   });
   React.useEffect(() => {
     const Ingredients = async () => {
@@ -34,8 +35,14 @@ function App() {
   }, [])
 
   const handleItemClick = (item) => {
-    setState({ ...state, selectedItem: item, selected:true });
-  };
+    if (item.type === "bun") {
+      setState({ ...state, selectedItemBuns: item });
+    }
+    else {
+      setState({ ...state, selectedItem: item });
+    }
+  }
+
 
   return (
     <div className={styles.app}>
@@ -50,5 +57,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

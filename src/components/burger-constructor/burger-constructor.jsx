@@ -11,10 +11,8 @@ import { BurgerContext } from '../../services/appContext';
 
 
 const BurgerConstructor = () => {
-    const {selectedItem} = useContext(BurgerContext);
-    const value = useContext(BurgerContext);
-    const buns = value.ingrid.filter((item) => item.type === 'bun');
-    const a = value.ingrid.filter((item) => item.type === 'sauce' || item.type === 'main');
+    const { selectedItemBuns, selectedItem } = useContext(BurgerContext);
+    console.log(selectedItem);
     const [modalActive, setModalActive] = React.useState(false);
     const closeModal = () => {
         setModalActive(false)
@@ -23,26 +21,27 @@ const BurgerConstructor = () => {
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
                 <div className="pl-8 mb-4">
-                {selectedItem && <ConstructorElement
-                            type="top"
-                            isLocked={true}
-                            text={`${selectedItem.name} (верх)`}
-                            price={selectedItem.price}
-                            thumbnail={selectedItem.image}
-                        />}
+                    {selectedItemBuns && <ConstructorElement
+                        type="top"
+                        isLocked={true}
+                        text={`${selectedItemBuns.name} (верх)`}
+                        price={selectedItemBuns.price}
+                        thumbnail={selectedItemBuns.image}
+                    />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
                     {//a.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)
+                      selectedItem &&  <Ingridients key={selectedItem} data={selectedItem} />
                     }
                 </ul>
                 <div className="pl-8 mt-4">
-                {selectedItem && <ConstructorElement
-                            type=" bottom"
-                            isLocked={true}
-                            text={`${selectedItem.name} (низ)`}
-                            price={selectedItem.price}
-                            thumbnail={selectedItem.image}
-                        />}
+                    {selectedItemBuns && <ConstructorElement
+                        type=" bottom"
+                        isLocked={true}
+                        text={`${selectedItemBuns.name} (низ)`}
+                        price={selectedItemBuns.price}
+                        thumbnail={selectedItemBuns.image}
+                    />}
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>

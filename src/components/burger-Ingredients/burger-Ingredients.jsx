@@ -8,10 +8,9 @@ export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const BurgerIngredients = ({ onItemClick }) => {
-    
-    
-    const state = useContext(BurgerContext);
 
+
+    const state = useContext(BurgerContext);
 
 
     const buns = state.ingrid.filter((item) => item.type === 'bun');
@@ -28,10 +27,9 @@ const BurgerIngredients = ({ onItemClick }) => {
                 <li className={BurgerIngredientsStyles.ul} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
 
-                    <div className={BurgerIngredientsStyles.containerContent} >
+                    <div className={BurgerIngredientsStyles.containerContent}>
                         {state.isLoading && 'Загрузка...'}
                         {state.hasError && 'Произошла ошибка'}
-
                         {!state.isLoading &&
                             !state.hasError &&
                             state.ingrid.length &&
@@ -45,7 +43,7 @@ const BurgerIngredients = ({ onItemClick }) => {
                         {!state.isLoading &&
                             !state.hasError &&
                             state.ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
@@ -56,7 +54,7 @@ const BurgerIngredients = ({ onItemClick }) => {
                         {!state.isLoading &&
                             !state.hasError &&
                             state.ingrid.length &&
-                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
+                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div>
                 </li>
             </ul>
