@@ -6,6 +6,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { BurgerContext, CountContext } from "../../services/appContext";
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
+const orderPostUlr= 'https://norma.nomoreparties.space/api/orders';
 const priceInitialState = {
   selectedItems: [],
   selectedItemBuns: [],
@@ -81,7 +82,7 @@ function App() {
     const ingredientId = selectedItems.map(item => item._id);
     const ingredientBunsId = state.selectedItemBuns._id;
     const ingredient = [...ingredientId, ingredientBunsId];
-    const response = await fetch('https://norma.nomoreparties.space/api/orders', {
+    const response = await fetch(orderPostUlr, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
