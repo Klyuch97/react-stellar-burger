@@ -75,7 +75,7 @@ function App() {
     }
   }
 
-  React.useEffect(()=>{}) const handleOrderSubmit = async () => {
+  const handleOrderSubmit = async () => {
     const ingredientId = selectedItems.map(item => item._id);
     const ingredientBunsId = state.selectedItemBuns._id;
     const ingredient = [...ingredientId, ingredientBunsId];
@@ -88,20 +88,23 @@ function App() {
     });
     if (!response.ok) {
       throw new Error('Ошибка при отправке заказа');
-      }
+    }
+    const data = await response.json();
+    const orderNumber = data.order.number;
+
+   // console.log('Номер заказа:', orderNumber);
   }
 
-  handleOrderSubmit()
 
 
   return (
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <BurgerContext.Provider value={{ ...state, selectedItems }}>
+        <BurgerContext.Provider value={{ ...state, selectedItems, handleOrderSubmit }}>
           <CountContext.Provider value={{ priceState, priceDispatcher }}>
             <BurgerIngredients onItemClick={handleItemClick} />
-            <BurgerConstructor />
+            <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
           </CountContext.Provider>
         </BurgerContext.Provider>
       </main>

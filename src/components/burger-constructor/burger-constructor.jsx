@@ -4,16 +4,17 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { BurgerContext,CountContext } from '../../services/appContext';
+import { BurgerContext, CountContext } from '../../services/appContext';
 
 
 
 
-const BurgerConstructor = () => {
-    const { selectedItemBuns,selectedItems } = useContext(BurgerContext);
+const BurgerConstructor = ({ handleOrderSubmit }) => {
+    
+    const { selectedItemBuns, selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
-    const {priceState, priceDispatcher}= useContext(CountContext)
-  
+    const { priceState, priceDispatcher } = useContext(CountContext)
+
     const closeModal = () => {
         setModalActive(false)
     }
@@ -50,7 +51,10 @@ const BurgerConstructor = () => {
                     <Button htmlType="button"
                         type="primary"
                         size="medium"
-                        onClick={() => setModalActive(true)}>
+                        onClick={() => {
+                            handleOrderSubmit();
+                            setModalActive(true);
+                            }}>
                         Оформить заказ
                     </Button>
                 </div>
