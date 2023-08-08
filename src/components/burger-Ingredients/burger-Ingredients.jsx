@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
@@ -13,9 +13,13 @@ const BurgerIngredients = ({ onItemClick }) => {
     const state = useContext(BurgerContext);
 
 
-    const buns = state.ingrid.filter((item) => item.type === 'bun');
-    const sauces = state.ingrid.filter((item) => item.type === 'sauce');
-    const mains = state.ingrid.filter((item) => item.type === 'main');
+    const [buns, sauces, mains] = useMemo(() => {
+        const filteredBuns = state.ingrid.filter(item => item.type === 'bun');
+        const filteredSauces = state.ingrid.filter(item => item.type === 'sauce');
+        const filteredMains = state.ingrid.filter(item => item.type === 'main');
+        
+        return [filteredBuns, filteredSauces, filteredMains];
+        }, [state.ingrid]);
 
     return (
         <section className={BurgerIngredientsStyles.page}>
