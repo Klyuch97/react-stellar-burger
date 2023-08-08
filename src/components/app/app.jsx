@@ -77,6 +77,7 @@ function App() {
   }
 
   const handleOrderSubmit = async () => {
+    setState({ ...state, isLoading: true });
     const ingredientId = selectedItems.map(item => item._id);
     const ingredientBunsId = state.selectedItemBuns._id;
     const ingredient = [...ingredientId, ingredientBunsId];
@@ -88,11 +89,13 @@ function App() {
       body: JSON.stringify({ ingredients: ingredient }),
     });
     if (!response.ok) {
-      throw new Error('Ошибка при отправке заказа');
+      const message = alert(`Ошибка: ${response.status}`);
+      setState({ ...state, hasError: true });
+      throw new Error(message);
     }
     const data = await response.json();
     const orderNumber = data.order.number;
-    setState({...state, orderNumber:orderNumber})
+    setState({...state, orderNumber:orderNumber,isLoading: false})
 console.log('Номер заказа:', orderNumber);
   }
 
