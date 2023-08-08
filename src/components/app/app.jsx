@@ -10,7 +10,7 @@ const priceInitialState = {
   selectedItems: [],
   selectedItemBuns: [],
   totalPrice: 0,
-  price:0,
+  price: 0,
   priceBuns: 0,
 };
 
@@ -21,7 +21,7 @@ function reducer(state, action) {
         return {
           ...state,
           selectedItemBuns: [action.payload],
-          priceBuns: action.payload.price*2,
+          priceBuns: action.payload.price * 2,
           totalPrice: state.price + action.payload.price * 2
         };
       } else {
@@ -44,7 +44,7 @@ function App() {
     isLoading: false,
     hasError: false,
     ingrid: [],
-    selectedItemBuns: null
+    selectedItemBuns: []
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
@@ -74,6 +74,24 @@ function App() {
       priceDispatcher({ type: "incriment", payload: item });
     }
   }
+
+  React.useEffect(()=>{}) const handleOrderSubmit = async () => {
+    const ingredientId = selectedItems.map(item => item._id);
+    const ingredientBunsId = state.selectedItemBuns._id;
+    const ingredient = [...ingredientId, ingredientBunsId];
+    const response = await fetch('https://norma.nomoreparties.space/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ingredients: ingredient }),
+    });
+    if (!response.ok) {
+      throw new Error('Ошибка при отправке заказа');
+      }
+  }
+
+  handleOrderSubmit()
 
 
   return (
