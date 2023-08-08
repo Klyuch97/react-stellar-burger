@@ -44,7 +44,8 @@ function App() {
     isLoading: false,
     hasError: false,
     ingrid: [],
-    selectedItemBuns: []
+    selectedItemBuns: [],
+    orderNumber: null
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
@@ -91,10 +92,9 @@ function App() {
     }
     const data = await response.json();
     const orderNumber = data.order.number;
-
-   // console.log('Номер заказа:', orderNumber);
+    setState({...state, orderNumber:orderNumber})
+console.log('Номер заказа:', orderNumber);
   }
-
 
 
   return (
