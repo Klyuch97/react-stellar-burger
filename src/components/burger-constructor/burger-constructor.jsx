@@ -15,7 +15,7 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
     const { selectedItemBuns, selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
     const { priceState, priceDispatcher } = useContext(CountContext);
-   
+   console.log(selectedItems.map((ingrid, index) => ingrid.key))
 
     const closeModal = () => {
         setModalActive(false)
@@ -33,7 +33,7 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
                     />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {selectedItems.map((ingrid, index) => <Ingridients key={uuidv4()} data={ingrid} />)
+                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} />)
                     }
                 </ul>
                 <div className="pl-8 mt-4">

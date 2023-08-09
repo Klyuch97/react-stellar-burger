@@ -15,7 +15,6 @@ const priceInitialState = {
   totalPrice: 0,
   price: 0,
   priceBuns: 0,
-  
 };
 
 function reducer(state, action) {
@@ -41,8 +40,6 @@ function reducer(state, action) {
   }
 }
 
-
-
 function App() {
   const [state, setState] = useState({
     isLoading: false,
@@ -50,8 +47,6 @@ function App() {
     ingrid: [],
     selectedItemBuns: [],
     orderNumber: null,
-    
-
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
@@ -77,7 +72,7 @@ function App() {
       priceDispatcher({ type: "incriment", payload: item });
     }
     else {
-      setSelectedItems((prevItems) => [...prevItems, item]);
+      setSelectedItems((prevItems) => [...prevItems,{...item,key:uuidv4()}]);
       priceDispatcher({ type: "incriment", payload: item });
     }
   }
