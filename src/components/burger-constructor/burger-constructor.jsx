@@ -5,6 +5,7 @@ import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { BurgerContext, CountContext } from '../../services/appContext';
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -13,7 +14,8 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
     
     const { selectedItemBuns, selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
-    const { priceState, priceDispatcher } = useContext(CountContext)
+    const { priceState, priceDispatcher } = useContext(CountContext);
+   
 
     const closeModal = () => {
         setModalActive(false)
@@ -31,7 +33,7 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
                     />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
-                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid._id} data={ingrid} />)
+                    {selectedItems.map((ingrid, index) => <Ingridients key={uuidv4()} data={ingrid} />)
                     }
                 </ul>
                 <div className="pl-8 mt-4">

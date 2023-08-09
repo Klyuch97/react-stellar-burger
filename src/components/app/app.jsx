@@ -4,6 +4,8 @@ import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { BurgerContext, CountContext } from "../../services/appContext";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 const orderPostUlr= 'https://norma.nomoreparties.space/api/orders';
@@ -13,6 +15,7 @@ const priceInitialState = {
   totalPrice: 0,
   price: 0,
   priceBuns: 0,
+  
 };
 
 function reducer(state, action) {
@@ -46,7 +49,9 @@ function App() {
     hasError: false,
     ingrid: [],
     selectedItemBuns: [],
-    orderNumber: null
+    orderNumber: null,
+    
+
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
