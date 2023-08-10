@@ -10,7 +10,7 @@ import { getIngrid } from '../../services/actions/burgerState';
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
-const BurgerIngredients = ({ onItemClick }) => {
+const BurgerIngredients = () => {
 
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const BurgerIngredients = ({ onItemClick }) => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
+                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid}  />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -52,7 +52,7 @@ const BurgerIngredients = ({ onItemClick }) => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
@@ -63,7 +63,7 @@ const BurgerIngredients = ({ onItemClick }) => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
+                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
                         </ul>

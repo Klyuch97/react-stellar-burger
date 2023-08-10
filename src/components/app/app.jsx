@@ -66,16 +66,7 @@ function App() {
     Ingredients();
   }, [])8*/
 
-  const handleItemClick = (item) => {
-    if (item.type === "bun") {
-      setState({ ...state, selectedItemBuns: item });
-      priceDispatcher({ type: "incriment", payload: item });
-    }
-    else {
-      setSelectedItems((prevItems) => [...prevItems,{...item,key:uuidv4()}]);
-      priceDispatcher({ type: "incriment", payload: item });
-    }
-  }
+ 
 
   const handleOrderSubmit = async () => {
     setState({ ...state, isLoading: true });
@@ -107,8 +98,8 @@ console.log('Номер заказа:', orderNumber);
       <main className={styles.main}>
         <BurgerContext.Provider value={{ ...state, selectedItems, handleOrderSubmit }}>
           <CountContext.Provider value={{ priceState, priceDispatcher }}>
-            <BurgerIngredients onItemClick={handleItemClick} />
-            {/* <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />*/}
+            <BurgerIngredients />
+            <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
           </CountContext.Provider>
         </BurgerContext.Provider>
       </main>

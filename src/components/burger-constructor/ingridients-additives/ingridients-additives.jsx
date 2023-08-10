@@ -2,7 +2,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import BurgerConstructorStyles from '../burger-constructor.module.css';
 import { ingredientPropType } from '../../../utils/prop-types'
 
-const Ingridients = ({data}) => {
+const Ingridients = ({ data }) => {
     return (<li className={`${BurgerConstructorStyles.ingridients} mb-4`}>
         <DragIcon type="primary" />
         <ConstructorElement

@@ -1,11 +1,11 @@
-import { GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS } from "../actions/burgerState";
+import { v4 as uuidv4 } from 'uuid';
+import { GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,ADD_INGRID,ADD_INGRIDS } from "../actions/burgerState";
 
 
 const initialState = {
     ingrid: [],
     selectedItems: [],
-    selectedItemBuns: [],
-    currentIngredient: null,
+    selectedItemBuns: null,
     isLoading: false,
     hasError: false,
     totalPrice: 0,
@@ -15,6 +15,7 @@ const initialState = {
 
 export const burgerReducer = (state = initialState, action) => {
     switch (action.type) {
+       
         case GET_INGRID_REQUEST: {
             return {
                 ...state,
@@ -34,6 +35,22 @@ export const burgerReducer = (state = initialState, action) => {
                 ...state,
                 hasError: true,
                 isLoading: false,
+            };
+        }
+        case ADD_INGRID: {
+            return {
+                ...state,
+                selectedItemBuns: action.item
+            };
+        }
+        case ADD_INGRIDS: {
+            const newItem = {
+                ...action.item,
+                key: uuidv4(),
+                };
+            return {
+                ...state,
+                selectedItems:[...state.selectedItems, newItem]
             };
         }
         default: {

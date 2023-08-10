@@ -1,6 +1,8 @@
 export const GET_INGRID_REQUEST = 'GET_INGRID_REQUEST';
 export const GET_INGRID_SUCCESS = 'GET_INGRID_SUCCESS';
 export const GET_INGRID_FAILED = 'GET_INGRID_FAILED';
+export const ADD_INGRID='ADD_INGRID';
+export const ADD_INGRIDS='ADD_INGRIDS';
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 export const getIngrid = () => {
@@ -17,3 +19,17 @@ export const getIngrid = () => {
   }
   };
   };
+
+  export const addItem = (item) => {
+    return {
+    type: ADD_INGRID,
+    item,
+    };
+    };
+
+    export const addItems = (item) => {
+      return {
+      type: ADD_INGRIDS,
+      item,
+      };
+      };

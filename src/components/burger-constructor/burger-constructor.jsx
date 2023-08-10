@@ -5,14 +5,15 @@ import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { BurgerContext, CountContext } from '../../services/appContext';
-import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 const BurgerConstructor = ({ handleOrderSubmit }) => {
-    
-    const { selectedItemBuns, selectedItems } = useContext(BurgerContext);
+    const {selectedItemBuns,selectedItems} = useSelector(state => state.burger);
+  
+   
     const [modalActive, setModalActive] = React.useState(false);
     const { priceState, priceDispatcher } = useContext(CountContext);
 
