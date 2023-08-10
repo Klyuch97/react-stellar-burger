@@ -38,24 +38,5 @@ export const addItems = (item) => {
   };
 };
 
-/*export const setLoadingPost = (isLoading) => {
-  return {
-  type: POST_ORDER_NUMBER_REQUEST,
-  payload: isLoading,
-  };
-  };
-  
-  export const setHasErrorPost = (hasError) => {
-  return {
-  type: POST_ORDER_NUMBER_FAILED,
-  payload: hasError,
-  };
-  };
-  
-  export const setOrderNumberPost = (orderNumber) => {
-  return {
-  type: POST_ORDER_NUMBER_SUCCESS,
-  payload: orderNumber,
-  };
-  };*/
+
 
