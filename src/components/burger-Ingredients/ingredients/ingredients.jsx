@@ -26,10 +26,12 @@ const Ingredients = ({ data }) => {
         if (item.type === "bun") {
             dispatch(addItem(item))
             priceDispatcher({ type: "incriment", payload: item });
+            setModalActive(true);
         }
         else {
             dispatch(addItems(item))
              priceDispatcher({ type: "incriment", payload: item });
+             setModalActive(true);
         }
     }
    
