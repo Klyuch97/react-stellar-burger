@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
-const orderPostUlr= 'https://norma.nomoreparties.space/api/orders';
+const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 const priceInitialState = {
   selectedItems: [],
   selectedItemBuns: [],
@@ -50,23 +50,23 @@ function App() {
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
- /* React.useEffect(() => {
-    const Ingredients = async () => {
-      setState({ ...state, isLoading: true });
-      const res = await fetch(baseUrl);
-      if (!res.ok) {
-        const message = alert(`Ошибка: ${res.status}`);
-        setState({ ...state, hasError: true });
-        throw new Error(message);
-      }
-      const data = await res.json();
-      setState({ ingrid: data.data, isLoading: false });
-    }
-
-    Ingredients();
-  }, [])8*/
-
+  /* React.useEffect(() => {
+     const Ingredients = async () => {
+       setState({ ...state, isLoading: true });
+       const res = await fetch(baseUrl);
+       if (!res.ok) {
+         const message = alert(`Ошибка: ${res.status}`);
+         setState({ ...state, hasError: true });
+         throw new Error(message);
+       }
+       const data = await res.json();
+       setState({ ingrid: data.data, isLoading: false });
+     }
  
+     Ingredients();
+   }, [])8*/
+
+
 
   const handleOrderSubmit = async () => {
     setState({ ...state, isLoading: true });
@@ -87,8 +87,8 @@ function App() {
     }
     const data = await response.json();
     const orderNumber = data.order.number;
-    setState({...state, orderNumber:orderNumber,isLoading: false})
-console.log('Номер заказа:', orderNumber);
+    setState({ ...state, orderNumber: orderNumber, isLoading: false })
+    console.log('Номер заказа:', orderNumber);
   }
 
 
@@ -96,14 +96,11 @@ console.log('Номер заказа:', orderNumber);
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <BurgerContext.Provider value={{ ...state, selectedItems, handleOrderSubmit }}>
-          <CountContext.Provider value={{ priceState, priceDispatcher }}>
-            <BurgerIngredients />
-            <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
-          </CountContext.Provider>
-        </BurgerContext.Provider>
+        <CountContext.Provider value={{ priceState, priceDispatcher }}>
+          <BurgerIngredients />
+          <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
+        </CountContext.Provider>
       </main>
-
     </div>
   );
 }

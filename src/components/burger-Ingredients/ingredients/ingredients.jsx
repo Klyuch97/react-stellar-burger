@@ -7,11 +7,13 @@ import { ingredientPropType } from '../../../utils/prop-types';
 import { BurgerContext } from '../../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem,addItems } from '../../../services/actions/burgerState';
+import { CountContext } from '../../../services/appContext';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
+    const { priceState, priceDispatcher } = useContext(CountContext);
 
     const dispatch = useDispatch();
 
@@ -23,10 +25,11 @@ const Ingredients = ({ data }) => {
     const handleItemClick = (item) => {
         if (item.type === "bun") {
             dispatch(addItem(item))
+            priceDispatcher({ type: "incriment", payload: item });
         }
         else {
             dispatch(addItems(item))
-            // priceDispatcher({ type: "incriment", payload: item });
+             priceDispatcher({ type: "incriment", payload: item });
         }
     }
    
