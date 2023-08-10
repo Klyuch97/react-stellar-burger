@@ -2,6 +2,7 @@ import { MODAL_CLOSE, MODAL_OPEN } from "../actions/modal";
 
 const initialStateModal = {
     modalActive: false,
+    currentIngrid: null
 };
 
 export const modalReducer = (state = initialStateModal, action) => {
@@ -10,6 +11,7 @@ export const modalReducer = (state = initialStateModal, action) => {
             return {
                 ...state,
                 modalActive: true,
+                currentIngrid: action.payload
             };
         }
         case MODAL_CLOSE: {

@@ -4,10 +4,13 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalStyles from './modal.module.css'
 import ModalOverLay from '../modal-overlay/modal-overlay';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 
 
-const Modal = ({ children, onClose, active }) => {
+const Modal = ({ children, onClose,}) => {
+    const {modalActive}= useSelector(state=> state.modal)
+
     React.useEffect(() => {
         const closeEsc = (evt) => {
             if (evt.key === "Escape") {
@@ -19,7 +22,7 @@ const Modal = ({ children, onClose, active }) => {
         return () => document.removeEventListener("keydown", closeEsc);
     }, [onClose]);
     const modals = document.getElementById('modals');
-    if (!active) { return null; }
+    if (!modalActive) { return null; }
 
     return ReactDOM.createPortal(
         <>
@@ -40,7 +43,6 @@ const Modal = ({ children, onClose, active }) => {
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
-    active: PropTypes.bool.isRequired,
     children:PropTypes.element
 }
 

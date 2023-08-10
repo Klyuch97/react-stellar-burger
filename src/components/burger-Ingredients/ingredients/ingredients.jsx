@@ -8,36 +8,43 @@ import { BurgerContext } from '../../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, addItems } from '../../../services/actions/burgerState';
 import { CountContext } from '../../../services/appContext';
+import { MODAL_CLOSE, MODAL_OPEN } from '../../../services/actions/modal';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
     const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
-    const [modalActive, setModalActive] = React.useState(false);
+    //const [modalActive, setModalActive] = React.useState(false);
+    const { modalActive, currentIngrid } = useSelector(state => state.modal);
+
+
 
     const closeModal = () => {
-        setModalActive(false)
+        dispatch({ type: MODAL_CLOSE })
     }
 
     const handleItemClick = (item) => {
         if (item.type === "bun") {
             dispatch(addItem(item))
             priceDispatcher({ type: "incriment", payload: item });
-            setModalActive(true);
+            dispatch({ type: "MODAL_OPEN" ,payload:item });
+            //setModalActive(true);
         }
         else {
             dispatch(addItems(item))
+            dispatch({ type: "MODAL_OPEN" ,payload:item });
             priceDispatcher({ type: "incriment", payload: item });
-            setModalActive(true);
+            //setModalActive(true);
         }
     }
 
+
     return (
         <>
-            <div className={`${BurgerIngredientsStyles.content}`} onClick={() => handleItemClick(data)} >
+            <div className={`${BurgerIngredientsStyles.content}`} onClick={() => {handleItemClick(data)}} >
                 <Counter count={0} size="default" extraClass="m-1" />
-                <img className={BurgerIngredientsStyles.image} src={data.image}></img>
+                <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
                     <p className="text text_type_digits-default">{data.price}</p>
                     <CurrencyIcon type="primary" />
@@ -46,8 +53,8 @@ const Ingredients = ({ data }) => {
             </div>
 
             {
-                modalActive && <Modal active={modalActive} onClose={closeModal}>
-                    <IngredientDetails data={data} /></Modal>
+                modalActive && <Modal onClose={closeModal}>
+                    <IngredientDetails data={ currentIngrid} /></Modal>
             }
         </>
     )
