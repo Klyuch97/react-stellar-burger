@@ -24,9 +24,9 @@ export const burgerReducer = (state = initialState, action) => {
         case GET_INGRID_SUCCESS: {
             return {
                 ...state,
-                itemsRequest: false,
-                itemsFailed: false,
-                ingrid: action.items
+                isLoading: false,
+                hasError: false,
+                ingrid: action.ingrid.data
             };
         }
         case GET_INGRID_FAILED: {

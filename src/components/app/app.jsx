@@ -50,7 +50,7 @@ function App() {
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
-  React.useEffect(() => {
+ /* React.useEffect(() => {
     const Ingredients = async () => {
       setState({ ...state, isLoading: true });
       const res = await fetch(baseUrl);
@@ -64,7 +64,7 @@ function App() {
     }
 
     Ingredients();
-  }, [])
+  }, [])8*/
 
   const handleItemClick = (item) => {
     if (item.type === "bun") {
@@ -108,7 +108,7 @@ console.log('Номер заказа:', orderNumber);
         <BurgerContext.Provider value={{ ...state, selectedItems, handleOrderSubmit }}>
           <CountContext.Provider value={{ priceState, priceDispatcher }}>
             <BurgerIngredients onItemClick={handleItemClick} />
-            <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
+            {/* <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />*/}
           </CountContext.Provider>
         </BurgerContext.Provider>
       </main>

@@ -1,25 +1,30 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo,useEffect } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
 import { BurgerContext } from '../../services/appContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngrid } from '../../services/actions/burgerState';
+
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const BurgerIngredients = ({ onItemClick }) => {
 
-
-    const state = useContext(BurgerContext);
-
+    const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getIngrid());
+        }, [dispatch]);
 
     const [buns, sauces, mains] = useMemo(() => {
-        const filteredBuns = state.ingrid.filter(item => item.type === 'bun');
-        const filteredSauces = state.ingrid.filter(item => item.type === 'sauce');
-        const filteredMains = state.ingrid.filter(item => item.type === 'main');
-        
+       const filteredBuns = ingrid.filter(item => item.type === 'bun');
+        const filteredSauces = ingrid.filter(item => item.type === 'sauce');
+       const filteredMains = ingrid.filter(item => item.type === 'main');
+
         return [filteredBuns, filteredSauces, filteredMains];
-        }, [state.ingrid]);
+    }, [ingrid]);
 
     return (
         <section className={BurgerIngredientsStyles.page}>
@@ -27,41 +32,41 @@ const BurgerIngredients = ({ onItemClick }) => {
                 Соберите бургер
             </h1>
             <Tabs />
-            <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
+              <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
 
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {state.isLoading && 'Загрузка...'}
-                        {state.hasError && 'Произошла ошибка'}
-                        {!state.isLoading &&
-                            !state.hasError &&
-                            state.ingrid.length &&
+                      {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
                             buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {state.isLoading && 'Загрузка...'}
-                        {state.hasError && 'Произошла ошибка'}
-                        {!state.isLoading &&
-                            !state.hasError &&
-                            state.ingrid.length &&
+                        {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
                             sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul}>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
-                        {state.isLoading && 'Загрузка...'}
-                        {state.hasError && 'Произошла ошибка'}
-                        {!state.isLoading &&
-                            !state.hasError &&
-                            state.ingrid.length &&
+                        {isLoading && 'Загрузка...'}
+                        {hasError && 'Произошла ошибка'}
+                        {!isLoading &&
+                            !hasError &&
+                            ingrid.length &&
                             mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} addIngrid={onItemClick} />)}
                     </div>
                 </li>
-            </ul>
+                        </ul>
 
         </section>
     )
