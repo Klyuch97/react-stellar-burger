@@ -6,16 +6,40 @@ import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { CountContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
+import { POST_ORDER_NUMBER_REQUEST,POST_ORDER_NUMBER_FAILED,POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
+export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 
 
-
-const BurgerConstructor = ({ handleOrderSubmit }) => {
-    const {selectedItemBuns,selectedItems} = useSelector(state => state.burger);
-  
-   
+const BurgerConstructor = () => {
+    const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const [modalActive, setModalActive] = React.useState(false);
     const { priceState } = useContext(CountContext);
+    const dispatch = useDispatch();
+   
+
+    const handleOrderSubmit = async () => {
+        dispatch({type:POST_ORDER_NUMBER_REQUEST})
+        const ingredientId = selectedItems.map(item => item._id);
+        const ingredientBunsId = selectedItemBuns._id;
+        const ingredient = [...ingredientId, ingredientBunsId];
+        const response = await fetch(orderPostUlr, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ingredients: ingredient }),
+        });
+        if (!response.ok) {
+            const message = alert(`Ошибка: ${response.status}`);
+            dispatch({type:POST_ORDER_NUMBER_FAILED})
+            throw new Error(message);
+        }
+        const data = await response.json();
+        const orderNumber = data.order.number;
+        dispatch({type:POST_ORDER_NUMBER_SUCCESS, orderNumber})
+        console.log('Номер заказа:', orderNumber);
+    }
 
     const closeModal = () => {
         setModalActive(false)
@@ -56,7 +80,7 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
                         onClick={() => {
                             handleOrderSubmit();
                             setModalActive(true);
-                            }}>
+                        }}>
                         Оформить заказ
                     </Button>
                 </div>

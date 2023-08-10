@@ -7,8 +7,8 @@ import { BurgerContext, CountContext } from "../../services/appContext";
 import { v4 as uuidv4 } from 'uuid';
 
 
-export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
-const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
+
+
 const priceInitialState = {
   selectedItems: [],
   selectedItemBuns: [],
@@ -51,28 +51,7 @@ function App() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
 
-  const handleOrderSubmit = async () => {
-    setState({ ...state, isLoading: true });
-    const ingredientId = selectedItems.map(item => item._id);
-    const ingredientBunsId = state.selectedItemBuns._id;
-    const ingredient = [...ingredientId, ingredientBunsId];
-    const response = await fetch(orderPostUlr, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ingredients: ingredient }),
-    });
-    if (!response.ok) {
-      const message = alert(`Ошибка: ${response.status}`);
-      setState({ ...state, hasError: true });
-      throw new Error(message);
-    }
-    const data = await response.json();
-    const orderNumber = data.order.number;
-    setState({ ...state, orderNumber: orderNumber, isLoading: false })
-    console.log('Номер заказа:', orderNumber);
-  }
+  
 
   return (
     <div className={styles.app}>
@@ -80,7 +59,7 @@ function App() {
       <main className={styles.main}>
         <CountContext.Provider value={{ priceState, priceDispatcher }}>
           <BurgerIngredients />
-          <BurgerConstructor handleOrderSubmit={handleOrderSubmit} />
+          <BurgerConstructor />
         </CountContext.Provider>
       </main>
     </div>

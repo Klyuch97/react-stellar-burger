@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,ADD_INGRID,ADD_INGRIDS } from "../actions/burgerState";
+import { GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,ADD_INGRID,ADD_INGRIDS, 
+POST_ORDER_NUMBER_FAILED,POST_ORDER_NUMBER_REQUEST,POST_ORDER_NUMBER_SUCCESS} from "../actions/burgerState";
 
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     totalPrice: 0,
     price: 0,
     priceBuns: 0,
+    orderNumber: null,
 };
 
 export const burgerReducer = (state = initialState, action) => {
@@ -52,6 +54,27 @@ export const burgerReducer = (state = initialState, action) => {
                 ...state,
                 selectedItems:[...state.selectedItems, newItem]
             };
+        }
+        case POST_ORDER_NUMBER_REQUEST:{
+            return {
+                ...state,
+                isLoading: true,
+            };  
+        }
+        case POST_ORDER_NUMBER_FAILED:{
+            return {
+                ...state,
+                hasError: true,
+                isLoading: false,
+            };
+        }
+        case POST_ORDER_NUMBER_SUCCESS:{
+            return {
+                ...state,
+                isLoading: false,
+                hasError: false,
+                orderNumber: action.orderNumber
+            };  
         }
         default: {
             return state;
