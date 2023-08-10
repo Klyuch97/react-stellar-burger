@@ -4,7 +4,7 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { BurgerContext, CountContext } from '../../services/appContext';
+import { CountContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -15,7 +15,7 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
   
    
     const [modalActive, setModalActive] = React.useState(false);
-    const { priceState, priceDispatcher } = useContext(CountContext);
+    const { priceState } = useContext(CountContext);
 
     const closeModal = () => {
         setModalActive(false)

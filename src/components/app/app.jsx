@@ -50,23 +50,6 @@ function App() {
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
-  /* React.useEffect(() => {
-     const Ingredients = async () => {
-       setState({ ...state, isLoading: true });
-       const res = await fetch(baseUrl);
-       if (!res.ok) {
-         const message = alert(`Ошибка: ${res.status}`);
-         setState({ ...state, hasError: true });
-         throw new Error(message);
-       }
-       const data = await res.json();
-       setState({ ingrid: data.data, isLoading: false });
-     }
- 
-     Ingredients();
-   }, [])8*/
-
-
 
   const handleOrderSubmit = async () => {
     setState({ ...state, isLoading: true });
@@ -90,7 +73,6 @@ function App() {
     setState({ ...state, orderNumber: orderNumber, isLoading: false })
     console.log('Номер заказа:', orderNumber);
   }
-
 
   return (
     <div className={styles.app}>
