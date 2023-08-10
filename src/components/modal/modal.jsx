@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 
 
 const Modal = ({ children, onClose,}) => {
-    const {modalActive}= useSelector(state=> state.modal)
+    const {modalActive, currentIngrid}= useSelector(state=> state.modal);
+    
 
     React.useEffect(() => {
         const closeEsc = (evt) => {
@@ -22,7 +23,7 @@ const Modal = ({ children, onClose,}) => {
         return () => document.removeEventListener("keydown", closeEsc);
     }, [onClose]);
     const modals = document.getElementById('modals');
-    if (!modalActive) { return null; }
+    if (!modalActive || currentIngrid=== null) { return null; }
 
     return ReactDOM.createPortal(
         <>

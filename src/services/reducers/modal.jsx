@@ -18,6 +18,7 @@ export const modalReducer = (state = initialStateModal, action) => {
             return {
                 ...state,
                 modalActive: false,
+                currentIngrid:null
             };
         }
         default:

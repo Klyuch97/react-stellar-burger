@@ -6,20 +6,20 @@ import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { CountContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { POST_ORDER_NUMBER_REQUEST,POST_ORDER_NUMBER_FAILED,POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
+import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
+import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-    const [modalActive, setModalActive] = React.useState(false);
+    //const [modalActive, setModalActive] = React.useState(false);
     const { priceState } = useContext(CountContext);
+    const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
-   
-
     const handleOrderSubmit = async () => {
-        dispatch({type:POST_ORDER_NUMBER_REQUEST})
+        dispatch({ type: POST_ORDER_NUMBER_REQUEST })
         const ingredientId = selectedItems.map(item => item._id);
         const ingredientBunsId = selectedItemBuns._id;
         const ingredient = [...ingredientId, ingredientBunsId];
@@ -32,17 +32,18 @@ const BurgerConstructor = () => {
         });
         if (!response.ok) {
             const message = alert(`Ошибка: ${response.status}`);
-            dispatch({type:POST_ORDER_NUMBER_FAILED})
+            dispatch({ type: POST_ORDER_NUMBER_FAILED })
             throw new Error(message);
         }
         const data = await response.json();
         const orderNumber = data.order.number;
-        dispatch({type:POST_ORDER_NUMBER_SUCCESS, orderNumber})
+        dispatch({ type: POST_ORDER_NUMBER_SUCCESS, orderNumber })
         console.log('Номер заказа:', orderNumber);
     }
-
+console.log(currentIngrid,modalActive);
     const closeModal = () => {
-        setModalActive(false)
+        //setModalActive(false)
+        dispatch({ type: MODAL_CLOSE })
     }
     return (
         <section className={BurgerConstructorStyles.page}>
@@ -79,13 +80,14 @@ const BurgerConstructor = () => {
                         size="medium"
                         onClick={() => {
                             handleOrderSubmit();
-                            setModalActive(true);
+                            dispatch({ type: "MODAL_OPEN", payload: undefined });
+                            //setModalActive(true);
                         }}>
                         Оформить заказ
                     </Button>
                 </div>
                 {
-                    modalActive && <Modal active={modalActive} onClose={closeModal}>
+                    modalActive && currentIngrid === undefined && <Modal onClose={closeModal}>
                         <OrderDetails /></Modal>
                 }
             </div>

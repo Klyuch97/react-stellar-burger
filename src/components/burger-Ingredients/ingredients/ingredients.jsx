@@ -24,25 +24,37 @@ const Ingredients = ({ data }) => {
         dispatch({ type: MODAL_CLOSE })
     }
 
-    const handleItemClick = (item) => {
+    /*const handleItemClick = (item) => {
         if (item.type === "bun") {
             dispatch(addItem(item))
             priceDispatcher({ type: "incriment", payload: item });
-            dispatch({ type: "MODAL_OPEN" ,payload:item });
+           // dispatch({ type: "MODAL_OPEN" ,payload:item });
             //setModalActive(true);
         }
         else {
             dispatch(addItems(item))
-            dispatch({ type: "MODAL_OPEN" ,payload:item });
+           // dispatch({ type: "MODAL_OPEN" ,payload:item });
             priceDispatcher({ type: "incriment", payload: item });
             //setModalActive(true);
         }
-    }
-
+    }*/
+    const handleItemClick = React.useCallback((item) => {
+        if (item.type === "bun") {
+            dispatch(addItem(item));
+            priceDispatcher({ type: "incriment", payload: item });
+            dispatch({ type: "MODAL_OPEN", payload: item });
+            // setModalActive(true);
+        } else {
+            dispatch(addItems(item));
+            dispatch({ type: "MODAL_OPEN", payload: item });
+            priceDispatcher({ type: "incriment", payload: item });
+            // setModalActive(true);
+        }
+    }, [dispatch, addItem, addItems, priceDispatcher]);
 
     return (
         <>
-            <div className={`${BurgerIngredientsStyles.content}`} onClick={() => {handleItemClick(data)}} >
+            <div className={`${BurgerIngredientsStyles.content}`} onClick={() => { handleItemClick(data) }} >
                 <Counter count={0} size="default" extraClass="m-1" />
                 <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
@@ -53,8 +65,8 @@ const Ingredients = ({ data }) => {
             </div>
 
             {
-                modalActive && <Modal onClose={closeModal}>
-                    <IngredientDetails data={ currentIngrid} /></Modal>
+                modalActive && currentIngrid && <Modal onClose={closeModal}>
+                    <IngredientDetails data={currentIngrid} /></Modal>
             }
         </>
     )
