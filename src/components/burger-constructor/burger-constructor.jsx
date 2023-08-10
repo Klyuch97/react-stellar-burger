@@ -40,7 +40,6 @@ const BurgerConstructor = () => {
         dispatch({ type: POST_ORDER_NUMBER_SUCCESS, orderNumber })
         console.log('Номер заказа:', orderNumber);
     }
-console.log(currentIngrid,modalActive);
     const closeModal = () => {
         //setModalActive(false)
         dispatch({ type: MODAL_CLOSE })

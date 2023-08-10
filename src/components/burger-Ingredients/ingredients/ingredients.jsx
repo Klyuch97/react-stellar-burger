@@ -66,7 +66,7 @@ const Ingredients = ({ data }) => {
 
             {
                 modalActive && currentIngrid && <Modal onClose={closeModal}>
-                    <IngredientDetails data={currentIngrid} /></Modal>
+                    <IngredientDetails /></Modal>
             }
         </>
     )

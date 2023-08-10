@@ -1,9 +1,11 @@
 import IngridDetailsStyles from './ingredient-details.module.css'
 import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types';
+import { useSelector } from 'react-redux';
 
 
-export const IngredientDetails = ({ data }) => {
+export const IngredientDetails = () => {
+const data = useSelector(state=>state.modal.currentIngrid)
     return (
         <div>
             <h2 className={`text text_type_main-large pt-10 ${IngridDetailsStyles.title}`}>Детали ингредиента</h2>
