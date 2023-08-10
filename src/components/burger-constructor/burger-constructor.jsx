@@ -15,7 +15,6 @@ const BurgerConstructor = ({ handleOrderSubmit }) => {
     const { selectedItemBuns, selectedItems } = useContext(BurgerContext);
     const [modalActive, setModalActive] = React.useState(false);
     const { priceState, priceDispatcher } = useContext(CountContext);
-   console.log(selectedItems.map((ingrid, index) => ingrid.key))
 
     const closeModal = () => {
         setModalActive(false)
