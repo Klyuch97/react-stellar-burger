@@ -1,8 +1,7 @@
-import React, { useContext, useMemo,useEffect } from 'react';
+import React, { useMemo,useEffect } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
-import { BurgerContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngrid } from '../../services/actions/burgerState';
 

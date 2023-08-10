@@ -3,10 +3,7 @@ import styles from "./app.module.css";
 import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { BurgerContext, CountContext } from "../../services/appContext";
-import { v4 as uuidv4 } from 'uuid';
-
-
+import { CountContext } from "../../services/appContext";
 
 
 const priceInitialState = {
@@ -41,17 +38,7 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, setState] = useState({
-    isLoading: false,
-    hasError: false,
-    ingrid: [],
-    selectedItemBuns: [],
-    orderNumber: null,
-  });
-  const [selectedItems, setSelectedItems] = useState([]);
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
-
-  
 
   return (
     <div className={styles.app}>

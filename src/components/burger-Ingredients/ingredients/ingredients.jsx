@@ -6,18 +6,16 @@ import { IngredientDetails } from '../../ingredient-details/ingredient-details';
 import { ingredientPropType } from '../../../utils/prop-types';
 import { BurgerContext } from '../../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem,addItems } from '../../../services/actions/burgerState';
+import { addItem, addItems } from '../../../services/actions/burgerState';
 import { CountContext } from '../../../services/appContext';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
-    const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-    const { priceState, priceDispatcher } = useContext(CountContext);
-
+    const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
-
     const [modalActive, setModalActive] = React.useState(false);
+
     const closeModal = () => {
         setModalActive(false)
     }
@@ -26,15 +24,14 @@ const Ingredients = ({ data }) => {
         if (item.type === "bun") {
             dispatch(addItem(item))
             priceDispatcher({ type: "incriment", payload: item });
-            //setModalActive(true);
+            setModalActive(true);
         }
         else {
             dispatch(addItems(item))
-             priceDispatcher({ type: "incriment", payload: item });
-             //setModalActive(true);
+            priceDispatcher({ type: "incriment", payload: item });
+            setModalActive(true);
         }
     }
-   
 
     return (
         <>
