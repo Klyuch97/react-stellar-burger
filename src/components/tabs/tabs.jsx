@@ -4,7 +4,6 @@ import TabStyles from '../tabs/tabs.module.css';
 import { useInView } from 'react-intersection-observer';
 
 const Tabs = ({ current, setCurrent, handleTabClick }) => {
-//console.log(current);
 
     return (
         <div className={`${TabStyles.page} mb-10`}>

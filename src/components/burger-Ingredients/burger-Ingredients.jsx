@@ -36,10 +36,11 @@ const BurgerIngredients = () => {
 
     const [current, setCurrent] = React.useState('one');
 
-    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
-    const [sausesRef, sausesInView] = useInView({ threshold: 0 });
-    const [mainsRef, mainInView] = useInView({ threshold: 0 });
-    
+    const [bunsRef, bunsInView] = useInView({ threshold: 0.1 });
+    const [sausesRef, sausesInView] = useInView({ threshold: 0.1 });
+    const [mainsRef, mainInView] = useInView({ threshold: 0.1 });
+    const a = bunsRef;
+
     useEffect(() => {
         if (bunsInView) {
             setCurrent("one");
@@ -50,9 +51,21 @@ const BurgerIngredients = () => {
         }
     }, [bunsInView, sausesInView, mainInView]);
 
-    const handleTabClick = (value) => {
-        setCurrent(value);
-        console.log(value);
+    const handleTabClick = (currentTab) => {
+        setCurrent(currentTab);
+        switch (currentTab) {
+            case 'one':
+                document.getElementById('bunsTab').scrollIntoView({ behavior: "smooth" });
+                break;
+            case 'two':
+                document.getElementById('saucesTab').scrollIntoView({ behavior: "smooth" });
+                break;
+            case 'three':
+                document.getElementById('mainsTab').scrollIntoView({ behavior: "smooth" });
+                break;
+            default:
+                break;
+        }
     };
 
 
@@ -63,7 +76,7 @@ const BurgerIngredients = () => {
             </h1>
             <Tabs current={current} setCurrent={setCurrent} handleTabClick={handleTabClick} />
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
-                <li className={BurgerIngredientsStyles.ul} ref={bunsRef} >
+                <li className={BurgerIngredientsStyles.ul} ref={bunsRef} id='bunsTab' >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
 
                     <div className={BurgerIngredientsStyles.containerContent}>
@@ -74,7 +87,7 @@ const BurgerIngredients = () => {
                             ingrid.length &&
                             buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div> </li>
-                <li className={BurgerIngredientsStyles.ul} ref={sausesRef}>
+                <li className={BurgerIngredientsStyles.ul} ref={sausesRef} id='saucesTab'>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
                         {isLoading && 'Загрузка...'}
@@ -85,7 +98,7 @@ const BurgerIngredients = () => {
                             sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
-                <li className={BurgerIngredientsStyles.ul} ref={mainsRef}>
+                <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
                         {isLoading && 'Загрузка...'}
