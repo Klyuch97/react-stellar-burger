@@ -39,7 +39,6 @@ const BurgerIngredients = () => {
     const [bunsRef, bunsInView] = useInView({ threshold: 0.1 });
     const [sausesRef, sausesInView] = useInView({ threshold: 0.1 });
     const [mainsRef, mainInView] = useInView({ threshold: 0.1 });
-    const a = bunsRef;
 
     useEffect(() => {
         if (bunsInView) {
