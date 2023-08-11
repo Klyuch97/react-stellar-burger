@@ -1,9 +1,11 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import TabStyles from '../tabs/tabs.module.css'
+import TabStyles from '../tabs/tabs.module.css';
+import { useInView } from 'react-intersection-observer';
 
-const Tabs = () => {
-    const [current, setCurrent] = React.useState('one')
+const Tabs = ({current,setCurrent}) => {
+
+   
     return (
         <div className={`${TabStyles.page} mb-10`}>
             <Tab value="one" active={current === 'one'} onClick={setCurrent}>

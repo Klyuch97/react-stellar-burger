@@ -7,6 +7,7 @@ import { getIngrid } from '../../services/actions/burgerState';
 import Modal from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { MODAL_CLOSE } from '../../services/actions/modal';
+import { useInView } from 'react-intersection-observer';
 
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
@@ -32,14 +33,31 @@ const BurgerIngredients = () => {
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
 
+
+    const [current, setCurrent] = React.useState('one');
+    
+    const [bunsRef, bunsInView] = useInView({ threshold: 0 });
+    const [sausesRef, sausesInView] = useInView({ threshold: 0 });
+    const [mainsRef, mainInView] = useInView({ threshold: 0 });
+    useEffect(() => {
+        if (bunsInView) {
+            setCurrent("one");
+        } else if (sausesInView) {
+            setCurrent("two");
+        } else if (mainInView) {
+            setCurrent("three");
+        }
+    }, [bunsInView, sausesInView, mainInView]);
+
+
     return (
         <section className={BurgerIngredientsStyles.page}>
             <h1 className='text text_type_main-large mt-10 pb-5'>
                 Соберите бургер
             </h1>
-            <Tabs />
+            <Tabs current={current} setCurrent={setCurrent} />
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
-                <li className={BurgerIngredientsStyles.ul} >
+                <li className={BurgerIngredientsStyles.ul} ref={bunsRef} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
 
                     <div className={BurgerIngredientsStyles.containerContent}>
@@ -50,7 +68,7 @@ const BurgerIngredients = () => {
                             ingrid.length &&
                             buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div> </li>
-                <li className={BurgerIngredientsStyles.ul}>
+                <li className={BurgerIngredientsStyles.ul} ref={sausesRef}>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
                         {isLoading && 'Загрузка...'}
@@ -61,7 +79,7 @@ const BurgerIngredients = () => {
                             sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} />)}
                     </div>
                 </li>
-                <li className={BurgerIngredientsStyles.ul}>
+                <li className={BurgerIngredientsStyles.ul} ref={mainsRef}>
                     <h2 className='mb-6 text text_type_main-medium'>Начинки</h2>
                     <div className={BurgerIngredientsStyles.containerContent}>
                         {isLoading && 'Загрузка...'}
