@@ -35,10 +35,11 @@ const BurgerIngredients = () => {
 
 
     const [current, setCurrent] = React.useState('one');
-    
+
     const [bunsRef, bunsInView] = useInView({ threshold: 0 });
     const [sausesRef, sausesInView] = useInView({ threshold: 0 });
     const [mainsRef, mainInView] = useInView({ threshold: 0 });
+    
     useEffect(() => {
         if (bunsInView) {
             setCurrent("one");
@@ -49,13 +50,18 @@ const BurgerIngredients = () => {
         }
     }, [bunsInView, sausesInView, mainInView]);
 
+    const handleTabClick = (value) => {
+        setCurrent(value);
+        console.log(value);
+    };
+
 
     return (
         <section className={BurgerIngredientsStyles.page}>
             <h1 className='text text_type_main-large mt-10 pb-5'>
                 Соберите бургер
             </h1>
-            <Tabs current={current} setCurrent={setCurrent} />
+            <Tabs current={current} setCurrent={setCurrent} handleTabClick={handleTabClick} />
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} ref={bunsRef} >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
