@@ -4,18 +4,28 @@ import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngrid } from '../../services/actions/burgerState';
+import Modal from '../modal/modal';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { MODAL_CLOSE } from '../../services/actions/modal';
 
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const BurgerIngredients = () => {
+    const { modalActive, currentIngrid } = useSelector(state => state.modal);
+
+    console.log(currentIngrid);
 
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getIngrid());
         }, [dispatch]);
+
+        const closeModal = () => {
+            dispatch({ type: MODAL_CLOSE })
+        }
 
     const [buns, sauces, mains] = useMemo(() => {
        const filteredBuns = ingrid.filter(item => item.type === 'bun');
@@ -66,6 +76,10 @@ const BurgerIngredients = () => {
                     </div>
                 </li>
                         </ul>
+                        {
+                modalActive && currentIngrid && <Modal onClose={closeModal}>
+                    <IngredientDetails /></Modal>
+            }
 
         </section>
     )

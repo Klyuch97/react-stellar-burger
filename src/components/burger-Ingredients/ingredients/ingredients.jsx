@@ -16,13 +16,9 @@ const Ingredients = ({ data }) => {
     const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
     //const [modalActive, setModalActive] = React.useState(false);
-    const { modalActive, currentIngrid } = useSelector(state => state.modal);
+   
 
-
-
-    const closeModal = () => {
-        dispatch({ type: MODAL_CLOSE })
-    }
+   
 
     /*const handleItemClick = (item) => {
         if (item.type === "bun") {
@@ -64,10 +60,7 @@ const Ingredients = ({ data }) => {
                 <p className={`${BurgerIngredientsStyles.text} text text_type_main-default`} >{data.name}</p>
             </div>
 
-            {
-                modalActive && currentIngrid && <Modal onClose={closeModal}>
-                    <IngredientDetails /></Modal>
-            }
+          
         </>
     )
 }
