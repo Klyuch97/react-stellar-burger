@@ -14,7 +14,6 @@ export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-    //const [modalActive, setModalActive] = React.useState(false);
     const { priceState } = useContext(CountContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
@@ -41,7 +40,6 @@ const BurgerConstructor = () => {
         console.log('Номер заказа:', orderNumber);
     }
     const closeModal = () => {
-        //setModalActive(false)
         dispatch({ type: MODAL_CLOSE })
     }
     return (
@@ -80,7 +78,6 @@ const BurgerConstructor = () => {
                         onClick={() => {
                             handleOrderSubmit();
                             dispatch({ type: "MODAL_OPEN", payload: undefined });
-                            //setModalActive(true);
                         }}>
                         Оформить заказ
                     </Button>
