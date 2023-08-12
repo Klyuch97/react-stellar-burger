@@ -1,4 +1,5 @@
 import React,{useContext} from "react";
 
-export const BurgerContext = React.createContext(); 
-export const CountContext = React.createContext(null);
+
+export const TotalPriceContext = React.createContext(null);
+export const CounterContext = React.createContext(null)

@@ -3,7 +3,7 @@ import styles from "./app.module.css";
 import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { CountContext } from "../../services/appContext";
+import { TotalPriceContext, CounterContext } from "../../services/appContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -15,6 +15,25 @@ const priceInitialState = {
   price: 0,
   priceBuns: 0,
 };
+
+const counterInitialState = {
+  count: 0,
+  activeCount: false,
+}
+function reducerCount(state, action) {
+  switch (action.type) {
+    case "incriment":
+      {
+        return {
+          ...state,
+          count: state.count + action.payload.count,
+          activeCount: true
+        };
+      }
+    case "reset":
+      return counterInitialState;
+  }
+}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -41,17 +60,20 @@ function reducer(state, action) {
 
 function App() {
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
-
+  const [counterState, counterDispatcher] = useReducer(reducerCount, counterInitialState, undefined)
   return (
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <CountContext.Provider value={{ priceState, priceDispatcher }}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        </CountContext.Provider>
+        <CounterContext.Provider value={{ counterState, counterDispatcher }}>
+          <TotalPriceContext.Provider value={{ priceState, priceDispatcher }}>
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
+          </TotalPriceContext.Provider>
+        </CounterContext.Provider>
+
       </main>
     </div>
   );
