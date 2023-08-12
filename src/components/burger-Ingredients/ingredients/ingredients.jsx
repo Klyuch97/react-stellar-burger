@@ -13,8 +13,8 @@ const Ingredients = ({ data }) => {
     const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({
-        type: 'itemBun',
-        item: data.type === 'bun' ? data : null,
+        type: data.type === "bun" ? "itemBun" : "itemOther",
+        item: data,
         collect: monitor => ({
             opacity: monitor.isDragging() ? 0.5 : 1
         })
