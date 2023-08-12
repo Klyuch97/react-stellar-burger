@@ -30,6 +30,7 @@ const BurgerConstructor = () => {
         drop: (item) => {
             dispatch(addItem(item));
             priceDispatcher({ type: "incriment", payload: item });
+            counterDispatcher({type:"incriment", payload:item})
 
         },
     })
