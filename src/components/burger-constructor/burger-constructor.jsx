@@ -8,6 +8,7 @@ import { CountContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
+import { useDrop } from 'react-dnd';
 export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 
@@ -17,6 +18,13 @@ const BurgerConstructor = () => {
     const { priceState } = useContext(CountContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
+    const [{ isHover }, dropTarget] = useDrop({
+        accept: 'items',
+        collect: monitor => ({
+            isHover: monitor.isOver()
+        })
+    })
+
     const handleOrderSubmit = async () => {
         dispatch({ type: POST_ORDER_NUMBER_REQUEST })
         const ingredientId = selectedItems.map(item => item._id);
@@ -45,7 +53,9 @@ const BurgerConstructor = () => {
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
-                <div className="pl-8 mb-4">
+                <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
+                ${BurgerConstructorStyles.ingridientsBun}`} 
+                ref={dropTarget}>
                     {selectedItemBuns && <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -54,11 +64,14 @@ const BurgerConstructor = () => {
                         thumbnail={selectedItemBuns.image}
                     />}
                 </div>
-                <ul className={`${BurgerConstructorStyles.containerScroll} custom-scroll`}>
+                <ul className={`${BurgerConstructorStyles.containerScroll}
+                 custom-scroll`}>
                     {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} />)
                     }
                 </ul>
-                <div className="pl-8 mt-4">
+                <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
+                ${BurgerConstructorStyles.ingridientsBun}`}
+                >
                     {selectedItemBuns && <ConstructorElement
                         type=" bottom"
                         isLocked={true}

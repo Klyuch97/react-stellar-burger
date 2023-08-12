@@ -4,6 +4,8 @@ import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { CountContext } from "../../services/appContext";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 const priceInitialState = {
@@ -44,10 +46,12 @@ function App() {
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <CountContext.Provider value={{ priceState, priceDispatcher }}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </CountContext.Provider>
+        <DndProvider backend={HTML5Backend}>
+          <CountContext.Provider value={{ priceState, priceDispatcher }}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </CountContext.Provider>
+        </DndProvider>
       </main>
     </div>
   );
