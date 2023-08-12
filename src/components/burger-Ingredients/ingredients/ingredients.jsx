@@ -13,13 +13,12 @@ const Ingredients = ({ data }) => {
     const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({
-        type: 'items',
-        item: data ,
+        type: 'itemBun',
+        item: data.type === 'bun' ? data : null,
         collect: monitor => ({
-          opacity: monitor.isDragging() ? 0.5 : 1
+            opacity: monitor.isDragging() ? 0.5 : 1
         })
-      })
-
+    })
     const handleItemClick = React.useCallback((item) => {
         if (item.type === "bun") {
             //dispatch(addItem(item));
@@ -34,10 +33,10 @@ const Ingredients = ({ data }) => {
 
     return (
         <>
-            <div className={`${BurgerIngredientsStyles.content}`} 
-            onClick={() => { handleItemClick(data) }}
-            style={{opacity}}
-            ref={ref} >
+            <div className={`${BurgerIngredientsStyles.content}`}
+                onClick={() => { handleItemClick(data) }}
+                style={{ opacity }}
+                ref={ref} >
 
                 <Counter count={0} size="default" extraClass="m-1" />
                 <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
