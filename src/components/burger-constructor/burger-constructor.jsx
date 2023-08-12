@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
-import { addItem,addItems } from '../../services/actions/burgerState';
+import { addItem, addItems } from '../../services/actions/burgerState';
 
 export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
@@ -20,7 +20,6 @@ const BurgerConstructor = () => {
     const { priceState } = useContext(CountContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
-   
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
@@ -28,6 +27,14 @@ const BurgerConstructor = () => {
             isHover: monitor.isOver()
         }),
         drop(item) { dispatch(addItem(item)) }
+    })
+
+    const [{ isHoverItems }, dropTargets] = useDrop({
+        accept: 'itemOther',
+        collect: monitor => ({
+            isHoverItems: monitor.isOver()
+        }),
+        drop(item) { dispatch(addItems(item)) }
     })
 
     const handleOrderSubmit = async () => {
@@ -60,7 +67,7 @@ const BurgerConstructor = () => {
             <div className="pt-25 pb-10">
                 <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
                 ${BurgerConstructorStyles.ingridientsBun}`}
-                    ref={dropTarget}>
+                    ref={dropTarget} >
                     {selectedItemBuns && <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -70,7 +77,8 @@ const BurgerConstructor = () => {
                     />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll}
-                 custom-scroll`}>
+                ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`} 
+                ref={dropTargets}>
                     {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} />)
                     }
                 </ul>
