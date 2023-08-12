@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../../utils/prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { CountContext } from '../../../services/appContext';
+import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
-    //const { priceDispatcher } = useContext(CountContext);
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({
         type: data.type === "bun" ? "itemBun" : "itemOther",
@@ -18,17 +16,9 @@ const Ingredients = ({ data }) => {
             opacity: monitor.isDragging() ? 0.5 : 1
         })
     })
-    const handleItemClick = React.useCallback((item) => {
-        if (item.type === "bun") {
-            //dispatch(addItem(item));
-            //priceDispatcher({ type: "incriment", payload: item });
-            dispatch({ type: "MODAL_OPEN", payload: item });
-        } else {
-            //dispatch(addItems(item));
-            dispatch({ type: "MODAL_OPEN", payload: item });
-            //priceDispatcher({ type: "incriment", payload: item });
-        }
-    }, [dispatch]);
+    const handleItemClick = (item) => {
+        dispatch({ type: "MODAL_OPEN", payload: item });
+    }
 
     return (
         <>
