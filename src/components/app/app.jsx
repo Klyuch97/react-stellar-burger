@@ -26,7 +26,7 @@ function reducerCount(state, action) {
       {
         return {
           ...state,
-          count: state.count + action.payload.count,
+          count: 1,
           activeCount: true
         };
       }

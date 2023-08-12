@@ -4,7 +4,7 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { TotalPriceContext } from '../../services/appContext';
+import { CounterContext, TotalPriceContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
@@ -19,6 +19,8 @@ const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const { priceState, priceDispatcher } = useContext(TotalPriceContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
+    const {counterState,counterDispatcher}= useContext(CounterContext);
+    console.log(counterState);
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
