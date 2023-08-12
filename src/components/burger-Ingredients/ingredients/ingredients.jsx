@@ -14,7 +14,7 @@ const Ingredients = ({ data }) => {
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({
         type: 'items',
-        item: data._id ,
+        item: data ,
         collect: monitor => ({
           opacity: monitor.isDragging() ? 0.5 : 1
         })

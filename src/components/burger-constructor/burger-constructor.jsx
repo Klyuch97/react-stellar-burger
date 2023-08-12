@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
+import { addItem } from '../../services/actions/burgerState';
+
 export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 
@@ -18,11 +20,14 @@ const BurgerConstructor = () => {
     const { priceState } = useContext(CountContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
+   
+
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'items',
         collect: monitor => ({
             isHover: monitor.isOver()
-        })
+        }),
+        drop(item) { dispatch(addItem(item)) }
     })
 
     const handleOrderSubmit = async () => {
@@ -54,8 +59,8 @@ const BurgerConstructor = () => {
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
                 <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
-                ${BurgerConstructorStyles.ingridientsBun}`} 
-                ref={dropTarget}>
+                ${BurgerConstructorStyles.ingridientsBun}`}
+                    ref={dropTarget}>
                     {selectedItemBuns && <ConstructorElement
                         type="top"
                         isLocked={true}
