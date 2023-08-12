@@ -17,16 +17,19 @@ export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-    const { priceState } = useContext(CountContext);
+    const { priceState, priceDispatcher } = useContext(CountContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
-
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
         collect: monitor => ({
             isHover: monitor.isOver()
         }),
-        drop(item) { dispatch(addItem(item)) }
+        drop: (item) => {
+            dispatch(addItem(item));
+            priceDispatcher({ type: "incriment", payload: item });
+
+        },
     })
 
     const [{ isHoverItems }, dropTargets] = useDrop({
@@ -34,7 +37,10 @@ const BurgerConstructor = () => {
         collect: monitor => ({
             isHoverItems: monitor.isOver()
         }),
-        drop(item) { dispatch(addItems(item)) }
+        drop: (item) => {
+            dispatch(addItems(item));
+            priceDispatcher({ type: "incriment", payload: item });
+        }
     })
 
     const handleOrderSubmit = async () => {
@@ -77,8 +83,8 @@ const BurgerConstructor = () => {
                     />}
                 </div>
                 <ul className={`${BurgerConstructorStyles.containerScroll}
-                ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`} 
-                ref={dropTargets}>
+                ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
+                    ref={dropTargets}>
                     {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} />)
                     }
                 </ul>

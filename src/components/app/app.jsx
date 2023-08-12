@@ -46,12 +46,12 @@ function App() {
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <DndProvider backend={HTML5Backend}>
-          <CountContext.Provider value={{ priceState, priceDispatcher }}>
+        <CountContext.Provider value={{ priceState, priceDispatcher }}>
+          <DndProvider backend={HTML5Backend}>
             <BurgerIngredients />
             <BurgerConstructor />
-          </CountContext.Provider>
-        </DndProvider>
+          </DndProvider>
+        </CountContext.Provider>
       </main>
     </div>
   );
