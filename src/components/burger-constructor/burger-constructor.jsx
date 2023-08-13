@@ -17,6 +17,7 @@ export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
+   
     const { priceState, priceDispatcher } = useContext(TotalPriceContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();

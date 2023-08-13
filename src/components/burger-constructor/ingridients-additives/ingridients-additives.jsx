@@ -9,6 +9,7 @@ const Ingridients = ({ data }) => {
             text={data.name}
             price={data.price}
             thumbnail={data.image}
+            handleClose={()=>{console.log(1)}}
         />
     </li>
     )

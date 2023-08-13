@@ -10,6 +10,7 @@ export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
+  
 
     const ingredient = [...selectedItems, selectedItemBuns];
     const count = useMemo(() => {
