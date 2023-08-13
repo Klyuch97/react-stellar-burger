@@ -10,8 +10,8 @@ import { MODAL_CLOSE} from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
+import { BASE_URL } from '../../utils/api';
 
-export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 
 
@@ -49,7 +49,7 @@ const BurgerConstructor = () => {
         const ingredientId = selectedItems.map(item => item._id);
         const ingredientBunsId = selectedItemBuns._id;
         const ingredient = [...ingredientId, ingredientBunsId];
-        const response = await fetch(orderPostUlr, {
+        const response = await fetch(`${BASE_URL}orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

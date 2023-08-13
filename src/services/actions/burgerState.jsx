@@ -1,3 +1,5 @@
+import { BASE_URL } from "../../utils/api";
+
 export const GET_INGRID_REQUEST = 'GET_INGRID_REQUEST';
 export const GET_INGRID_SUCCESS = 'GET_INGRID_SUCCESS';
 export const GET_INGRID_FAILED = 'GET_INGRID_FAILED';
@@ -8,14 +10,13 @@ export const POST_ORDER_NUMBER_SUCCESS = 'POST_ORDER_NUMBER_SUCCESS';
 export const POST_ORDER_NUMBER_FAILED = 'POST_ORDER_NUMBER_FAILED';
 export const DELETE_INGRIDIENT = 'DELETE_INGRIDIENT';
 export const CHANGE_CARTS = "CHANGE_CARTS";
-export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 export const getIngrid = () => {
   return async (dispatch) => {
     dispatch({ type: GET_INGRID_REQUEST });
 
-    const response = await fetch(baseUrl);
+    const response = await fetch(`${BASE_URL}ingredients`);
     const data = await response.json();
 
     if (response.ok && data.success) {
