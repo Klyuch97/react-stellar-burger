@@ -78,7 +78,6 @@ export const burgerReducer = (state = initialState, action) => {
             };
         }
         case DELETE_INGRIDIENT: {
-            //console.log(action.payload);
             return {
                 ...state,
                 selectedItems: state.selectedItems.filter((item) => item.key !== action.payload.key)
