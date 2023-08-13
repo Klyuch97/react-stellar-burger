@@ -10,7 +10,7 @@ import {
 const initialState = {
     ingrid: [],
     selectedItems: [],
-    selectedItemBuns: null,
+    selectedItemBuns: {},
     isLoading: false,
     hasError: false,
     orderNumber: null,

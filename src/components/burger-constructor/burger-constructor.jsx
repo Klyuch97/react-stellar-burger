@@ -4,7 +4,7 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { CounterContext, TotalPriceContext } from '../../services/appContext';
+import { TotalPriceContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
@@ -74,7 +74,7 @@ const BurgerConstructor = () => {
                 <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
                 ${BurgerConstructorStyles.ingridientsBun}`}
                     ref={dropTarget} >
-                    {selectedItemBuns && <ConstructorElement
+                    {Object.keys(selectedItemBuns).length > 0 && <ConstructorElement
                         type="top"
                         isLocked={true}
                         text={`${selectedItemBuns.name} (верх)`}
@@ -91,7 +91,7 @@ const BurgerConstructor = () => {
                 <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
                 ${BurgerConstructorStyles.ingridientsBun}`}
                 >
-                    {selectedItemBuns && <ConstructorElement
+                    {Object.keys(selectedItemBuns).length > 0 && <ConstructorElement
                         type=" bottom"
                         isLocked={true}
                         text={`${selectedItemBuns.name} (низ)`}

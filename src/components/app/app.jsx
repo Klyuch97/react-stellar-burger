@@ -3,7 +3,7 @@ import styles from "./app.module.css";
 import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { TotalPriceContext, CounterContext } from "../../services/appContext";
+import { TotalPriceContext } from "../../services/appContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

@@ -1,16 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../../utils/prop-types';
 import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
-import { CounterContext } from '../../../services/appContext';
+import { useSelector } from 'react-redux';
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
+    const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
+
+    const ingredient = [...selectedItems, selectedItemBuns];
+    const count = useMemo(() => {
+        return ingredient.reduce(
+            (acc, item) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            {}
+        );
+    }, [ingredient]);
+
     const dispatch = useDispatch();
-    const [count, setCount] = useState(0);
     const [{ opacity }, ref] = useDrag({
         type: data.type === "bun" ? "itemBun" : "itemOther",
         item: data,
@@ -20,13 +29,6 @@ const Ingredients = ({ data }) => {
     })
     const handleItemClick = (item) => {
         // dispatch({ type: "MODAL_OPEN", payload: item });
-        if (item.type === "bun") { 
-            setCount(1); }
-            else {
-                setCount(count+1)  
-            }
-
-
     }
 
     return (
@@ -36,7 +38,7 @@ const Ingredients = ({ data }) => {
                 style={{ opacity }}
                 ref={ref} >
 
-                {count !== 0 && <Counter count={count} size="default" extraClass="m-1" />}
+                {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
                 <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
                     <p className="text text_type_digits-default">{data.price}</p>
