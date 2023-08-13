@@ -6,7 +6,7 @@ import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CLOSE } from '../../services/actions/modal';
-import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
+import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS, postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
 import { BASE_URL } from '../../utils/api';
@@ -45,26 +45,11 @@ const BurgerConstructor = () => {
     })
 
     const handleOrderSubmit = async () => {
-        dispatch({ type: POST_ORDER_NUMBER_REQUEST })
-        const ingredientId = selectedItems.map(item => item._id);
+       const ingredientId = selectedItems.map(item => item._id);
         const ingredientBunsId = selectedItemBuns._id;
         const ingredient = [...ingredientId, ingredientBunsId];
-        const response = await fetch(`${BASE_URL}orders`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ingredients: ingredient }),
-        });
-        if (!response.ok) {
-            const message = alert(`Ошибка: ${response.status}`);
-            dispatch({ type: POST_ORDER_NUMBER_FAILED })
-            throw new Error(message);
-        }
-        const data = await response.json();
-        const orderNumber = data.order.number;
-        dispatch({ type: POST_ORDER_NUMBER_SUCCESS, orderNumber })
-        console.log('Номер заказа:', orderNumber);
+        dispatch(postOrderSubmit(ingredient))
+       
     }
     const closeModal = () => {
         dispatch({ type: MODAL_CLOSE })
