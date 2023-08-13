@@ -38,7 +38,7 @@ const Ingredients = ({ data }) => {
                 style={{ opacity }}
                 ref={ref} >
                 {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
-                <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
+                <img className={BurgerIngredientsStyles.image} src={data.image} alt={data.name} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
                     <p className="text text_type_digits-default">{data.price}</p>
                     <CurrencyIcon type="primary" />
