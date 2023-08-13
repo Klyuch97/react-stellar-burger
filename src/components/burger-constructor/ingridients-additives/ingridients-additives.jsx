@@ -3,16 +3,14 @@ import BurgerConstructorStyles from '../burger-constructor.module.css';
 import { ingredientPropType } from '../../../utils/prop-types'
 import { useDispatch, useSelector } from 'react-redux';
 import { DELETE_INGRIDIENT, CHANGE_CARTS } from '../../../services/actions/burgerState';
-import { useContext, useRef } from 'react';
+import {  useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { TotalPriceContext } from '../../../services/appContext';
+import { DECREMENT } from '../../../services/actions/price';
 
 const Ingridients = ({ data, index }) => {
     const id = data._id;
-    console.log(data.key);
     const { selectedItems } = useSelector(state => state.burger);
     const dispatch = useDispatch();
-    const { priceDispatcher } = useContext(TotalPriceContext);
 
     const moveCart = (dragIndex, hoverIndex) => {
         const dragCard = selectedItems[dragIndex];
@@ -71,7 +69,7 @@ const Ingridients = ({ data, index }) => {
             thumbnail={data.image}
             handleClose={() => {
                 dispatch({ type: DELETE_INGRIDIENT, payload: data });
-                priceDispatcher({ type: "decriment", payload: data });
+                dispatch({ type: DECREMENT, payload: data });
             }}
         />
     </li>

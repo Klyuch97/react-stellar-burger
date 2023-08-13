@@ -4,13 +4,13 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { TotalPriceContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { MODAL_CLOSE} from '../../services/actions/modal';
+import { MODAL_CLOSE } from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
 import { BASE_URL } from '../../utils/api';
+import { INCREMENT } from '../../services/actions/price';
 
 
 
@@ -18,7 +18,7 @@ import { BASE_URL } from '../../utils/api';
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
 
-    const { priceState, priceDispatcher } = useContext(TotalPriceContext);
+    const { totalPrice } = useSelector(state => state.price);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
@@ -28,7 +28,7 @@ const BurgerConstructor = () => {
         }),
         drop: (item) => {
             dispatch(addItem(item));
-            priceDispatcher({ type: "incriment", payload: item });
+            dispatch({ type: INCREMENT, payload: item });
 
         },
     })
@@ -40,7 +40,7 @@ const BurgerConstructor = () => {
         }),
         drop: (item) => {
             dispatch(addItems(item));
-            priceDispatcher({ type: "incriment", payload: item });
+            dispatch({ type: INCREMENT, payload: item });
         }
     })
 
@@ -103,7 +103,7 @@ const BurgerConstructor = () => {
                 </div>
                 <div className={`${BurgerConstructorStyles.checkout} mr-4 mt-10`}>
                     <div className={`${BurgerConstructorStyles.price} mr-10`}>
-                        <p className="text text_type_digits-medium">{priceState.totalPrice}</p>
+                        <p className="text text_type_digits-medium">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
                     </div>
                     <Button htmlType="button"
