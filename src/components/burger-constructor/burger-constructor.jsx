@@ -87,7 +87,7 @@ const BurgerConstructor = () => {
                 <ul className={`${BurgerConstructorStyles.containerScroll}
                 ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
                     ref={dropTargets}>
-                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} />)
+                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
                 <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4

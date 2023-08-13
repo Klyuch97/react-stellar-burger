@@ -3,7 +3,7 @@ import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
     ADD_INGRID, ADD_INGRIDS,
     POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
-    POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT
+    POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS
 } from "../actions/burgerState";
 
 
@@ -81,6 +81,12 @@ export const burgerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedItems: state.selectedItems.filter((item) => item.key !== action.payload.key)
+            }
+        }
+        case CHANGE_CARTS: {
+            return {
+                ...state,
+                selectedItems :[...action.payload]
             }
         }
         default: {
