@@ -21,7 +21,7 @@ const BurgerConstructor = () => {
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
         collect: monitor => ({
-            isHover: monitor.isOver()
+            isHover: monitor.canDrop()
         }),
         drop: (item) => {
             dispatch(addItem(item));
@@ -33,7 +33,7 @@ const BurgerConstructor = () => {
     const [{ isHoverItems }, dropTargets] = useDrop({
         accept: 'itemOther',
         collect: monitor => ({
-            isHoverItems: monitor.isOver()
+            isHoverItems: monitor.canDrop()
         }),
         drop: (item) => {
             dispatch(addItems(item));
