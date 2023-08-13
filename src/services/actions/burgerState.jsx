@@ -1,7 +1,5 @@
-import { BASE_URL } from "../../utils/api";
 import { v4 as uuidv4 } from 'uuid';
 import { request } from "../../utils/api";
-import { useSelector } from "react-redux";
 
 export const GET_INGRID_REQUEST = 'GET_INGRID_REQUEST';
 export const GET_INGRID_SUCCESS = 'GET_INGRID_SUCCESS';
@@ -13,6 +11,7 @@ export const POST_ORDER_NUMBER_SUCCESS = 'POST_ORDER_NUMBER_SUCCESS';
 export const POST_ORDER_NUMBER_FAILED = 'POST_ORDER_NUMBER_FAILED';
 export const DELETE_INGRIDIENT = 'DELETE_INGRIDIENT';
 export const CHANGE_CARTS = "CHANGE_CARTS";
+export const CURRENT_INGRID="CURRENT_INGRID"
 
 
 export const getIngrid = () => {

@@ -1,7 +1,7 @@
 
 import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
-    ADD_INGRID, ADD_INGRIDS,
+    ADD_INGRID, ADD_INGRIDS,CURRENT_INGRID,
     POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
     POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS
 } from "../actions/burgerState";
@@ -14,6 +14,7 @@ const initialState = {
     isLoading: false,
     hasError: false,
     orderNumber: null,
+    currentIngrid:{}
 };
 
 export const burgerReducer = (state = initialState, action) => {
@@ -83,6 +84,12 @@ export const burgerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedItems: [...action.payload]
+            }
+        }
+        case CURRENT_INGRID:{
+            return {
+                ...state,
+                currentIngrid: action.payload
             }
         }
         default: {

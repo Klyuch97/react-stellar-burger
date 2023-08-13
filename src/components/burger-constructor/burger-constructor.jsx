@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import BurgerConstructorStyles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { MODAL_CLOSE } from '../../services/actions/modal';
-import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS, postOrderSubmit } from '../../services/actions/burgerState';
+import { postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
-import { BASE_URL } from '../../utils/api';
 import { INCREMENT } from '../../services/actions/price';
 
 
@@ -17,9 +15,8 @@ import { INCREMENT } from '../../services/actions/price';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-
+    const [modalActive, setModalActive] = useState(false)
     const { totalPrice } = useSelector(state => state.price);
-    const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
@@ -45,14 +42,15 @@ const BurgerConstructor = () => {
     })
 
     const handleOrderSubmit = async () => {
-       const ingredientId = selectedItems.map(item => item._id);
+        const ingredientId = selectedItems.map(item => item._id);
         const ingredientBunsId = selectedItemBuns._id;
         const ingredient = [...ingredientId, ingredientBunsId];
         dispatch(postOrderSubmit(ingredient))
-       
+        setModalActive(true)
+
     }
     const closeModal = () => {
-        dispatch({ type: MODAL_CLOSE })
+        setModalActive(false)
     }
 
     return (
@@ -96,13 +94,12 @@ const BurgerConstructor = () => {
                         size="medium"
                         onClick={() => {
                             handleOrderSubmit();
-                            dispatch({ type: "MODAL_OPEN", payload: undefined });
                         }}>
                         Оформить заказ
                     </Button>
                 </div>
                 {
-                    modalActive && currentIngrid === undefined && <Modal onClose={closeModal}>
+                    modalActive && <Modal onClose={closeModal}>
                         <OrderDetails /></Modal>
                 }
             </div>
