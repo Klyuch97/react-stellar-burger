@@ -31,7 +31,7 @@ function reducer(state, action) {
       } else {
         return {
           ...state,
-          selectedItems: [...state.selectedItems, action.payload],
+          selectedItems: [...state.selectedItems,action.payload],
           price: state.price + action.payload.price,
           totalPrice: state.price + state.priceBuns + action.payload.price,
         };
@@ -39,6 +39,7 @@ function reducer(state, action) {
     case "decriment": {
       return {
         ...state,
+        price: state.price - action.payload.price,
         totalPrice: state.totalPrice - action.payload.price
       }
     }
@@ -47,6 +48,7 @@ function reducer(state, action) {
 
 function App() {
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
+ 
   return (
     <div className={styles.app}>
       <Header />
