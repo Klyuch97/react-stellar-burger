@@ -36,8 +36,12 @@ function reducer(state, action) {
           totalPrice: state.price + state.priceBuns + action.payload.price,
         };
       }
-    case "reset":
-      return priceInitialState;
+    case "decriment": {
+      return {
+        ...state,
+        totalPrice: state.totalPrice - action.payload.price
+      }
+    }
   }
 }
 
@@ -47,12 +51,12 @@ function App() {
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-          <TotalPriceContext.Provider value={{ priceState, priceDispatcher }}>
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </DndProvider>
-          </TotalPriceContext.Provider>
+        <TotalPriceContext.Provider value={{ priceState, priceDispatcher }}>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+        </TotalPriceContext.Provider>
 
       </main>
     </div>
