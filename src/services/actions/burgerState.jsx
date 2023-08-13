@@ -6,6 +6,7 @@ export const ADD_INGRIDS = 'ADD_INGRIDS';
 export const POST_ORDER_NUMBER_REQUEST = 'POST_ORDER_NUMBER_REQUEST';
 export const POST_ORDER_NUMBER_SUCCESS = 'POST_ORDER_NUMBER_SUCCESS';
 export const POST_ORDER_NUMBER_FAILED = 'POST_ORDER_NUMBER_FAILED';
+export const DELETE_INGRIDIENT='DELETE_INGRIDIENT';
 export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 

@@ -17,7 +17,7 @@ export const orderPostUlr = 'https://norma.nomoreparties.space/api/orders';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-   
+
     const { priceState, priceDispatcher } = useContext(TotalPriceContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
     const dispatch = useDispatch();
@@ -69,6 +69,7 @@ const BurgerConstructor = () => {
     const closeModal = () => {
         dispatch({ type: MODAL_CLOSE })
     }
+
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
