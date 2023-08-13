@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import styles from "./app.module.css";
 import Header from "../header/header"
 import BurgerIngredients from "../burger-Ingredients/burger-Ingredients";
@@ -16,8 +16,6 @@ const priceInitialState = {
   priceBuns: 0,
 };
 
-
-
 function reducer(state, action) {
   switch (action.type) {
     case "incriment":
@@ -31,7 +29,7 @@ function reducer(state, action) {
       } else {
         return {
           ...state,
-          selectedItems: [...state.selectedItems,action.payload],
+          selectedItems: [...state.selectedItems, action.payload],
           price: state.price + action.payload.price,
           totalPrice: state.price + state.priceBuns + action.payload.price,
         };
@@ -48,7 +46,7 @@ function reducer(state, action) {
 
 function App() {
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
- 
+
   return (
     <div className={styles.app}>
       <Header />

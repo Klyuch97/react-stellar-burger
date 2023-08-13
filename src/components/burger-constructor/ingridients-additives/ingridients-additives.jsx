@@ -11,7 +11,7 @@ const Ingridients = ({ data, index }) => {
     const id = data._id;
     const { selectedItems } = useSelector(state => state.burger);
     const dispatch = useDispatch();
-    const { priceState, priceDispatcher } = useContext(TotalPriceContext);
+    const { priceDispatcher } = useContext(TotalPriceContext);
 
     const moveCart = (dragIndex, hoverIndex) => {
         const dragCard = selectedItems[dragIndex];
@@ -20,7 +20,6 @@ const Ingridients = ({ data, index }) => {
         newCarts.splice(hoverIndex, 0, dragCard);
         dispatch({ type: CHANGE_CARTS, payload: newCarts })
     }
-
 
     const ref = useRef(null);
 

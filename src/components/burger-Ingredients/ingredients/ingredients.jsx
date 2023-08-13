@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../../utils/prop-types';
@@ -6,11 +6,10 @@ import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
 
-export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-  
+
 
     const ingredient = [...selectedItems, selectedItemBuns];
     const count = useMemo(() => {
@@ -29,7 +28,7 @@ const Ingredients = ({ data }) => {
         })
     })
     const handleItemClick = (item) => {
-        // dispatch({ type: "MODAL_OPEN", payload: item });
+        dispatch({ type: "MODAL_OPEN", payload: item });
     }
 
     return (
@@ -38,7 +37,6 @@ const Ingredients = ({ data }) => {
                 onClick={() => { handleItemClick(data) }}
                 style={{ opacity }}
                 ref={ref} >
-
                 {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
                 <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>

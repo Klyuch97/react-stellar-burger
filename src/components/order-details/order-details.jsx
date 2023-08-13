@@ -3,8 +3,6 @@ import OrderdetailsStyles from './order-details.module.css'
 import DoneImage from '../../images/done.png'
 import { useSelector } from 'react-redux';
 
-
-
 export const OrderDetails = () => {
     const { isLoading, hasError, orderNumber, ingrid } = useSelector(state => state.burger);
 

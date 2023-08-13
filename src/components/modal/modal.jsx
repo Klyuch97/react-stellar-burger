@@ -11,8 +11,7 @@ import { useSelector } from 'react-redux';
 const Modal = ({ children, onClose,}) => {
     const {modalActive, currentIngrid}= useSelector(state=> state.modal);
     
-
-    React.useEffect(() => {
+ React.useEffect(() => {
         const closeEsc = (evt) => {
             if (evt.key === "Escape") {
                 onClose();

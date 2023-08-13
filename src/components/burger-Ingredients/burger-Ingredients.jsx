@@ -10,7 +10,6 @@ import { MODAL_CLOSE } from '../../services/actions/modal';
 import { useInView } from 'react-intersection-observer';
 
 
-export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 
 const BurgerIngredients = () => {

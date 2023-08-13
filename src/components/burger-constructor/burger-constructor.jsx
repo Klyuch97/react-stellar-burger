@@ -6,7 +6,7 @@ import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { TotalPriceContext } from '../../services/appContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { MODAL_CLOSE, MODAL_OPEN } from '../../services/actions/modal';
+import { MODAL_CLOSE} from '../../services/actions/modal';
 import { POST_ORDER_NUMBER_REQUEST, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_SUCCESS } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
