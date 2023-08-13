@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
-import { INCREMENT } from '../../services/actions/price';
+import { INCREMENT, RESET } from '../../services/actions/price';
 
 
 
@@ -46,13 +46,13 @@ const BurgerConstructor = () => {
         const ingredientBunsId = selectedItemBuns._id;
         const ingredient = [...ingredientId, ingredientBunsId];
         dispatch(postOrderSubmit(ingredient))
+        dispatch({ type: RESET })
         setModalActive(true)
 
     }
     const closeModal = () => {
         setModalActive(false)
     }
-    console.log(selectedItemBuns);
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
@@ -100,7 +100,7 @@ const BurgerConstructor = () => {
                         </Button> : <Button htmlType="button"
                             type="primary"
                             size="medium"
-                            disabled="false">
+                            disabled>
                             Оформить заказ
                         </Button>
                     }

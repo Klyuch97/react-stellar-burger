@@ -9,8 +9,8 @@ export const OrderDetails = () => {
     return (
         <div className={`mt-30 mb-30 ${OrderdetailsStyles.container}`}>
             <h2 className="text text_type_digits-large mb-8">
-                {isLoading && 'Загрузка...'}
-                {hasError && 'Произошла ошибка'}
+                {isLoading && <span style={{fontSize:'40px'}}>Загрузка</span>}
+                {hasError && <span style={{fontSize:'40px'}}>Произошла ошибка</span>}
                 {!isLoading &&
                     !hasError &&
                     ingrid.length && orderNumber}

@@ -1,4 +1,4 @@
-import { INCREMENT,DECREMENT } from "../actions/price";
+import { INCREMENT,DECREMENT,RESET } from "../actions/price";
 
 const priceInitialState = {
     selectedItems: [],
@@ -31,6 +31,15 @@ export const totalPriceReducer = (state = priceInitialState, action) => {
                 ...state,
                 price: state.price - action.payload.price,
                 totalPrice: state.totalPrice - action.payload.price
+            }
+        }
+        case RESET:{
+            return{
+                selectedItems: [],
+                selectedItemBuns: [],
+                totalPrice: 0,
+                price: 0,
+                priceBuns: 0,
             }
         }
         default: {
