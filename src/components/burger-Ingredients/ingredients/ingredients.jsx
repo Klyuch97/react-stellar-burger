@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../../utils/prop-types';
@@ -10,7 +10,7 @@ export const baseUrl = 'https://norma.nomoreparties.space/api/ingredients';
 
 const Ingredients = ({ data }) => {
     const dispatch = useDispatch();
-    const {counterState,counterDispatcher}= useContext(CounterContext);
+    const [count, setCount] = useState(0);
     const [{ opacity }, ref] = useDrag({
         type: data.type === "bun" ? "itemBun" : "itemOther",
         item: data,
@@ -19,7 +19,14 @@ const Ingredients = ({ data }) => {
         })
     })
     const handleItemClick = (item) => {
-        dispatch({ type: "MODAL_OPEN", payload: item });
+        // dispatch({ type: "MODAL_OPEN", payload: item });
+        if (item.type === "bun") { 
+            setCount(1); }
+            else {
+                setCount(count+1)  
+            }
+
+
     }
 
     return (
@@ -29,7 +36,7 @@ const Ingredients = ({ data }) => {
                 style={{ opacity }}
                 ref={ref} >
 
-                {counterState.activeCount &&<Counter count={counterState.count} size="default" extraClass="m-1" />}
+                {count !== 0 && <Counter count={count} size="default" extraClass="m-1" />}
                 <img className={BurgerIngredientsStyles.image} src={data.image} ></img>
                 <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
                     <p className="text text_type_digits-default">{data.price}</p>

@@ -16,24 +16,7 @@ const priceInitialState = {
   priceBuns: 0,
 };
 
-const counterInitialState = {
-  count: 0,
-  activeCount: false,
-}
-function reducerCount(state, action) {
-  switch (action.type) {
-    case "incriment":
-      {
-        return {
-          ...state,
-          count: 1,
-          activeCount: true
-        };
-      }
-    case "reset":
-      return counterInitialState;
-  }
-}
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -60,19 +43,16 @@ function reducer(state, action) {
 
 function App() {
   const [priceState, priceDispatcher] = useReducer(reducer, priceInitialState, undefined);
-  const [counterState, counterDispatcher] = useReducer(reducerCount, counterInitialState, undefined)
   return (
     <div className={styles.app}>
       <Header />
       <main className={styles.main}>
-        <CounterContext.Provider value={{ counterState, counterDispatcher }}>
           <TotalPriceContext.Provider value={{ priceState, priceDispatcher }}>
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
               <BurgerConstructor />
             </DndProvider>
           </TotalPriceContext.Provider>
-        </CounterContext.Provider>
 
       </main>
     </div>

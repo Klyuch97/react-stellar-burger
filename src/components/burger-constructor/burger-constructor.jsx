@@ -19,8 +19,6 @@ const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const { priceState, priceDispatcher } = useContext(TotalPriceContext);
     const { modalActive, currentIngrid } = useSelector(state => state.modal);
-    const {counterState,counterDispatcher}= useContext(CounterContext);
-    console.log(counterState);
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
@@ -30,7 +28,6 @@ const BurgerConstructor = () => {
         drop: (item) => {
             dispatch(addItem(item));
             priceDispatcher({ type: "incriment", payload: item });
-            counterDispatcher({type:"incriment", payload:item})
 
         },
     })
