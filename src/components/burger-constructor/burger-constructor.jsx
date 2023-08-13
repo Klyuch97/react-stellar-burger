@@ -52,7 +52,7 @@ const BurgerConstructor = () => {
     const closeModal = () => {
         setModalActive(false)
     }
-
+    console.log(selectedItemBuns);
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
@@ -89,14 +89,21 @@ const BurgerConstructor = () => {
                         <p className="text text_type_digits-medium">{totalPrice}</p>
                         <CurrencyIcon type="primary" />
                     </div>
-                    <Button htmlType="button"
-                        type="primary"
-                        size="medium"
-                        onClick={() => {
-                            handleOrderSubmit();
-                        }}>
-                        Оформить заказ
-                    </Button>
+                    {Object.keys(selectedItemBuns).length > 0 ?
+                        <Button htmlType="button"
+                            type="primary"
+                            size="medium"
+                            onClick={() => {
+                                handleOrderSubmit();
+                            }}>
+                            Оформить заказ
+                        </Button> : <Button htmlType="button"
+                            type="primary"
+                            size="medium"
+                            disabled="false">
+                            Оформить заказ
+                        </Button>
+                    }
                 </div>
                 {
                     modalActive && <Modal onClose={closeModal}>

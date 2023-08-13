@@ -71,8 +71,10 @@ export const burgerReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 hasError: false,
-                orderNumber: action.orderNumber
-            };
+                orderNumber: action.orderNumber,
+                selectedItems:[],
+                selectedItemBuns:{}
+};
         }
         case DELETE_INGRIDIENT: {
             return {
