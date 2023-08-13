@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
     ADD_INGRID, ADD_INGRIDS,
@@ -47,13 +47,9 @@ export const burgerReducer = (state = initialState, action) => {
             };
         }
         case ADD_INGRIDS: {
-            const newItem = {
-                ...action.item,
-                key: uuidv4(),
-            };
             return {
                 ...state,
-                selectedItems: [...state.selectedItems, newItem]
+                selectedItems: [...state.selectedItems, action.item]
             };
         }
         case POST_ORDER_NUMBER_REQUEST: {
@@ -86,7 +82,7 @@ export const burgerReducer = (state = initialState, action) => {
         case CHANGE_CARTS: {
             return {
                 ...state,
-                selectedItems :[...action.payload]
+                selectedItems: [...action.payload]
             }
         }
         default: {

@@ -1,4 +1,5 @@
 import { BASE_URL } from "../../utils/api";
+import { v4 as uuidv4 } from 'uuid';
 
 export const GET_INGRID_REQUEST = 'GET_INGRID_REQUEST';
 export const GET_INGRID_SUCCESS = 'GET_INGRID_SUCCESS';
@@ -35,11 +36,16 @@ export const addItem = (item) => {
 };
 
 export const addItems = (item) => {
-  return {
-    type: ADD_INGRIDS,
-    item,
+  const newItem = {
+  ...item,
+  key: uuidv4(),
   };
-};
+  
+  return {
+  type: ADD_INGRIDS,
+  item: newItem,
+  };
+  };
 
 
 

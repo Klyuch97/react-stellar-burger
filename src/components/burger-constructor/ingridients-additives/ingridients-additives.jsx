@@ -9,6 +9,7 @@ import { TotalPriceContext } from '../../../services/appContext';
 
 const Ingridients = ({ data, index }) => {
     const id = data._id;
+    console.log(data.key);
     const { selectedItems } = useSelector(state => state.burger);
     const dispatch = useDispatch();
     const { priceDispatcher } = useContext(TotalPriceContext);
