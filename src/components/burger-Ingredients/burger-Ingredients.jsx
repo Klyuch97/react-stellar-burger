@@ -7,20 +7,22 @@ import { getIngrid } from '../../services/actions/burgerState';
 import Modal from '../modal/modal';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useInView } from 'react-intersection-observer';
-
+import { useModal } from '../../hooks/modal';
+import { CURRENT_INGRID } from '../../services/actions/burgerState';
 
 
 
 const BurgerIngredients = () => {
-    const [modalActive, setModalActive] = useState(false)
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
+    const { isModalOpen, openModal, closeModal } = useModal();
+    console.log(isModalOpen);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getIngrid());
     }, [dispatch]);
 
-    const closeModal = () => {
-        setModalActive(false)
+    const closeModals = () => {
+        closeModal()
     }
 
     const [buns, sauces, mains] = useMemo(() => {
@@ -64,6 +66,11 @@ const BurgerIngredients = () => {
                 break;
         }
     };
+    const handleItemClick = (item) => {
+        openModal()
+        dispatch({type:CURRENT_INGRID, payload: item})
+       
+    }
 
 
     return (
@@ -82,7 +89,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} setModalActive={setModalActive} />)}
+                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul} ref={sausesRef} id='saucesTab'>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -92,7 +99,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} setModalActive={setModalActive} />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick}  />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
@@ -103,12 +110,12 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} setModalActive={setModalActive} />)}
+                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
             </ul>
             {
-                modalActive && <Modal onClose={closeModal} >
+                isModalOpen && <Modal onClose={closeModals} >
                     <IngredientDetails /></Modal>
             }
 

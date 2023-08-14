@@ -9,14 +9,12 @@ import { postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
 import { INCREMENT, RESET } from '../../services/actions/price';
-
-
-
+import { useModal } from '../../hooks/modal';
 
 const BurgerConstructor = () => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-    const [modalActive, setModalActive] = useState(false)
     const { totalPrice } = useSelector(state => state.price);
+    const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
         accept: 'itemBun',
@@ -47,11 +45,11 @@ const BurgerConstructor = () => {
         const ingredient = [...ingredientId, ingredientBunsId];
         dispatch(postOrderSubmit(ingredient))
         dispatch({ type: RESET })
-        setModalActive(true)
+        openModal()
 
     }
-    const closeModal = () => {
-        setModalActive(false)
+    const closeModals = () => {
+        closeModal()
     }
     return (
         <section className={BurgerConstructorStyles.page}>
@@ -105,7 +103,7 @@ const BurgerConstructor = () => {
                     }
                 </div>
                 {
-                    modalActive && <Modal onClose={closeModal}>
+                    isModalOpen && <Modal onClose={closeModals}>
                         <OrderDetails /></Modal>
                 }
             </div>

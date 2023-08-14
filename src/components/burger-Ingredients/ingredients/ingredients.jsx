@@ -5,12 +5,12 @@ import { ingredientPropType } from '../../../utils/prop-types';
 import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
-import { CURRENT_INGRID } from '../../../services/actions/burgerState';
 
 
-const Ingredients = ({ data, setModalActive }) => {
-    const { selectedItemBuns, selectedItems,currentIngrid } = useSelector(state => state.burger);
-    
+const Ingredients = ({ data,handleItemClick}) => {
+    const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
+   
+ 
 
     const ingredient = [...selectedItems, selectedItemBuns];
     const count = useMemo(() => {
@@ -28,10 +28,7 @@ const Ingredients = ({ data, setModalActive }) => {
             opacity: monitor.isDragging() ? 0.5 : 1
         })
     })
-    const handleItemClick = (item) => {
-        setModalActive(true)
-        dispatch({type:CURRENT_INGRID, payload: item})
-    }
+  
 
     return (
         <>
