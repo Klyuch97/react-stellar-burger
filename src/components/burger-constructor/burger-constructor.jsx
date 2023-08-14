@@ -73,8 +73,7 @@ const BurgerConstructor = () => {
                     {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
-                <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
-                ${BurgerConstructorStyles.ingridientsBun}`}
+                <div className={`pl-8 mb-4 ${BurgerConstructorStyles.ingridientsBun}`}
                 >
                     {Object.keys(selectedItemBuns).length > 0 && <ConstructorElement
                         type=" bottom"
