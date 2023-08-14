@@ -11,18 +11,19 @@ export const POST_ORDER_NUMBER_SUCCESS = 'POST_ORDER_NUMBER_SUCCESS';
 export const POST_ORDER_NUMBER_FAILED = 'POST_ORDER_NUMBER_FAILED';
 export const DELETE_INGRIDIENT = 'DELETE_INGRIDIENT';
 export const CHANGE_CARTS = "CHANGE_CARTS";
-export const CURRENT_INGRID="CURRENT_INGRID"
+export const CURRENT_INGRID = "CURRENT_INGRID"
 
 
 export const getIngrid = () => {
   return async (dispatch) => {
     dispatch({ type: GET_INGRID_REQUEST });
 
-    const response = await request("ingredients");
-    if (response.success) {
+    try {
+      const response = await request("ingredients");
       dispatch({ type: GET_INGRID_SUCCESS, ingrid: response });
-    } else {
+    } catch (error) {
       dispatch({ type: GET_INGRID_FAILED });
+      alert(`Ошибка: ${error}`);
     }
   };
 };
@@ -30,22 +31,24 @@ export const getIngrid = () => {
 export const postOrderSubmit = (ingredient) => {
   return async (dispatch) => {
     dispatch({ type: POST_ORDER_NUMBER_REQUEST })
-
-    const response = await request("orders", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ingredients: ingredient }),
-    });
-    const orderNumber = response.order.number;
-    if (response.success) {
+    try {
+      const response = await request("orders", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ingredients: ingredient }),
+      });
+      const orderNumber = response.order.number;
       dispatch({ type: POST_ORDER_NUMBER_SUCCESS, orderNumber })
       console.log('Номер заказа:', orderNumber);
     }
-    else {
+    catch (error) {
       dispatch({ type: POST_ORDER_NUMBER_FAILED })
+      alert(`Ошибка: ${error}`);
     }
+
+
   }
 }
 
