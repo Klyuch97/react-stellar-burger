@@ -1,14 +1,15 @@
 import IngridDetailsStyles from './ingredient-details.module.css'
-import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types';
+import { useSelector } from 'react-redux';
 
 
-export const IngredientDetails = ({ data }) => {
+export const IngredientDetails = () => {
+const data = useSelector(state=>state.burger.currentIngrid)
     return (
         <div>
             <h2 className={`text text_type_main-large pt-10 ${IngridDetailsStyles.title}`}>Детали ингредиента</h2>
             <div className={IngridDetailsStyles.content}>
-                <img src={data.image} className={IngridDetailsStyles.image}></img>
+                <img src={data.image} className={IngridDetailsStyles.image} alt={data.name}></img>
                 <p className={"text text_type_main-medium mb-8 mt-4"}>{data.name}</p>
                 <div className={`${IngridDetailsStyles.items} mb-15`}>
                     <div className={IngridDetailsStyles.item}>

@@ -7,8 +7,9 @@ import PropTypes from 'prop-types';
 
 
 
-const Modal = ({ children, onClose, active }) => {
-    React.useEffect(() => {
+const Modal = ({ children, onClose,}) => {
+    
+ React.useEffect(() => {
         const closeEsc = (evt) => {
             if (evt.key === "Escape") {
                 onClose();
@@ -19,7 +20,6 @@ const Modal = ({ children, onClose, active }) => {
         return () => document.removeEventListener("keydown", closeEsc);
     }, [onClose]);
     const modals = document.getElementById('modals');
-    if (!active) { return null; }
 
     return ReactDOM.createPortal(
         <>
@@ -40,7 +40,6 @@ const Modal = ({ children, onClose, active }) => {
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
-    active: PropTypes.bool.isRequired,
     children:PropTypes.element
 }
 

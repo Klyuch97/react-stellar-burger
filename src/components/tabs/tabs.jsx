@@ -1,18 +1,21 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import TabStyles from '../tabs/tabs.module.css'
+import TabStyles from '../tabs/tabs.module.css';
 
-const Tabs = () => {
-    const [current, setCurrent] = React.useState('one')
+const Tabs = ({ current, handleTabClick }) => {
+
     return (
         <div className={`${TabStyles.page} mb-10`}>
-            <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+            <Tab value="one" active={current === 'one'}
+                onClick={(currentTab) => handleTabClick(currentTab)}>
                 Булки
             </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+            <Tab value="two" active={current === 'two'}
+                onClick={(currentTab) => handleTabClick(currentTab)}>
                 Соусы
             </Tab>
-            <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+            <Tab value="three" active={current === 'three'}
+                onClick={(currentTab) => handleTabClick(currentTab)}>
                 Начинки
             </Tab>
         </div>
