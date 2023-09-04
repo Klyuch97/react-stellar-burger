@@ -15,7 +15,6 @@ import { CURRENT_INGRID } from '../../services/actions/burgerState';
 const BurgerIngredients = () => {
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
     const { isModalOpen, openModal, closeModal } = useModal();
-    console.log(isModalOpen);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getIngrid());
