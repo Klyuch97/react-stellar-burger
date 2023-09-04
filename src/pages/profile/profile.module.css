@@ -1,0 +1,20 @@
+.content {
+    display: flex;
+    width: 860px;
+    margin-left: 380px;
+    margin-top: 120px;
+}
+
+.navigation {
+    height: 100%;
+}
+
+.inputs {
+    max-height: 240px;
+}
+
+.text {
+    height: 64px;
+    display: flex;
+    align-items: center;
+}

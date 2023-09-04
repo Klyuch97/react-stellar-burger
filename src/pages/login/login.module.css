@@ -1,0 +1,28 @@
+.content {
+    max-width: 480px;
+    height: 430px;
+    margin: auto;
+}
+
+.data {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+}
+
+.button {
+   margin: 0 auto;
+}
+.text{
+    text-align: center;
+}
+
+.spanText{
+    color:#4C4CFF;
+    cursor: pointer;
+}
