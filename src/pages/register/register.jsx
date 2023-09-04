@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../login/login.module.css";
+import { Link } from "react-router-dom";
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const Register = () => {
@@ -45,7 +46,7 @@ export const Register = () => {
                 </Button>
             </div>
             <p className={`text text_type_main-default text_color_inactive ${styles.text} `}>
-                Уже зарегистрированы? <span className={styles.spanText}>Войти</span></p>
+                Уже зарегистрированы? <Link to='/login' className={styles.spanText}>Войти</Link></p>
         </div>
     )
 }
