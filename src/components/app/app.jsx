@@ -15,8 +15,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getIngrid } from "../../services/actions/burgerState";
 
 
-
 function App() {
+ 
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;

@@ -1,9 +1,11 @@
-import { fetchWithRefresh } from "../../utils/api";
+import { fetchWithRefresh, request } from "../../utils/api";
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
-export const REGISTER_REQUEST = 'REGISTER_REQUEST'
-
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER__FAILED = 'GET_USER__FAILED';
 
 export const registerUser = (userData) => {
     return async (dispatch) => {
@@ -16,11 +18,12 @@ export const registerUser = (userData) => {
                 },
                 body: JSON.stringify(userData),
             });
-            const data = await response.json();
-            if (data.success) {
+            if (response.success) {
+                localStorage.setItem("refreshToken", response.refreshToken);
+                localStorage.setItem("accessToken", response.accessToken);
                 dispatch({
                     type: "REGISTER_SUCCESS",
-                    payload: data.user,
+                    payload: response.user,
                 });
             } else {
                 dispatch({
@@ -34,3 +37,23 @@ export const registerUser = (userData) => {
         }
     };
 };
+
+export const getUser = () => {
+    return async (dispatch) => {
+        dispatch({ type: GET_USER_REQUEST });
+        try {
+            const response = await request("auth/user", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    authorization: localStorage.getItem('accessToken')
+                }
+            });
+            dispatch({ type: GET_USER_SUCCESS, user: response.user });
+        } catch (error) {
+            dispatch({ type: GET_USER__FAILED });
+            alert(`Ошибка: ${error}`);
+        }
+    };
+};
+

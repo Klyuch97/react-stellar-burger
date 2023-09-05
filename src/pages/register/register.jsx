@@ -13,7 +13,7 @@ export const Register = () => {
 
     const { name, mail, password, setName, setMail, setPassword } = useUser();
     const dispatch = useDispatch();
-
+  
     const handleSubmit = (e) => {
         e.preventDefault();
 

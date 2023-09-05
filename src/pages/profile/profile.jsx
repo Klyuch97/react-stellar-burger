@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../profile/profile.module.css";
 import { Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../services/actions/autnUser";
 
 export const Profile = () => {
+    const userData = useSelector((state) => state.user)
+    console.log(userData);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getUser());
+    }, [dispatch]);
     const [value, setValue] = React.useState('')
     const inputRef = React.useRef(null)
     const onChange = e => {
