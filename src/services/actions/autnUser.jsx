@@ -25,13 +25,11 @@ export const registerUser = (userData) => {
             } else {
                 dispatch({
                     type: "REGISTER_FAILURE",
-                    //payload: error,
                 });
             }
         } catch (error) {
             dispatch({
                 type: "REGISTER_FAILURE",
-                //payload: error,
             });
         }
     };
