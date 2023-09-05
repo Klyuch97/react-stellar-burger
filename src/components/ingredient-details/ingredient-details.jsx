@@ -1,6 +1,7 @@
 import IngridDetailsStyles from './ingredient-details.module.css'
 import { ingredientPropType } from '../../utils/prop-types';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 export const IngredientDetails = () => {

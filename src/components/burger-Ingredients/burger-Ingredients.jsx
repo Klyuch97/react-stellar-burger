@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect,useState } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
@@ -16,9 +16,6 @@ const BurgerIngredients = () => {
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getIngrid());
-    }, [dispatch]);
 
     const closeModals = () => {
         closeModal()
@@ -67,8 +64,8 @@ const BurgerIngredients = () => {
     };
     const handleItemClick = (item) => {
         openModal()
-        dispatch({type:CURRENT_INGRID, payload: item})
-       
+        dispatch({ type: CURRENT_INGRID, payload: item })
+
     }
 
 
@@ -98,7 +95,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick}  />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
@@ -113,10 +110,7 @@ const BurgerIngredients = () => {
                     </div>
                 </li>
             </ul>
-            {
-                isModalOpen && <Modal onClose={closeModals} >
-                    <IngredientDetails /></Modal>
-            }
+
 
         </section>
     )

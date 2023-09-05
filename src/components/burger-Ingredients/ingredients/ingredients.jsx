@@ -5,12 +5,15 @@ import { ingredientPropType } from '../../../utils/prop-types';
 import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 
-const Ingredients = ({ data,handleItemClick}) => {
+const Ingredients = ({ data, handleItemClick }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-   
- 
+
+    const location = useLocation();
+
+    const id = data['_id'];
 
     const ingredient = [...selectedItems, selectedItemBuns];
     const count = useMemo(() => {
@@ -28,22 +31,29 @@ const Ingredients = ({ data,handleItemClick}) => {
             opacity: monitor.isDragging() ? 0.5 : 1
         })
     })
-  
+
 
     return (
         <>
-            <div className={`${BurgerIngredientsStyles.content}`}
-                onClick={() => { handleItemClick(data) }}
-                style={{ opacity }}
-                ref={ref} >
-                {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
-                <img className={BurgerIngredientsStyles.image} src={data.image} alt={data.name} ></img>
-                <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
-                    <p className="text text_type_digits-default">{data.price}</p>
-                    <CurrencyIcon type="primary" />
+            <Link className={BurgerIngredientsStyles.link} key={id}
+                // Тут мы формируем динамический путь для нашего ингредиента
+                to={`/ingredients/${id}`}
+                // а также сохраняем в свойство background роут,
+                // на котором была открыта наша модалка
+                state={{ background: location }}>
+                <div className={`${BurgerIngredientsStyles.content}`}
+                    onClick={() => { handleItemClick(data) }}
+                    style={{ opacity }}
+                    ref={ref} >
+                    {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
+                    <img className={BurgerIngredientsStyles.image} src={data.image} alt={data.name} ></img>
+                    <div className={`${BurgerIngredientsStyles.price} pb-1 pt-1`}>
+                        <p className="text text_type_digits-default">{data.price}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                    <p className={`${BurgerIngredientsStyles.text} text text_type_main-default`} >{data.name}</p>
                 </div>
-                <p className={`${BurgerIngredientsStyles.text} text text_type_main-default`} >{data.name}</p>
-            </div>
+            </Link>
         </>
     )
 }
