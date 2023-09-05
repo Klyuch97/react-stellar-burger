@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./app.module.css";
 import Header from "../header/header";
 import { HomePage } from "../../pages/home-page";
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Login } from "../../pages/login/login";
 import { Register } from "../../pages/register/register";
 import { ForgotPassword } from "../../pages/forgot-password/forgot-password";
@@ -11,9 +11,9 @@ import { Profile } from "../../pages/profile/profile";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import Modal from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getIngrid } from "../../services/actions/burgerState";
-import { useEffect } from "react";
+
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getIngrid());
+    dispatch(getIngrid());
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
@@ -38,7 +38,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/ingredients/:id" element={<Ingredient/>} />
+        <Route path="/ingredients/:id" element={<Ingredient />} />
       </Routes>
       {background && (
         <Routes>

@@ -3,9 +3,6 @@ import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.mo
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngrid } from '../../services/actions/burgerState';
-import Modal from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useInView } from 'react-intersection-observer';
 import { useModal } from '../../hooks/modal';
 import { CURRENT_INGRID } from '../../services/actions/burgerState';
@@ -17,10 +14,6 @@ const BurgerIngredients = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
 
-    const closeModals = () => {
-        closeModal()
-    }
-
     const [buns, sauces, mains] = useMemo(() => {
         const filteredBuns = ingrid.filter(item => item.type === 'bun');
         const filteredSauces = ingrid.filter(item => item.type === 'sauce');
@@ -29,9 +22,7 @@ const BurgerIngredients = () => {
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
 
-
     const [current, setCurrent] = React.useState('one');
-
     const [bunsRef, bunsInView] = useInView({ threshold: 0.1 });
     const [sausesRef, sausesInView] = useInView({ threshold: 0.1 });
     const [mainsRef, mainInView] = useInView({ threshold: 0.1 });
