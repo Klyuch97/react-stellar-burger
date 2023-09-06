@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import styles from "../profile/profile.module.css";
 import { Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getUser } from "../../services/actions/autnUser";
 
 export const Profile = () => {
-    const userData = useSelector((state) => state.user)
-    console.log(userData);
+    const userData = useSelector((state) => state.user.user)
+  console.log(userData);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getUser());
+       
     }, [dispatch]);
     const [value, setValue] = React.useState('')
     const inputRef = React.useRef(null)
@@ -31,7 +30,7 @@ export const Profile = () => {
                     placeholder={'Имя'}
                     onChange={e => setValue(e.target.value)}
                     icon={'EditIcon'}
-                    value={value}
+                    value={userData? userData.name:""}
                     name={'name'}
                     error={false}
                     ref={inputRef}
@@ -40,12 +39,12 @@ export const Profile = () => {
                     size={'default'}
                     extraClass="mb-6"
                 />
-                <EmailInput
+                <Input
                     onChange={onChange}
-                    value={value}
+                    value={userData? userData.email:""}
                     name={'email'}
                     placeholder="Логин"
-                    isIcon={true}
+                    icon={'EditIcon'}
                     extraClass="mb-6"
                 />
                 <PasswordInput

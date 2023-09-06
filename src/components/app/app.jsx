@@ -13,16 +13,19 @@ import Modal from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngrid } from "../../services/actions/burgerState";
+import { checkUserAuth } from "../../services/actions/autnUser";
+import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 
 
 function App() {
- 
+
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngrid());
+    dispatch(checkUserAuth());
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
@@ -33,11 +36,11 @@ function App() {
       <Header />
       <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
+        <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
+        <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
+        <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<Profile/>} />} />
         <Route path="/ingredients/:id" element={<Ingredient />} />
       </Routes>
       {background && (
