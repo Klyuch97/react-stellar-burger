@@ -6,9 +6,13 @@ export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER__FAILED = 'GET_USER__FAILED';
-export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
+export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const SET_USER = "SET_USER";
+export const SET_USER = 'SET_USER';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
 
 export const setAuthChecked = (value) => ({
     type: SET_AUTH_CHECKED,
@@ -22,7 +26,7 @@ export const setUser = (user) => ({
 
 export const registerUser = (userData) => {
     return async (dispatch) => {
-        dispatch({ type: REGISTER_SUCCESS })
+        dispatch({ type: "REGISTER_SUCCESS" })
         try {
             const response = await request("auth/register", {
                 method: "POST",
@@ -117,3 +121,36 @@ export const logOut = () => {
         }
     };
 };
+
+export const LogIn = (userData) => {
+    return async (dispatch) => {
+        dispatch({ type: "LOGIN_REQUEST" });
+        try {
+            const response = await fetchWithRefresh("auth/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(userData),
+            });
+            if (response.success) {
+                localStorage.setItem("refreshToken", response.refreshToken);
+                localStorage.setItem("accessToken", response.accessToken);
+                dispatch({
+                    type: "LOGIN_SUCCESS",
+                    payload: response.user,
+                });
+            } else {
+                dispatch({
+                    type: "LOGIN_FAILURE",
+                });
+            }
+        } catch (error) {
+            dispatch({
+                type: "LOGIN_FAILURE",
+            });
+        }
+    };
+};
+
+console.log(localStorage);

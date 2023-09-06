@@ -1,6 +1,7 @@
 import {
     REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
-    GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER, LOGOUT_SUCCESS
+    GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER,
+    LOGOUT_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS
 } from "../actions/autnUser";
 
 const initialState = {
@@ -63,6 +64,24 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 user: null
             }
+        case LOGIN_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                loading: false,
+                error: false,
+            };
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+            };
 
         default:
             return state;
