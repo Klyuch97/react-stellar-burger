@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import styles from "../profile/profile.module.css";
-import { Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Profile = () => {
     const userData = useSelector((state) => state.user.user)
-  console.log(userData);
+ // console.log(userData);
     const dispatch = useDispatch();
     useEffect(() => {
        

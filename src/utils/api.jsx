@@ -1,10 +1,7 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
 
 const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка ${res.status}`);
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 const checkSuccess = (res) => {
@@ -22,7 +19,7 @@ export const request = (endpoint, options) => {
 };
 
 export const refreshToken = () => {
-  return fetch(`${BASE_URL}/auth/token`, {
+  return fetch(`${BASE_URL}auth/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -32,22 +29,22 @@ export const refreshToken = () => {
     }),
   }).then(checkResponse);
 };
-
 export const fetchWithRefresh = async (endpoint, options) => {
   try {
     const res = await fetch(`${BASE_URL}${endpoint}`, options);
     return await checkResponse(res);
+
   } catch (err) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
+      console.log(refreshData);
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(`${BASE_URL}${endpoint}`, options); //повторяем запрос
+      const res = await fetch(`${BASE_URL}${endpoint}`, options);//повторяем запрос
       return await checkResponse(res);
     } else {
       return Promise.reject(err);

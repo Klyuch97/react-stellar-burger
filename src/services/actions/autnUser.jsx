@@ -23,7 +23,7 @@ export const registerUser = (userData) => {
     return async (dispatch) => {
         dispatch({ type: REGISTER_SUCCESS })
         try {
-            const response = await fetchWithRefresh("auth/register", {
+            const response = await request("auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export const getUser = () => {
             dispatch(setUser(response.user));
         } catch (error) {
             dispatch({ type: GET_USER__FAILED });
-           // alert(`Ошибка: ${error}`);
+            // alert(`Ошибка: ${error}`);
         }
     };
 };
@@ -85,3 +85,5 @@ export const checkUserAuth = () => {
         }
     };
 };
+
+
