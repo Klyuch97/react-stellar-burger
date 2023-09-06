@@ -7,6 +7,7 @@ export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER__FAILED = 'GET_USER__FAILED';
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const SET_USER = "SET_USER";
 
 export const setAuthChecked = (value) => ({
@@ -86,4 +87,33 @@ export const checkUserAuth = () => {
     };
 };
 
-
+export const logOut = () => {
+    return async (dispatch) => {
+        // dispatch({ type: LOGOUT_SUCCESS })
+        try {
+            const response = await request("auth/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token: localStorage.refreshToken }),
+            });
+            if (response.success) {
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                dispatch({
+                    type: "LOGOUT_SUCCESS",
+                    //payload: response.user,
+                });
+            } else {
+                dispatch({
+                    //type: "LOGOUT_FAILURE",
+                });
+            }
+        } catch (error) {
+            dispatch({
+                //type: "LOGOUT_FAILURE",
+            });
+        }
+    };
+};

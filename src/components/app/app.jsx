@@ -19,7 +19,6 @@ import { NotFound404 } from "../../pages/notFound404/notFound404";
 
 
 function App() {
-
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
@@ -43,7 +42,7 @@ function App() {
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
         <Route path="/ingredients/:id" element={<Ingredient />} />
-        <Route path="*" element={<NotFound404/>}/>
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
       {background && (
         <Routes>
