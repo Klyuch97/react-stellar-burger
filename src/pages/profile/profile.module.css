@@ -9,12 +9,11 @@
     height: 100%;
 }
 
-.inputs {
-    max-height: 240px;
-}
 
 .text {
     height: 64px;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
+

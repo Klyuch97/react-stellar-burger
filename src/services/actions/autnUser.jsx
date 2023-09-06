@@ -12,6 +12,9 @@ export const SET_USER = 'SET_USER';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const UPDATE_USER_INFO_SUCCESS= 'UPDATE_USER_INFO_SUCCESS';
+export const UPDATE_USER_INFO_FAILURE= 'UPDATE_USER_INFO_FAILURE';
+export const UPDATE_USER_INFO_REQUEST= 'UPDATE_USER_INFO_REQUEST';
 
 
 export const setAuthChecked = (value) => ({
@@ -153,4 +156,33 @@ export const LogIn = (userData) => {
     };
 };
 
-console.log(localStorage);
+export const updateUserInfo = (userData) => {
+    return async (dispatch) => {
+        dispatch({ type: "UPDATE_USER_INFO_REQUEST" })
+        try {
+            const response = await fetchWithRefresh("auth/user", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: localStorage.getItem('accessToken')
+                },
+                body: JSON.stringify(userData),
+            });
+            if (response.success) {
+                dispatch({
+                    type: "UPDATE_USER_INFO_SUCCESS",
+                    payload: response.user,
+                });
+                dispatch(setUser(response.user));
+            } else {
+                dispatch({
+                    type: "UPDATE_USER_INFO_FAILURE",
+                });
+            }
+        } catch (error) {
+            dispatch({
+                type: "UPDATE_USER_INFO_FAILURE",
+            });
+        }
+    };
+};

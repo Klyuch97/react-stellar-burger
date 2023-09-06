@@ -16,6 +16,7 @@ import { getIngrid } from "../../services/actions/burgerState";
 import { checkUserAuth } from "../../services/actions/autnUser";
 import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 import { NotFound404 } from "../../pages/notFound404/notFound404";
+import { ProfileInfo } from "../profile-info/profile-info";
 
 
 function App() {
@@ -40,7 +41,10 @@ function App() {
         <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+        <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
+          <Route index element={<ProfileInfo/>} />
+
+        </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>

@@ -1,7 +1,8 @@
 import {
     REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
     GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER,
-    LOGOUT_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS
+    LOGOUT_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
+    UPDATE_USER_INFO_FAILURE, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS
 } from "../actions/autnUser";
 
 const initialState = {
@@ -53,17 +54,17 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthChecked: action.payload
-            }
+            };
         case SET_USER:
             return {
                 ...state,
                 user: action.payload
-            }
+            };
         case LOGOUT_SUCCESS:
             return {
                 ...state,
                 user: null
-            }
+            };
         case LOGIN_REQUEST:
             return {
                 ...state,
@@ -82,7 +83,24 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: true,
             };
-
+        case UPDATE_USER_INFO_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case UPDATE_USER_INFO_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                loading: false,
+                error: false,
+            };
+        case UPDATE_USER_INFO_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+            };
         default:
             return state;
     }
