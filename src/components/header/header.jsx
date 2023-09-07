@@ -24,8 +24,8 @@ const Header = () => {
                     <Logo></Logo>
                 </div>
                 <Link to="/profile" className={`${headerStyles.navigation} ml-5 mr-5`}>
-                    <ProfileIcon type={location.pathname === "/profile" ? "primary" : "secondary"} />
-                    <p className={`pl-2 text text_type_main-default text_color_${location.pathname === "/profile" ? "active" : "inactive"}`}>
+                    <ProfileIcon type={location.pathname === "/profile" || "/profile/orders" ? "primary" : "secondary"} />
+                    <p className={`pl-2 text text_type_main-default text_color_${location.pathname === "/profile" || "/profile/orders" ? "active" : "inactive"}`}>
                         Личный кабинет</p>
                 </Link>
 
