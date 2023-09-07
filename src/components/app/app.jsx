@@ -11,7 +11,7 @@ import { Profile } from "../../pages/profile/profile";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import Modal from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getIngrid } from "../../services/actions/burgerState";
 import { checkUserAuth } from "../../services/actions/autnUser";
 import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
