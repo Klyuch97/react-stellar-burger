@@ -47,6 +47,7 @@ function App() {
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
+        <Route path="/lenta" element={<p>Лента заказов</p>} />
       </Routes>
       {background && (
         <Routes>
