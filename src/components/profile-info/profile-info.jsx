@@ -15,6 +15,10 @@ export const ProfileInfo = () => {
         setName(userData.name);
         setMail(userData.email)
     }, [setName, setMail]);
+    const CheckData = () => {
+        return name === userData.name && mail === userData.email && password === "" ? true : false;
+    }
+
 
     const cancelChanges = () => {
         setName(userData.name);
@@ -64,13 +68,13 @@ export const ProfileInfo = () => {
                 icon="EditIcon"
                 extraClass="mb-6"
             />
-            <div className={styles.buttons}>
+            {CheckData() === true ? '' : <div className={styles.buttons}>
                 <Button htmlType="submit" type="primary" size="medium"
                     onClick={handleSubmit}>Сохранить</Button>
                 <Button htmlType="button" type="secondary" size="medium"
                     onClick={cancelChanges}
                 >Отмена</Button>
-            </div>
+            </div>}
         </div>
     )
 }
