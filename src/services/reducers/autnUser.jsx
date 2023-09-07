@@ -1,8 +1,8 @@
 import {
-    REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
+    REGISTER_FAILED, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
     GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER,
-    LOGOUT_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
-    UPDATE_USER_INFO_FAILURE, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS,
+    LOGOUT_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS,
+    UPDATE_USER_INFO_FAILED , UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS,
     FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS,
     RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED
 } from "../actions/autnUser";
@@ -28,7 +28,7 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: false,
             };
-        case REGISTER_FAILURE:
+        case REGISTER_FAILED:
             return {
                 ...state,
                 loading: false,
@@ -79,7 +79,7 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: false,
             };
-        case LOGIN_FAILURE:
+        case LOGIN_FAILED:
             return {
                 ...state,
                 loading: false,
@@ -97,7 +97,7 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: false,
             };
-        case UPDATE_USER_INFO_FAILURE:
+        case UPDATE_USER_INFO_FAILED :
             return {
                 ...state,
                 loading: false,

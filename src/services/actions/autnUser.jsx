@@ -1,7 +1,7 @@
 import { fetchWithRefresh, request } from "../../utils/api";
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const REGISTER_FAILED = 'REGISTER_FAILED';
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
@@ -11,9 +11,9 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const SET_USER = 'SET_USER';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN_FAILED  = 'LOGIN_FAILED';
 export const UPDATE_USER_INFO_SUCCESS = 'UPDATE_USER_INFO_SUCCESS';
-export const UPDATE_USER_INFO_FAILURE = 'UPDATE_USER_INFO_FAILURE';
+export const UPDATE_USER_INFO_FAILED  = 'UPDATE_USER_INFO_FAILED ';
 export const UPDATE_USER_INFO_REQUEST = 'UPDATE_USER_INFO_REQUEST';
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
@@ -53,12 +53,12 @@ export const registerUser = (userData) => {
                 });
             } else {
                 dispatch({
-                    type: "REGISTER_FAILURE",
+                    type: "REGISTER_FAILED",
                 });
             }
         } catch (error) {
             dispatch({
-                type: "REGISTER_FAILURE",
+                type: "REGISTER_FAILED",
             });
         }
     };
@@ -79,7 +79,7 @@ export const getUser = () => {
             dispatch(setUser(response.user));
         } catch (error) {
             dispatch({ type: GET_USER__FAILED });
-            // alert(`Ошибка: ${error}`);
+            alert(`Ошибка: ${error}`);
         }
     };
 };
@@ -102,7 +102,7 @@ export const checkUserAuth = () => {
 
 export const logOut = () => {
     return async (dispatch) => {
-        // dispatch({ type: LOGOUT_SUCCESS })
+        dispatch({ type: LOGOUT_SUCCESS })
         try {
             const response = await request("auth/logout", {
                 method: "POST",
@@ -116,16 +116,15 @@ export const logOut = () => {
                 localStorage.removeItem("refreshToken");
                 dispatch({
                     type: "LOGOUT_SUCCESS",
-                    //payload: response.user,
                 });
             } else {
                 dispatch({
-                    //type: "LOGOUT_FAILURE",
+                    type: "LOGOUT_FAILURE",
                 });
             }
         } catch (error) {
             dispatch({
-                //type: "LOGOUT_FAILURE",
+                type: "LOGOUT_FAILURE",
             });
         }
     };
@@ -151,12 +150,12 @@ export const LogIn = (userData) => {
                 });
             } else {
                 dispatch({
-                    type: "LOGIN_FAILURE",
+                    type: "LOGIN_FAILED",
                 });
             }
         } catch (error) {
             dispatch({
-                type: "LOGIN_FAILURE",
+                type: "LOGIN_FAILED",
             });
         }
     };
@@ -182,12 +181,12 @@ export const updateUserInfo = (userData) => {
                 dispatch(setUser(response.user));
             } else {
                 dispatch({
-                    type: "UPDATE_USER_INFO_FAILURE",
+                    type: "UPDATE_USER_INFO_FAILED ",
                 });
             }
         } catch (error) {
             dispatch({
-                type: "UPDATE_USER_INFO_FAILURE",
+                type: "UPDATE_USER_INFO_FAILED ",
             });
         }
     };
