@@ -13,7 +13,7 @@ export const ResetPassword = () => {
     const { newPassword, setNewPassword, codeMail, setCodeMail } = useUser();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(resetPassword(newPassword,codeMail));
+        dispatch(resetPassword(newPassword, codeMail));
 
     };
 
@@ -42,7 +42,7 @@ export const ResetPassword = () => {
                     extraClass="mb-6"
                 />
                 <Button htmlType="button" type="primary" onClick={handleSubmit}
-                    size="medium" extraClass={styles.button}>
+                    size="medium" extraClass={styles.button} disabled={!newPassword || !codeMail}>
                     Сохранить
                 </Button>
             </div>

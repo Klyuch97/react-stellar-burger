@@ -8,7 +8,6 @@ import { useUser } from "../../hooks/user";
 
 
 export const ForgotPassword = () => {
-    const userData = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
     const { mail, setMail } = useUser();
     const navigate = useNavigate();
@@ -18,10 +17,10 @@ export const ForgotPassword = () => {
         const userData = {
             email: mail,
         };
-        dispatch(forgotPassword(userData, navigate('/reset-password')));
-
+        if (mail) {
+            dispatch(forgotPassword(userData, navigate('/reset-password')));
+        }
     };
-
 
     return (
         <div className={styles.content}>
@@ -37,7 +36,7 @@ export const ForgotPassword = () => {
                     placeholder="Укажите e-mail"
                 />
                 <Button htmlType="button" type="primary" onClick={handleSubmit}
-                    size="medium" extraClass={styles.button}>
+                    size="medium" extraClass={styles.button} disabled={!mail}>
                     Восстановить
                 </Button>
             </div>
