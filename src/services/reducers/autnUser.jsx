@@ -2,7 +2,9 @@ import {
     REGISTER_FAILURE, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
     GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER,
     LOGOUT_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS,
-    UPDATE_USER_INFO_FAILURE, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS
+    UPDATE_USER_INFO_FAILURE, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS,
+    FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS,
+    RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED
 } from "../actions/autnUser";
 
 const initialState = {
@@ -100,6 +102,41 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: true,
+            };
+            case FORGOT_PASSWORD_REQUEST:
+                return {
+                    ...state,
+                    loading: true,
+                };
+        case FORGOT_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                user: action.payload,
+            };
+        case FORGOT_PASSWORD_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: true
+            };
+        case RESET_PASSWORD_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+        case RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+            };
+        case RESET_PASSWORD_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: true
             };
         default:
             return state;

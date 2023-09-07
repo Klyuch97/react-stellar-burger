@@ -12,9 +12,15 @@ export const SET_USER = 'SET_USER';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const UPDATE_USER_INFO_SUCCESS= 'UPDATE_USER_INFO_SUCCESS';
-export const UPDATE_USER_INFO_FAILURE= 'UPDATE_USER_INFO_FAILURE';
-export const UPDATE_USER_INFO_REQUEST= 'UPDATE_USER_INFO_REQUEST';
+export const UPDATE_USER_INFO_SUCCESS = 'UPDATE_USER_INFO_SUCCESS';
+export const UPDATE_USER_INFO_FAILURE = 'UPDATE_USER_INFO_FAILURE';
+export const UPDATE_USER_INFO_REQUEST = 'UPDATE_USER_INFO_REQUEST';
+export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAILED = 'FORGOT_PASSWORD_FAILED';
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAILED = 'RESET_PASSWORD_FAILED';
 
 
 export const setAuthChecked = (value) => ({
@@ -186,3 +192,65 @@ export const updateUserInfo = (userData) => {
         }
     };
 };
+
+export const forgotPassword = (userData, pageResetPassword) => {
+    return async (dispatch) => {
+        dispatch({ type: "FORGOT_PASSWORD_REQUEST" })
+        try {
+            const response = await request("password-reset", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
+            if (response.success) {
+                dispatch({
+                    type: "FORGOT_PASSWORD_SUCCESS",
+                    payload: response.user,
+                });
+                dispatch(setUser(response.user));
+                pageResetPassword()
+            } else {
+                dispatch({
+                    type: "FORGOT_PASSWORD_FAILED",
+                });
+            }
+        } catch (error) {
+            dispatch({
+                type: "FORGOT_PASSWORD_FAILED",
+            });
+        }
+    };
+};
+
+export const resetPassword = (newPassword,code) => {
+    return async (dispatch) => {
+        dispatch({ type: "RESET_PASSWORD_REQUEST" });
+        try {
+            const response = await request("password-reset/reset", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ password: newPassword, token: code })
+            });
+            if (response.success) {
+                dispatch({
+                    type: "RESET_PASSWORD_SUCCESS",
+                })
+            }
+            else {
+                dispatch({
+                    type: "RESET_PASSWORD_FAILED",
+                });
+            }
+        }
+        catch (err) {
+            dispatch({
+                type: "RESET_PASSWORD_FAILED",
+            });
+        }
+
+    }
+}
