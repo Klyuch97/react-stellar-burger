@@ -223,7 +223,7 @@ export const forgotPassword = (userData, pageResetPassword) => {
     };
 };
 
-export const resetPassword = (newPassword,code) => {
+export const resetPassword = (newPassword,code,pageLogin) => {
     return async (dispatch) => {
         dispatch({ type: "RESET_PASSWORD_REQUEST" });
         try {
@@ -237,7 +237,8 @@ export const resetPassword = (newPassword,code) => {
             if (response.success) {
                 dispatch({
                     type: "RESET_PASSWORD_SUCCESS",
-                })
+                });
+                pageLogin();
             }
             else {
                 dispatch({

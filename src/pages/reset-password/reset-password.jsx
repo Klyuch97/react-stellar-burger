@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../login/login.module.css";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 import { resetPassword } from "../../services/actions/autnUser";
 import { useDispatch } from "react-redux";
@@ -9,11 +9,13 @@ import { useDispatch } from "react-redux";
 
 export const ResetPassword = () => {
     const inputRef = React.useRef(null);
+    const navigate = useNavigate();
     const dispatch = useDispatch()
     const { newPassword, setNewPassword, codeMail, setCodeMail } = useUser();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(resetPassword(newPassword, codeMail));
+        dispatch(resetPassword(newPassword, codeMail, () => { navigate('/login') }));
+
 
     };
 
