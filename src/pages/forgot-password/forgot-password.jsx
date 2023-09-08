@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
             email: mail,
         };
         if (mail) {
-            dispatch(forgotPassword(userData, navigate('/reset-password')));
+            dispatch(forgotPassword(userData,()=> {navigate('/reset-password')}));
         }
     };
 

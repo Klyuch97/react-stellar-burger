@@ -20,7 +20,7 @@ export const ResetPassword = () => {
     };
 
     if (!localStorage.getItem('resetPasswordFlag')) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
     }
 
     return (
