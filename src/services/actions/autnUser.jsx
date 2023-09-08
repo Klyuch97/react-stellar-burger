@@ -11,9 +11,9 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const SET_USER = 'SET_USER';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_FAILED  = 'LOGIN_FAILED';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const UPDATE_USER_INFO_SUCCESS = 'UPDATE_USER_INFO_SUCCESS';
-export const UPDATE_USER_INFO_FAILED  = 'UPDATE_USER_INFO_FAILED ';
+export const UPDATE_USER_INFO_FAILED = 'UPDATE_USER_INFO_FAILED ';
 export const UPDATE_USER_INFO_REQUEST = 'UPDATE_USER_INFO_REQUEST';
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
@@ -209,7 +209,9 @@ export const forgotPassword = (userData, pageResetPassword) => {
                     payload: response.user,
                 });
                 dispatch(setUser(response.user));
-                pageResetPassword()
+                localStorage.setItem('resetPasswordFlag', 'true');
+                pageResetPassword();
+              
             } else {
                 dispatch({
                     type: "FORGOT_PASSWORD_FAILED",
@@ -223,7 +225,7 @@ export const forgotPassword = (userData, pageResetPassword) => {
     };
 };
 
-export const resetPassword = (newPassword,code,pageLogin) => {
+export const resetPassword = (newPassword, code, pageLogin) => {
     return async (dispatch) => {
         dispatch({ type: "RESET_PASSWORD_REQUEST" });
         try {
@@ -239,6 +241,7 @@ export const resetPassword = (newPassword,code,pageLogin) => {
                     type: "RESET_PASSWORD_SUCCESS",
                 });
                 pageLogin();
+                localStorage.removeItem('resetPasswordFlag');
             }
             else {
                 dispatch({

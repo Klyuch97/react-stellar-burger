@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../login/login.module.css";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,14 +8,22 @@ import { useDispatch } from "react-redux";
 
 
 export const ResetPassword = () => {
+
     const inputRef = React.useRef(null);
     const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem('resetPasswordFlag')) {
+            navigate('/');
+        } return () => {
+            localStorage.removeItem('resetPasswordFlag');
+        };
+    }, [navigate]);
+
     const dispatch = useDispatch()
     const { newPassword, setNewPassword, codeMail, setCodeMail } = useUser();
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(resetPassword(newPassword, codeMail, () => { navigate('/login') }));
-
 
     };
 
