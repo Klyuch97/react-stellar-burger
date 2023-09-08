@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "../login/login.module.css";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate, Navigate } from "react-router-dom";
@@ -16,7 +16,6 @@ export const ResetPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(resetPassword(newPassword, codeMail, () => { navigate('/login') }));
-
     };
 
     if (!localStorage.getItem('resetPasswordFlag')) {
@@ -55,7 +54,5 @@ export const ResetPassword = () => {
             <p className={`text text_type_main-default text_color_inactive ${styles.text} `}>
                 Вспомнили пароль? <Link to="/login" className={styles.spanText}>Войти</Link></p>
         </div>
-
     )
-
 }

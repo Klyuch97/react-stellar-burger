@@ -7,7 +7,6 @@ import { useUser } from "../../hooks/user";
 import { useDispatch } from "react-redux";
 
 export const Login = () => {
-
     const { mail, password, setMail, setPassword } = useUser();
     const dispatch = useDispatch();
 
@@ -20,10 +19,7 @@ export const Login = () => {
         if (mail && password) {
             dispatch(LogIn(userData));
         }
-
     };
-
-
 
     return (
         <div className={styles.content}>
@@ -37,14 +33,14 @@ export const Login = () => {
                     extraClass="mb-6"
                 />
                 <PasswordInput
-                  onChange={e => setPassword(e.target.value)}
-                     value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
                     name={'password'}
                     extraClass="mb-6"
                 />
                 <Button htmlType="button" type="primary"
                     size="medium" extraClass={styles.button}
-                    onClick={handleSubmit}  disabled={!mail || !password }>
+                    onClick={handleSubmit} disabled={!mail || !password}>
                     Войти
                 </Button>
             </div>

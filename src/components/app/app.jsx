@@ -20,7 +20,6 @@ import { ProfileInfo } from "../profile-info/profile-info";
 
 
 function App() {
-  console.log(localStorage.resetPasswordFlag);
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
@@ -43,7 +42,7 @@ function App() {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
-          <Route index element={<ProfileInfo/>} />
+          <Route index element={<ProfileInfo />} />
           <Route path="orders" element={<p>История заказов</p>} />
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
@@ -52,14 +51,11 @@ function App() {
       </Routes>
       {background && (
         <Routes>
-          <Route
-            path='/ingredients/:id'
+          <Route path='/ingredients/:id'
             element={
               <Modal onClose={handleModalClose}>
                 <IngredientDetails />
-              </Modal>
-            }
-          />
+              </Modal>} />
         </Routes>
       )}
     </div>

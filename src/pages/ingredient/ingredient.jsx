@@ -32,7 +32,6 @@ export const Ingredient = () => {
                         <p className='text text_type_digits-default text_color_inactive'>
                             {currentElem.carbohydrates}</p>
                     </div>
-
                 </div>
             </div >}
         </>

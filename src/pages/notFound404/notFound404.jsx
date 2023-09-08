@@ -5,7 +5,10 @@ export const NotFound404 = () => {
     return (
         <div className={styles.content}>
             < h1 className={styles.text} > Ошибка</ h1 >
-            <Link to="/" className={styles.link} >  Вернуться на главную страницу</Link>
+            <Link to="/" className={styles.link} >
+                <p> Вернуться на главную страницу</p></Link>
+            <Link to="/login" className={styles.link} >
+                <p> Войти в личный кабинет</p></Link>
         </div>
     )
 }

@@ -3,7 +3,7 @@ import styles from "../login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { forgotPassword } from "../../services/actions/autnUser";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useUser } from "../../hooks/user";
 
 
@@ -18,7 +18,7 @@ export const ForgotPassword = () => {
             email: mail,
         };
         if (mail) {
-            dispatch(forgotPassword(userData,()=> {navigate('/reset-password')}));
+            dispatch(forgotPassword(userData, () => { navigate('/reset-password') }));
         }
     };
 
