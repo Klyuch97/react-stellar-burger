@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "../login/login.module.css";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useUser } from "../../hooks/user";
 import { resetPassword } from "../../services/actions/autnUser";
 import { useDispatch } from "react-redux";
@@ -11,14 +11,6 @@ export const ResetPassword = () => {
 
     const inputRef = React.useRef(null);
     const navigate = useNavigate();
-    useEffect(() => {
-        if (!localStorage.getItem('resetPasswordFlag')) {
-            navigate('/');
-        } return () => {
-            localStorage.removeItem('resetPasswordFlag');
-        };
-    }, [navigate]);
-
     const dispatch = useDispatch()
     const { newPassword, setNewPassword, codeMail, setCodeMail } = useUser();
     const handleSubmit = (e) => {
@@ -26,6 +18,10 @@ export const ResetPassword = () => {
         dispatch(resetPassword(newPassword, codeMail, () => { navigate('/login') }));
 
     };
+
+    if (!localStorage.getItem('resetPasswordFlag')) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <div className={styles.content}>

@@ -20,7 +20,7 @@ import { ProfileInfo } from "../profile-info/profile-info";
 
 
 function App() {
-  console.log(localStorage);
+  console.log(localStorage.resetPasswordFlag);
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.background;
