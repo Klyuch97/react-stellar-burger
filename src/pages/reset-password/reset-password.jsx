@@ -12,7 +12,7 @@ export const ResetPassword = () => {
     const inputRef = React.useRef(null);
     const navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem('resetPasswordFlag')) {
+        if (!localStorage.getItem('resetPasswordFlag')) {
             navigate('/');
         } return () => {
             localStorage.removeItem('resetPasswordFlag');
