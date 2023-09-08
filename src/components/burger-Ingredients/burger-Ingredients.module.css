@@ -9,11 +9,11 @@
     list-style: none;
 }
 
-.li{
-padding: 0;
-margin: 0;
-overflow: auto;
-height: 720px;
+.li {
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    height: 720px;
 }
 
 .containerContent {
@@ -48,4 +48,9 @@ height: 720px;
 
 .text {
     text-align: center;
+}
+
+.link {
+    text-decoration: none;
+    color: #F2F2F3;
 }

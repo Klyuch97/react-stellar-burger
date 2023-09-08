@@ -10,10 +10,13 @@ import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
 import { INCREMENT, RESET } from '../../services/actions/price';
 import { useModal } from '../../hooks/modal';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = () => {
+    const navigate = useNavigate()
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const { totalPrice } = useSelector(state => state.price);
+    const user = useSelector(state => state.user.user);
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
     const [{ isHover }, dropTarget] = useDrop({
@@ -40,12 +43,17 @@ const BurgerConstructor = () => {
     })
 
     const handleOrderSubmit = async () => {
-        const ingredientId = selectedItems.map(item => item._id);
-        const ingredientBunsId = selectedItemBuns._id;
-        const ingredient = [...ingredientId, ingredientBunsId];
-        dispatch(postOrderSubmit(ingredient))
-        dispatch({ type: RESET })
-        openModal()
+        if (user === null) {
+            return (navigate('/login'))
+        }
+        else {
+            const ingredientId = selectedItems.map(item => item._id);
+            const ingredientBunsId = selectedItemBuns._id;
+            const ingredient = [...ingredientId, ingredientBunsId];
+            dispatch(postOrderSubmit(ingredient))
+            dispatch({ type: RESET })
+            openModal()
+        }
 
     }
     const closeModals = () => {

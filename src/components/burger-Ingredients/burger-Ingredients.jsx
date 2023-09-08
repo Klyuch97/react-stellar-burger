@@ -1,11 +1,8 @@
-import React, { useMemo, useEffect,useState } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngrid } from '../../services/actions/burgerState';
-import Modal from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useInView } from 'react-intersection-observer';
 import { useModal } from '../../hooks/modal';
 import { CURRENT_INGRID } from '../../services/actions/burgerState';
@@ -15,15 +12,7 @@ import { CURRENT_INGRID } from '../../services/actions/burgerState';
 const BurgerIngredients = () => {
     const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
     const { isModalOpen, openModal, closeModal } = useModal();
-    console.log(isModalOpen);
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getIngrid());
-    }, [dispatch]);
-
-    const closeModals = () => {
-        closeModal()
-    }
 
     const [buns, sauces, mains] = useMemo(() => {
         const filteredBuns = ingrid.filter(item => item.type === 'bun');
@@ -33,9 +22,7 @@ const BurgerIngredients = () => {
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
 
-
     const [current, setCurrent] = React.useState('one');
-
     const [bunsRef, bunsInView] = useInView({ threshold: 0.1 });
     const [sausesRef, sausesInView] = useInView({ threshold: 0.1 });
     const [mainsRef, mainInView] = useInView({ threshold: 0.1 });
@@ -68,8 +55,8 @@ const BurgerIngredients = () => {
     };
     const handleItemClick = (item) => {
         openModal()
-        dispatch({type:CURRENT_INGRID, payload: item})
-       
+        dispatch({ type: CURRENT_INGRID, payload: item })
+
     }
 
 
@@ -99,7 +86,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick}  />)}
+                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
@@ -114,10 +101,7 @@ const BurgerIngredients = () => {
                     </div>
                 </li>
             </ul>
-            {
-                isModalOpen && <Modal onClose={closeModals} >
-                    <IngredientDetails /></Modal>
-            }
+
 
         </section>
     )

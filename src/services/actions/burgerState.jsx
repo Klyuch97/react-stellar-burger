@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { request } from "../../utils/api";
+import { request} from "../../utils/api";
+
 
 export const GET_INGRID_REQUEST = 'GET_INGRID_REQUEST';
 export const GET_INGRID_SUCCESS = 'GET_INGRID_SUCCESS';
@@ -36,6 +37,7 @@ export const postOrderSubmit = (ingredient) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          authorization: localStorage.getItem('accessToken')
         },
         body: JSON.stringify({ ingredients: ingredient }),
       });
@@ -70,6 +72,8 @@ export const addItems = (item) => {
     item: newItem,
   };
 };
+
+
 
 
 
