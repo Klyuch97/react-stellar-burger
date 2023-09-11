@@ -17,6 +17,7 @@ import { checkUserAuth } from "../../services/actions/autnUser";
 import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 import { NotFound404 } from "../../pages/notFound404/notFound404";
 import { ProfileInfo } from "../profile-info/profile-info";
+import { Feed } from "../../pages/feed/feed";
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
-        <Route path="/lenta" element={<p>Лента заказов</p>} />
+        <Route path="/feed" element={<Feed />} />
       </Routes>
       {background && (
         <Routes>
