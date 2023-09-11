@@ -10,9 +10,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Ingredients = ({ data, handleItemClick }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
-
     const location = useLocation();
-
     const id = data['_id'];
 
     const ingredient = [...selectedItems, selectedItemBuns];

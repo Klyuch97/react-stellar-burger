@@ -18,6 +18,7 @@ import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 import { NotFound404 } from "../../pages/notFound404/notFound404";
 import { ProfileInfo } from "../profile-info/profile-info";
 import { Feed } from "../../pages/feed/feed";
+import { WS_CONNECTION_START } from "../../services/actions/web-socket";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngrid());
     dispatch(checkUserAuth());
+    dispatch({ type: WS_CONNECTION_START });
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки

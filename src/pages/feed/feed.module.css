@@ -1,0 +1,48 @@
+.content {
+    width: 64.6%;
+    border: solid green;
+    height: 80%;
+    margin: 40px auto 0;
+}
+
+.text {
+    width: 100%;
+}
+
+.block {
+    height: 95%;
+    display: flex;
+    gap: 60px;
+}
+
+.orderFeed {
+    width: 608px;
+    border: solid yellow;
+    max-height: 852px;
+    padding: 0;
+    overflow: auto;
+}
+
+.statusFeed {
+    width: 580px;
+    height: 626px;
+    border: solid blueviolet;
+}
+
+.burgerContainer {
+    margin-bottom: 16px;
+}
+
+.orderId {
+    display: flex;
+    justify-content: space-between;
+    max-width: 536px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.burgerName {
+    max-width: 536px;
+    margin-left: auto;
+    margin-right: auto;
+}
