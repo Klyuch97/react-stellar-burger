@@ -1,7 +1,7 @@
 .content {
-    width: 64.6%;
+    max-width: 1240px;
     border: solid green;
-    height: 80%;
+  
     margin: 40px auto 0;
 }
 
@@ -24,7 +24,6 @@
 
 .statusFeed {
     width: 580px;
-    height: 626px;
     border: solid blueviolet;
 }
 
@@ -82,4 +81,21 @@
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.ordersBoard {
+    display: flex;
+}
+
+.numberDone {
+    color: #00CCCC;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 272px;
+    height: 322px;
+    border: solid red;
 }

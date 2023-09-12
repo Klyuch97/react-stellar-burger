@@ -18,6 +18,19 @@ export const Feed = () => {
     let messageSocket = useSelector(state => state.feed.messages);
     let messagesOrders = messageSocket.orders;
 
+    let doneStatusOrder = [];
+    let pendingStatusOrder = [];
+
+    messagesOrders && messagesOrders.map((data, index) => {
+        if (data.status === "done") {
+            doneStatusOrder.push(data);
+        } else if (data.status === "pending") {
+            pendingStatusOrder.push(data);
+        }
+    });
+
+
+
     return (
         <div className={`${styles.content}`}>
             <p className={`${styles.text} mb-5 text text_type_main-large`}>Лента заказов</p>
@@ -26,7 +39,19 @@ export const Feed = () => {
                     {messagesOrders && messagesOrders.map((data, index) => <BurgerDetailsOrders data={data} key={data._id} />)}
                 </div>
                 <div className={styles.statusFeed}>
-
+                    <div className={styles.ordersBoard}>
+                        <div className={`mr-9`}>
+                            <p className={`text text_type_main-medium pb-6`}>Готовы:</p>
+                            <div className={styles.table}>
+                                {doneStatusOrder && doneStatusOrder.map((data, index) =>
+                                    index < 20 && <p key={index} className={`${styles.numberDone} pb-2 text text_type_digits-default `}>{data.number}</p>
+                                )}
+                            </div>
+                        </div>
+                        <div>
+                        <p className={`text text_type_main-medium pb-6`}>В работе:</p>
+                        </div>
+                    </div>
                     <p className={`text text_type_main-medium mt-15`}>Выполнено за все время:</p>
                     <p className={`text text_type_digits-large mb-15`}>{messageSocket.total}</p>
                     <p className={`text text_type_main-medium mt-15`}>Выполнено за сегодня:</p>
