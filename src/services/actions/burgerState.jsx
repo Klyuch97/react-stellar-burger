@@ -43,7 +43,7 @@ export const postOrderSubmit = (ingredient) => {
       });
       const orderNumber = response.order.number;
       dispatch({ type: POST_ORDER_NUMBER_SUCCESS, orderNumber })
-      console.log('Номер заказа:', orderNumber);
+     // console.log('Номер заказа:', orderNumber);
     }
     catch (error) {
       dispatch({ type: POST_ORDER_NUMBER_FAILED })

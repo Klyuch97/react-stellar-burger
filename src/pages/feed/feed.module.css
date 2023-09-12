@@ -1,7 +1,5 @@
 .content {
     max-width: 1240px;
-    border: solid green;
-  
     margin: 40px auto 0;
 }
 
@@ -24,7 +22,6 @@
 
 .statusFeed {
     width: 580px;
-    border: solid blueviolet;
 }
 
 .burgerContainer {
@@ -97,5 +94,4 @@
     flex-wrap: wrap;
     width: 272px;
     height: 322px;
-    border: solid red;
 }

@@ -50,6 +50,11 @@ export const Feed = () => {
                         </div>
                         <div>
                         <p className={`text text_type_main-medium pb-6`}>В работе:</p>
+                        <div className={styles.table}>
+                                {pendingStatusOrder && pendingStatusOrder.map((data, index) =>
+                                    index < 20 && <p key={index} className={`pb-2 text text_type_digits-default `}>{data.number}</p>
+                                )}
+                            </div>
                         </div>
                     </div>
                     <p className={`text text_type_main-medium mt-15`}>Выполнено за все время:</p>

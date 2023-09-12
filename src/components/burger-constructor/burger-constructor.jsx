@@ -49,7 +49,7 @@ const BurgerConstructor = () => {
         else {
             const ingredientId = selectedItems.map(item => item._id);
             const ingredientBunsId = selectedItemBuns._id;
-            const ingredient = [...ingredientId, ingredientBunsId];
+            const ingredient = [...ingredientId, ingredientBunsId,ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
             dispatch({ type: RESET })
             openModal()
