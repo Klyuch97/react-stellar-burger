@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     dispatch(getIngrid());
     dispatch(checkUserAuth());
-    dispatch({ type: WS_CONNECTION_START });
+    //dispatch({ type: WS_CONNECTION_START });
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
