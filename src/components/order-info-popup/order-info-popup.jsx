@@ -1,0 +1,42 @@
+import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components"
+import s from "./order-info-popup.module.css"
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { IngredientItems } from "./ingridinets-items";
+
+
+export const OrderInfoPopup = () => {
+    const { ingrid } = useSelector(store => store.burger);
+    const { id } = useParams();
+    let messageSocket = useSelector(state => state.feed.messages.orders);
+    const data = messageSocket && messageSocket.find((elem) => elem._id === id);
+    let IngredientId = data && data.ingredients;
+    const ingredientsCurrent = IngredientId && IngredientId.map((data) => {
+        const item = ingrid.find(item => item._id === data);
+        return item;
+    });
+
+
+    let totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+
+    return (
+        <>
+            {data && <div>
+                <p className={`text text_type_digits-default mb-5 mt-20 ${s.number}`}>#{data.number}</p>
+                <p className={`text text_type_main-medium mb-2 ${s.name}`}>{data.name}</p>
+                <p className={`text text_type_main-default ${s.status}`}>Выполнен</p>
+                <p className={`text text_type_main-medium mb-6 mt-15 ${s.compound}`}>Состав:</p>
+                <div className={`${s.items} custom-scroll `}>
+                    {ingredientsCurrent.map((data, index) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                </div>
+                <div className={`${s.timePrice} mt-10 mb-10`}>
+                    <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>
+                    <div className={`${s.price}`}>
+                        <p className={`text text_type_digits-default mr-2`}>{totalPrice}</p>
+                        <CurrencyIcon type="primary" />
+                    </div>
+                </div>
+            </div>}
+        </>
+    )
+}

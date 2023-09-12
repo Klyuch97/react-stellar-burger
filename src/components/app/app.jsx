@@ -19,6 +19,7 @@ import { NotFound404 } from "../../pages/notFound404/notFound404";
 import { ProfileInfo } from "../profile-info/profile-info";
 import { Feed } from "../../pages/feed/feed";
 import { WS_CONNECTION_START } from "../../services/actions/web-socket";
+import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<p>dfdsfsdfs</p>} />
       </Routes>
       {background && (
         <Routes>
@@ -58,6 +60,15 @@ function App() {
             element={
               <Modal onClose={handleModalClose}>
                 <IngredientDetails />
+              </Modal>} />
+        </Routes>
+      )}
+        {background && (
+        <Routes>
+          <Route path='/feed/:id'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfoPopup />
               </Modal>} />
         </Routes>
       )}

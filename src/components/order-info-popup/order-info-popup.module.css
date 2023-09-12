@@ -1,0 +1,84 @@
+.number {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.status {
+    color: #00CCCC;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.compound {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.timePrice {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}
+
+.items {
+    border: solid red;
+    width: 608px;
+    max-height: 852px;
+    padding: 0;
+    overflow: auto;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+
+}
+
+.frame {
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    border: 2px solid #801ab2;
+    border-radius: 100px;
+    display: flex;
+    position: relative;
+}
+
+
+.image {
+    left: -24px;
+    max-width: 112px;
+    position: relative;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    border: solid green;
+}
+
+.itemPrice {
+    display: flex;
+    align-items: center;
+}
+
+.textPrice {
+    width: 70%;
+}
