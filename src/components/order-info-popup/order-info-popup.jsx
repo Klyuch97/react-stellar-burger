@@ -16,6 +16,14 @@ export const OrderInfoPopup = () => {
         return item;
     });
 
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc, currentValue) => {
+        if (!acc.find(data => data._id === currentValue._id)) {
+            acc.push(currentValue);
+        }
+        return acc;
+    }, []
+    );
+
 
     let totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
 
@@ -27,7 +35,7 @@ export const OrderInfoPopup = () => {
                 <p className={`text text_type_main-default ${s.status}`}>Выполнен</p>
                 <p className={`text text_type_main-medium mb-6 mt-15 ${s.compound}`}>Состав:</p>
                 <div className={`${s.items} custom-scroll `}>
-                    {ingredientsCurrent.map((data, index) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                    {uniqueId.map((data, index) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
                 </div>
                 <div className={`${s.timePrice} mt-10 mb-10`}>
                     <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>

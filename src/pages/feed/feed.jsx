@@ -16,7 +16,13 @@ export const Feed = () => {
         }
     }, [dispatch]);
     let messageSocket = useSelector(state => state.feed.messages);
-    let messagesOrders = messageSocket.orders;
+    let messagesOrdersNotFilter = messageSocket.orders;
+    let messagesOrders = [];
+    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach(item => {
+        if (item.ingredients.every(ingredient => ingredient !== null)) {
+            messagesOrders.push(item);
+        }
+    });
 
     let doneStatusOrder = [];
     let pendingStatusOrder = [];
@@ -28,7 +34,6 @@ export const Feed = () => {
             pendingStatusOrder.push(data);
         }
     });
-
 
 
     return (
@@ -49,8 +54,8 @@ export const Feed = () => {
                             </div>
                         </div>
                         <div>
-                        <p className={`text text_type_main-medium pb-6`}>В работе:</p>
-                        <div className={styles.table}>
+                            <p className={`text text_type_main-medium pb-6`}>В работе:</p>
+                            <div className={styles.table}>
                                 {pendingStatusOrder && pendingStatusOrder.map((data, index) =>
                                     index < 20 && <p key={index} className={`pb-2 text text_type_digits-default `}>{data.number}</p>
                                 )}

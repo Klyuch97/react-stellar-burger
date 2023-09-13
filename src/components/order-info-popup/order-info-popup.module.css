@@ -38,7 +38,6 @@
 }
 
 .items {
-    border: solid red;
     width: 608px;
     max-height: 852px;
     padding: 0;
@@ -47,7 +46,6 @@
     margin-left: auto;
     margin-right: auto;
     height: 250px;
-
 }
 
 .frame {
@@ -60,7 +58,6 @@
     position: relative;
 }
 
-
 .image {
     left: -24px;
     max-width: 112px;
@@ -71,7 +68,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-    border: solid green;
 }
 
 .itemPrice {
