@@ -1,14 +1,12 @@
 import {
-    WS_CONNECTION_START, WS_CONNECTION_SUCCESS,
-    WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR,
-    WS_GET_MESSAGE
+    WS_CONNECTION_SUCCESS, WS_CONNECTION_CLOSED,
+    WS_CONNECTION_ERROR, WS_GET_MESSAGE
 } from "../actions/web-socket";
 
 const initialState = {
     wsConnected: false,
     messages: {}
 };
-
 
 export const wsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -33,7 +31,7 @@ export const wsReducer = (state = initialState, action) => {
         case WS_GET_MESSAGE:
             return {
                 ...state,
-                messages: action.payload ,
+                messages: action.payload,
             };
 
         default:

@@ -18,9 +18,9 @@ import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 import { NotFound404 } from "../../pages/notFound404/notFound404";
 import { ProfileInfo } from "../profile-info/profile-info";
 import { Feed } from "../../pages/feed/feed";
-import { WS_CONNECTION_START } from "../../services/actions/web-socket";
 import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
 import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
+import { ProfileOrders } from "../profile-orders/profile-orders";
 
 
 function App() {
@@ -31,7 +31,6 @@ function App() {
   useEffect(() => {
     dispatch(getIngrid());
     dispatch(checkUserAuth());
-    //dispatch({ type: WS_CONNECTION_START });
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки
@@ -48,7 +47,7 @@ function App() {
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route index element={<ProfileInfo />} />
-          <Route path="orders" element={<p>История заказов</p>} />
+          <Route path="orders" element={<ProfileOrders />} />
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
@@ -76,6 +75,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
