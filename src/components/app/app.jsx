@@ -20,6 +20,7 @@ import { ProfileInfo } from "../profile-info/profile-info";
 import { Feed } from "../../pages/feed/feed";
 import { WS_CONNECTION_START } from "../../services/actions/web-socket";
 import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
+import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
         <Route path="/ingredients/:id" element={<Ingredient />} />
         <Route path="*" element={<NotFound404 />} />
         <Route path="/feed" element={<Feed />} />
-        <Route path="/feed/:id" element={<p>dfdsfsdfs</p>} />
+        <Route path="/feed/:id" element={<FeedOrderInfo />} />
       </Routes>
       {background && (
         <Routes>
@@ -63,7 +64,7 @@ function App() {
               </Modal>} />
         </Routes>
       )}
-        {background && (
+      {background && (
         <Routes>
           <Route path='/feed/:id'
             element={
