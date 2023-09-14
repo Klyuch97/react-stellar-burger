@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/actions/web-socket";
-import s from "./feed-order-info.module.css"
+import { WS_CONNECTION_CLOSED,WS_INIT_USER_ORDER_START } from "../../services/actions/web-socket";
+import s from "./profile-order-info.module.css"
 import { IngredientItems } from "../../components/order-info-popup/ingridinets-items";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-export const FeedOrderInfo = () => {
+export const ProfileOrderInfo = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch({ type: WS_CONNECTION_START });
+        dispatch({ type: WS_INIT_USER_ORDER_START });
         return () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
@@ -25,7 +25,7 @@ export const FeedOrderInfo = () => {
         return item;
     });
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc, currentValue) => {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

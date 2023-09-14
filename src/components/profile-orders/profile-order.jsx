@@ -40,7 +40,7 @@ export const ProfileOrderUser = ({ data }) => {
             className={s.link}
             key={id}
             // Тут мы формируем динамический путь для нашего ингредиента
-            to={`/feed/${id}`}
+            to={`/profile/orders/${id}`}
             // а также сохраняем в свойство background роут,
             // на котором была открыта наша модалка
             state={{ background: location }}>

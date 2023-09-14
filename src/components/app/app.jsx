@@ -22,6 +22,7 @@ import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
 import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
 import { ProfileOrders } from "../profile-orders/profile-orders";
 import { OrderUserInfoPopup } from "../order-user-info-popup/order-user-info-popup";
+import { ProfileOrderInfo } from "../../pages/profile-order-info/profile-order-info";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="orders" element={<ProfileOrders />} />
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
+        <Route path="/profile/orders/:id" element={<OnlyAuth component={<ProfileOrderInfo />} />} ></Route>
         <Route path="*" element={<NotFound404 />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/feed/:id" element={<FeedOrderInfo />} />
@@ -75,7 +77,7 @@ function App() {
       )}
       {background && (
         <Routes>
-          <Route path='/feed/:id'
+          <Route path='/profile/orders/:id'
             element={
               <Modal onClose={handleModalClose}>
                 <OrderUserInfoPopup />
