@@ -26,7 +26,6 @@ export const OrderUserInfoPopup = () => {
 
     let totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
 
-
     const Status = () => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>

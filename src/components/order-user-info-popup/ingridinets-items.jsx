@@ -1,11 +1,8 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import s from "./order-user-info-popup.module.css"
-import { useSelector } from "react-redux";
 import { useMemo } from "react";
 
 export const IngredientItems = ({ data, ingredientsCurrent }) => {
-
-
     const count = useMemo(() => {
         return ingredientsCurrent.reduce(
             (acc, item) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),

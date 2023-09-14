@@ -6,7 +6,6 @@ import { useUser } from "../../hooks/user";
 import { updateUserInfo } from "../../services/actions/autnUser";
 
 export const ProfileInfo = () => {
-
     const userData = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
     const inputRef = React.useRef(null)
@@ -18,7 +17,6 @@ export const ProfileInfo = () => {
     const CheckData = () => {
         return name === userData.name && mail === userData.email && password === "" ? true : false;
     }
-
 
     const cancelChanges = () => {
         setName(userData.name);

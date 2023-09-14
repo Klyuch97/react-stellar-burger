@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 
 
 export const ResetPassword = () => {
-
     const inputRef = React.useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch()

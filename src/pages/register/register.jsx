@@ -7,16 +7,12 @@ import { registerUser } from "../../services/actions/autnUser";
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const Register = () => {
-
-
     const inputRef = React.useRef(null)
-
     const { name, mail, password, setName, setMail, setPassword } = useUser();
     const dispatch = useDispatch();
-  
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const userData = {
             email: mail,
             password: password,
@@ -25,12 +21,10 @@ export const Register = () => {
         if (mail && password && name) {
             dispatch(registerUser(userData));
         }
-
     };
 
     return (
         <div className={styles.content}>
-
             <form className={`${styles.data} mb-20`} >
                 <h2 className={`${styles.title} mb-6 text text_type_main-medium`}>Регистрация</h2>
                 <Input
