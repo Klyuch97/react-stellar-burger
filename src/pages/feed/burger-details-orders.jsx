@@ -17,7 +17,7 @@ export const BurgerDetailsOrders = ({ data }) => {
     let totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
     const id = data['_id'];
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc, currentValue) => {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

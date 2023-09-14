@@ -21,6 +21,7 @@ import { Feed } from "../../pages/feed/feed";
 import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
 import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
 import { ProfileOrders } from "../profile-orders/profile-orders";
+import { OrderUserInfoPopup } from "../order-user-info-popup/order-user-info-popup";
 
 
 function App() {
@@ -69,6 +70,15 @@ function App() {
             element={
               <Modal onClose={handleModalClose}>
                 <OrderInfoPopup />
+              </Modal>} />
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route path='/feed/:id'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderUserInfoPopup />
               </Modal>} />
         </Routes>
       )}

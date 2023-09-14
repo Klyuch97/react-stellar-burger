@@ -1,6 +1,6 @@
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import s from './profile-orders.module.css'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
@@ -14,14 +14,13 @@ export const ProfileOrderUser = ({ data }) => {
         const item = ingrid.find(item => item._id === data);
         return item;
     });
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc, currentValue) => {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []
     );
-
     let totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
     const id = data['_id'];
     const count = useMemo(() => {
@@ -37,7 +36,14 @@ export const ProfileOrderUser = ({ data }) => {
         )
     }
     return (
-        <>
+        <Link
+            className={s.link}
+            key={id}
+            // Тут мы формируем динамический путь для нашего ингредиента
+            to={`/feed/${id}`}
+            // а также сохраняем в свойство background роут,
+            // на котором была открыта наша модалка
+            state={{ background: location }}>
             <div className={`${s.items} mb-6`}>
                 <div className={s.item}>
                     <div className={`${s.numberTime} pt-6 pb-6`}>
@@ -63,6 +69,7 @@ export const ProfileOrderUser = ({ data }) => {
                     </div>
                 </div>
             </div>
-        </>
-    )
+            </Link>
+
+            )
 }
