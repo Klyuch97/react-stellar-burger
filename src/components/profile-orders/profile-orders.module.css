@@ -62,3 +62,7 @@
     align-items: center;
     gap: 8px;
 }
+
+.statusDone{
+    color: #00CCCC;
+}

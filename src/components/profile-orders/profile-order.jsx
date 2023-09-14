@@ -14,7 +14,6 @@ export const ProfileOrderUser = ({ data }) => {
         const item = ingrid.find(item => item._id === data);
         return item;
     });
-
     const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc, currentValue) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
@@ -31,6 +30,12 @@ export const ProfileOrderUser = ({ data }) => {
             {}
         );
     }, [ingredientsCurrent]);
+    const Status = () => {
+        return (
+            data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>
+                : <p className={`text text_type_main-default`}>Готовится</p>
+        )
+    }
     return (
         <>
             <div className={`${s.items} mb-6`}>
@@ -40,8 +45,7 @@ export const ProfileOrderUser = ({ data }) => {
                         <p className={`text text_type_main-default text_color_inactive`}><FormattedDate date={new Date(data.createdAt)} /> </p>
                     </div>
                     <p className="text text_type_main-medium mb-2">{data.name}</p>
-                    <p className="text text_type_main-default">Создан</p>
-
+                    {<Status />}
                     <div className={`${s.imgAndPrice} pb-6 pt-6`}>
                         <div className={s.containerImage}>
                             {uniqueId.map((data, index) =>

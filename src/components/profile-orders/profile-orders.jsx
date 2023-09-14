@@ -13,6 +13,7 @@ export const ProfileOrders = () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
     }, [dispatch]);
+
     let messageSocket = useSelector(state => state.feed.messages);
     let messagesOrdersNotFilter = messageSocket.orders;
     let messagesOrders = [];
@@ -20,11 +21,10 @@ export const ProfileOrders = () => {
         if (item.ingredients.every(ingredient => ingredient !== null)) {
             messagesOrders.push(item);
         }
-        //console.log(messagesOrders);
     });
     return (
         <div className={`${s.content} custom-scroll`}>
-            {messagesOrders && messagesOrders.map((data, index) =>  <ProfileOrderUser data={data} key={data._id}/> ).reverse()}
+            {messagesOrders && messagesOrders.map((data, index) => <ProfileOrderUser data={data} key={data._id} />).reverse()}
         </div>
     )
 }
