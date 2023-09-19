@@ -1,0 +1,31 @@
+.content {
+    display: flex;
+    margin: 122px auto;
+    width: 640px;
+    max-height: 620px;
+    flex-direction: column;
+}
+
+.number {
+    text-align: center;
+}
+
+.status {
+    color: #00CCCC;
+}
+
+.items {
+    padding: 0;
+    overflow: auto;
+    height: 366px;
+}
+
+.timePrice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}

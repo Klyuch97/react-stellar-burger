@@ -7,8 +7,7 @@ import { useLocation } from 'react-router-dom';
 const Header = () => {
     const location = useLocation();
     const isActive = location.pathname === "/profile" || location.pathname === "/profile/orders";
-    const isActiveLenta = location.pathname === "/lenta";
-    //не могу додуматься как isActive isActiveLenta сохранить в одну переменную
+    const isActiveLenta = location.pathname === "/feed";
     return (
         <header className={headerStyles.header}>
             <div className={`${headerStyles.content} mt-4 mb-4`}>
@@ -18,7 +17,7 @@ const Header = () => {
                         <p className={`pl-2 text text_type_main-default text_color_${location.pathname === "/" ? "active" : "inactive"}`}
                         >Конструктор</p>
                     </Link>
-                    <Link to="/lenta" className={`${headerStyles.navigation} ml-5 mr-5`}>
+                    <Link to="/feed" className={`${headerStyles.navigation} ml-5 mr-5`}>
                         <ListIcon type={isActiveLenta ? "primary" : "secondary"} />
                         <p className={`pl-2 text text_type_main-default text_color_${isActiveLenta ? "active" : "inactive"}`}>
                             Лента заказов</p>

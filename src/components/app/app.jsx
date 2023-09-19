@@ -17,6 +17,12 @@ import { checkUserAuth } from "../../services/actions/autnUser";
 import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
 import { NotFound404 } from "../../pages/notFound404/notFound404";
 import { ProfileInfo } from "../profile-info/profile-info";
+import { Feed } from "../../pages/feed/feed";
+import { OrderInfoPopup } from "../order-info-popup/order-info-popup";
+import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
+import { ProfileOrders } from "../profile-orders/profile-orders";
+import { OrderUserInfoPopup } from "../order-user-info-popup/order-user-info-popup";
+import { ProfileOrderInfo } from "../../pages/profile-order-info/profile-order-info";
 
 
 function App() {
@@ -43,11 +49,13 @@ function App() {
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route index element={<ProfileInfo />} />
-          <Route path="orders" element={<p>История заказов</p>} />
+          <Route path="orders" element={<ProfileOrders />} />
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
+        <Route path="/profile/orders/:id" element={<OnlyAuth component={<ProfileOrderInfo />} />} ></Route>
         <Route path="*" element={<NotFound404 />} />
-        <Route path="/lenta" element={<p>Лента заказов</p>} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:id" element={<FeedOrderInfo />} />
       </Routes>
       {background && (
         <Routes>
@@ -58,9 +66,26 @@ function App() {
               </Modal>} />
         </Routes>
       )}
+      {background && (
+        <Routes>
+          <Route path='/feed/:id'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderInfoPopup />
+              </Modal>} />
+        </Routes>
+      )}
+      {background && (
+        <Routes>
+          <Route path='/profile/orders/:id'
+            element={
+              <Modal onClose={handleModalClose}>
+                <OrderUserInfoPopup />
+              </Modal>} />
+        </Routes>
+      )}
     </div>
   );
 }
-
 
 export default App;

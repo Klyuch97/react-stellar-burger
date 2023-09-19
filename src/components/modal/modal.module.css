@@ -8,6 +8,7 @@
     left: 31.3%;
     top: 9.8%;
     max-height: 700px;
+    z-index: 10;
 }
 
 .closeButton {

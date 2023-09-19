@@ -1,0 +1,105 @@
+.content {
+    max-width: 1240px;
+    margin: 40px auto 0;
+}
+
+.text {
+    width: 100%;
+}
+
+.block {
+    height: 95%;
+    display: flex;
+    gap: 60px;
+}
+
+.orderFeed {
+    width: 608px;
+    max-height: 852px;
+    padding: 0;
+    overflow: auto;
+}
+
+.statusFeed {
+    width: 580px;
+}
+
+.burgerContainer {
+    margin-bottom: 16px;
+    background-color: #1c1c21;
+    border-radius: 40px;
+    border: 2px;
+}
+
+.orderId {
+    display: flex;
+    justify-content: space-between;
+    max-width: 536px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.burgerName {
+    max-width: 536px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imgAndPrice {
+    display: flex;
+    max-height: 64px;
+    max-width: 536px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.frame {
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    border: 2px solid #801ab2;
+    border-radius: 100px;
+    display: flex;
+    position: relative;
+    margin-left: -12px;
+}
+
+.containerImage {
+    display: flex;
+}
+
+.image {
+    left: -24px;
+    max-width: 112px;
+    position: relative;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ordersBoard {
+    display: flex;
+}
+
+.numberDone {
+    color: #00CCCC;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 272px;
+    height: 322px;
+}
+
+.count{
+    left: -90px;
+    top: 22px;
+    max-width: 112px;
+    position: relative;
+    font-size: 16px;
+}
