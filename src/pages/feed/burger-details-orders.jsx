@@ -8,13 +8,13 @@ import { useMemo } from "react";
 
 export const BurgerDetailsOrders = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
-    let IngredientId = data.ingredients;
+    const IngredientId = data.ingredients;
     const location = useLocation();
     const ingredientsCurrent = IngredientId.map((data) => {
         const item = ingrid.find(item => item._id === data);
         return item;
     });
-    let totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+    const totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
     const id = data['_id'];
 
     const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {

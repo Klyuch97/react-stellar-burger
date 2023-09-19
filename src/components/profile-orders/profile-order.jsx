@@ -8,12 +8,13 @@ import { useMemo } from 'react';
 
 export const ProfileOrderUser = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
-    let IngredientId = data.ingredients;
+    const IngredientId = data.ingredients;
     const location = useLocation();
     const ingredientsCurrent = IngredientId.map((data) => {
         const item = ingrid.find(item => item._id === data);
         return item;
     });
+
     const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
@@ -21,14 +22,18 @@ export const ProfileOrderUser = ({ data }) => {
         return acc;
     }, []
     );
-    let totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+
+    const totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+
     const id = data['_id'];
+
     const count = useMemo(() => {
         return ingredientsCurrent.reduce(
             (acc, item) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredientsCurrent]);
+    
     const Status = () => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>

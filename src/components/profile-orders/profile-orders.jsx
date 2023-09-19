@@ -13,9 +13,9 @@ export const ProfileOrders = () => {
         }
     }, [dispatch]);
 
-    let messageSocket = useSelector(state => state.feed.messages);
-    let messagesOrdersNotFilter = messageSocket.orders;
-    let messagesOrders = [];
+    const messageSocket = useSelector(state => state.feed.messages);
+    const messagesOrdersNotFilter = messageSocket.orders;
+    const messagesOrders = [];
     messagesOrdersNotFilter && messagesOrdersNotFilter.forEach(item => {
         if (item.ingredients.every(ingredient => ingredient !== null)) {
             messagesOrders.push(item);

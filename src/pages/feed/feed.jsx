@@ -15,17 +15,21 @@ export const Feed = () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
     }, [dispatch]);
-    let messageSocket = useSelector(state => state.feed.messages);
-    let messagesOrdersNotFilter = messageSocket.orders;
-    let messagesOrders = [];
+
+    const messageSocket = useSelector(state => state.feed.messages);
+
+    const messagesOrdersNotFilter = messageSocket.orders;
+
+    const messagesOrders = [];
+
     messagesOrdersNotFilter && messagesOrdersNotFilter.forEach(item => {
         if (item.ingredients.every(ingredient => ingredient !== null)) {
             messagesOrders.push(item);
         }
     });
 
-    let doneStatusOrder = [];
-    let pendingStatusOrder = [];
+    const doneStatusOrder = [];
+    const pendingStatusOrder = [];
 
     messagesOrders && messagesOrders.map((data, index) => {
         if (data.status === "done") {

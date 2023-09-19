@@ -9,17 +9,24 @@ import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burge
 
 export const FeedOrderInfo = () => {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch({ type: WS_CONNECTION_START });
         return () => {
             dispatch({ type: WS_CONNECTION_CLOSED });
         }
     }, [dispatch]);
+
     const { ingrid } = useSelector(store => store.burger);
+
     const { id } = useParams();
-    let messageSocket = useSelector(state => state.feed.messages.orders);
+
+    const messageSocket = useSelector(state => state.feed.messages.orders);
+
     const data = messageSocket && messageSocket.find((elem) => elem._id === id);
-    let IngredientId = data && data.ingredients;
+
+    const IngredientId = data && data.ingredients;
+
     const ingredientsCurrent = IngredientId && IngredientId.map((data) => {
         const item = ingrid.find(item => item._id === data);
         return item;
@@ -32,7 +39,7 @@ export const FeedOrderInfo = () => {
         return acc;
     }, []);
 
-    let totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
 
     const Status = () => {
         return (
