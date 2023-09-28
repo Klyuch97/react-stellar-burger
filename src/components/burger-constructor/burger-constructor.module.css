@@ -1,36 +1,61 @@
-.page{
+.page {
     width: 48.5%;
 }
 
-.containerScroll{
+.containerScroll {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 0;
     overflow: auto;
     height: 460px;
 }
-.ingridientsBun{
+
+.ingridientsBun {
     min-height: 50px;
 }
 
-.ingridients{
+.ingridients {
     display: flex;
     align-items: center;
 }
-.checkout{
+
+.checkout {
     display: flex;
     justify-content: flex-end;
 }
-.price{
+
+.price {
     display: flex;
     align-items: center;
     gap: 8px;
 }
-.onHover{
-    border: solid red;
+
+.onHover {
+    border: solid green;
+    border-radius: 5%;
 }
 
-.onHoverBun{
+.onHoverBun {
     border: solid green;
+    width: 536px;
+    background-color: #1C1C21;
+    min-height: 80px;
+    border-radius: 88px 88px 40px 40px;
+}
+
+.defaultBun {
+    width: 536px;
+    background-color: #1C1C21;
+    min-height: 80px;
+    border-radius: 88px 88px 40px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.defaultItems{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -49,7 +49,7 @@ const BurgerConstructor = () => {
         else {
             const ingredientId = selectedItems.map(item => item._id);
             const ingredientBunsId = selectedItemBuns._id;
-            const ingredient = [...ingredientId, ingredientBunsId,ingredientBunsId];
+            const ingredient = [...ingredientId, ingredientBunsId, ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
             dispatch({ type: RESET })
             openModal()
@@ -59,13 +59,29 @@ const BurgerConstructor = () => {
     const closeModals = () => {
         closeModal()
     }
+
+    const DefaultBun = () => {
+        return (
+            <div className={`${BurgerConstructorStyles.defaultBun}`}>
+                <p className="text text_type_main-medium">Перенесите булку сюда!</p>
+            </div>
+        )
+    }
+
+    const DefaultItems = () => {
+        return (
+            <div className={BurgerConstructorStyles.defaultItems}>
+                <p className="text text_type_main-medium">Добавьте ингредиенты!</p>
+            </div>
+        )
+    }
     return (
         <section className={BurgerConstructorStyles.page}>
             <div className="pt-25 pb-10">
-                <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} pl-8 mb-4
+                <div className={`${isHover ? BurgerConstructorStyles.onHoverBun : ""} mb-4 ml-8
                 ${BurgerConstructorStyles.ingridientsBun}`}
                     ref={dropTarget} >
-                    {Object.keys(selectedItemBuns).length > 0 && <ConstructorElement
+                    {Object.keys(selectedItemBuns).length === 0 ? <DefaultBun /> : <ConstructorElement
                         type="top"
                         isLocked={true}
                         text={`${selectedItemBuns.name} (верх)`}
@@ -73,16 +89,16 @@ const BurgerConstructor = () => {
                         thumbnail={selectedItemBuns.image}
                     />}
                 </div>
-                <ul className={`${BurgerConstructorStyles.containerScroll}
+                <ul className={`${BurgerConstructorStyles.containerScroll} 
                 ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
                     ref={dropTargets}>
-                    {selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
+                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
                 <div className={`pl-8 mb-4 ${BurgerConstructorStyles.ingridientsBun}`}
                 >
                     {Object.keys(selectedItemBuns).length > 0 && <ConstructorElement
-                        type=" bottom"
+                        type="bottom"
                         isLocked={true}
                         text={`${selectedItemBuns.name} (низ)`}
                         price={selectedItemBuns.price}
