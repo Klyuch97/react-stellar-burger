@@ -1,18 +1,24 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyles from '../burger-constructor.module.css';
-import { ingredientPropType } from '../../../utils/prop-types'
 import { useDispatch, useSelector } from 'react-redux';
 import { DELETE_INGRIDIENT, CHANGE_CARTS } from '../../../services/actions/burgerState';
-import {  useRef } from 'react';
+import { FC, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { DECREMENT } from '../../../services/actions/price';
+import { IIngregient } from '../../../types/types';
+import { any } from 'prop-types';
 
-const Ingridients = ({ data, index }) => {
+interface IIngredientElement {
+    data: IIngregient,
+    index: number,
+}
+
+const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
     const id = data._id;
-    const { selectedItems } = useSelector(state => state.burger);
+    const { selectedItems } = useSelector((state:any) => state.burger);
     const dispatch = useDispatch();
 
-    const moveCart = (dragIndex, hoverIndex) => {
+    const moveCart = (dragIndex: any, hoverIndex: any) => {
         const dragCard = selectedItems[dragIndex];
         const newCarts = [...selectedItems];
         newCarts.splice(dragIndex, 1);
@@ -20,11 +26,11 @@ const Ingridients = ({ data, index }) => {
         dispatch({ type: CHANGE_CARTS, payload: newCarts })
     }
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLLIElement>(null);
 
     const [, drop] = useDrop({
         accept: "ingrid",
-        hover: (item, monitor) => {
+        hover: (item: any, monitor) => {
             if (!ref.current) {
                 return
             }
@@ -36,8 +42,9 @@ const Ingridients = ({ data, index }) => {
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             const hoverMiddleY =
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            const clientOffset = monitor.getClientOffset()
+             const clientOffset: any | null  = monitor.getClientOffset()
             const hoverClientY = clientOffset.y - hoverBoundingRect.top
+
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return
             }
@@ -76,8 +83,6 @@ const Ingridients = ({ data, index }) => {
     )
 }
 
-Ingridients.propTypes = {
-    data: ingredientPropType
-}
+
 
 export default Ingridients
