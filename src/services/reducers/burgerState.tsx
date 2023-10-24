@@ -1,11 +1,10 @@
-
 import { IIngregient } from "../../types/types";
 import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
     ADD_INGRID, ADD_INGRIDS, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
     POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS,
-    TBurgerStateActions
-} from "../actions/burgerState";
+} from "../constants/index";
+import { TBurgerStateActions } from "../actions/burgerState";
 
 type TBurgerState = {
     ingrid: ReadonlyArray<IIngregient> | [],
@@ -27,7 +26,7 @@ const initialState: TBurgerState = {
 
 
 
-export const burgerReducer = (state = initialState, action: TBurgerStateActions):TBurgerState => {
+export const burgerReducer = (state = initialState, action: TBurgerStateActions): TBurgerState => {
     switch (action.type) {
 
         case GET_INGRID_REQUEST: {
@@ -99,7 +98,7 @@ export const burgerReducer = (state = initialState, action: TBurgerStateActions)
                 selectedItems: [...action.payload]
             }
         }
-       
+
         default: {
             return state;
         }

@@ -1,6 +1,16 @@
-import { INCREMENT,DECREMENT,RESET } from "../actions/price";
+import { IIngregient } from "../../types/types";
+import { TPriceStateActions } from "../actions/price";
+import { INCREMENT, DECREMENT, RESET} from "../constants/index"
 
-const priceInitialState = {
+type TPriceState = {
+    selectedItems: ReadonlyArray<IIngregient> | [],
+    selectedItemBuns: object,
+    totalPrice: number,
+    price: number,
+    priceBuns: number,
+}
+
+const priceInitialState: TPriceState = {
     selectedItems: [],
     selectedItemBuns: [],
     totalPrice: 0,
@@ -8,9 +18,9 @@ const priceInitialState = {
     priceBuns: 0,
 };
 
-export const totalPriceReducer = (state = priceInitialState, action) => {
+export const totalPriceReducer = (state = priceInitialState, action:TPriceStateActions): TPriceState => {
     switch (action.type) {
-        case INCREMENT:{
+        case INCREMENT: {
             if (action.payload.type === "bun") {
                 return {
                     ...state,
@@ -25,7 +35,8 @@ export const totalPriceReducer = (state = priceInitialState, action) => {
                     price: state.price + action.payload.price,
                     totalPrice: state.price + state.priceBuns + action.payload.price,
                 };
-            }}
+            }
+        }
         case DECREMENT: {
             return {
                 ...state,
@@ -33,8 +44,8 @@ export const totalPriceReducer = (state = priceInitialState, action) => {
                 totalPrice: state.totalPrice - action.payload.price
             }
         }
-        case RESET:{
-            return{
+        case RESET: {
+            return {
                 selectedItems: [],
                 selectedItemBuns: [],
                 totalPrice: 0,

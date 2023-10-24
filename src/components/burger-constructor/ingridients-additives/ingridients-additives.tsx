@@ -1,10 +1,9 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyles from '../burger-constructor.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { DELETE_INGRIDIENT, CHANGE_CARTS } from '../../../services/actions/burgerState';
+import { DELETE_INGRIDIENT, CHANGE_CARTS, DECREMENT } from '../../../services/constants';
 import { FC, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { DECREMENT } from '../../../services/actions/price';
 import { IIngregient } from '../../../types/types';
 import { any } from 'prop-types';
 
@@ -15,9 +14,8 @@ interface IIngredientElement {
 
 const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
     const id = data._id;
-    const { selectedItems } = useSelector((state:any) => state.burger);
+    const { selectedItems } = useSelector((state: any) => state.burger);
     const dispatch = useDispatch();
-
     const moveCart = (dragIndex: any, hoverIndex: any) => {
         const dragCard = selectedItems[dragIndex];
         const newCarts = [...selectedItems];
@@ -42,7 +40,7 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             const hoverMiddleY =
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-             const clientOffset: any | null  = monitor.getClientOffset()
+            const clientOffset: any | null = monitor.getClientOffset()
             const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {

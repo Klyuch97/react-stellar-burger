@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
-import { INCREMENT, RESET } from '../../services/actions/price';
+import { INCREMENT, RESET } from '../../services/constants/index';
 import { useModal } from '../../hooks/modal';
 import { useNavigate } from 'react-router-dom';
 
