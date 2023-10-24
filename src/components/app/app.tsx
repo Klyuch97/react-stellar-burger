@@ -32,7 +32,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngrid());
-    dispatch(checkUserAuth());
+   // dispatch(checkUserAuth());
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки

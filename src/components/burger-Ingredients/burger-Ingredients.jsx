@@ -10,7 +10,8 @@ import { CURRENT_INGRID } from '../../services/actions/burgerState';
 
 
 const BurgerIngredients = () => {
-    const { ingrid, isLoading, hasError, } = useSelector(state => state.burger);
+    const { ingrid, isLoading, hasError } = useSelector(state => state.burger);
+
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
 
@@ -53,10 +54,9 @@ const BurgerIngredients = () => {
                 break;
         }
     };
-    const handleItemClick = (item) => {
+    const handleItemClick = () => {
         openModal()
-        dispatch({ type: CURRENT_INGRID, payload: item })
-
+        // dispatch({ type: CURRENT_INGRID, payload: item })
     }
 
 

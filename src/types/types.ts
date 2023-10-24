@@ -11,5 +11,6 @@ export interface IIngregient {
     type: string,
     __v: number,
     _id: string,
+    key?:string,
 }
 

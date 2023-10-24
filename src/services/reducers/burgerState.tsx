@@ -1,23 +1,33 @@
 
+import { IIngregient } from "../../types/types";
 import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
-    ADD_INGRID, ADD_INGRIDS,CURRENT_INGRID,
-    POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
-    POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS
+    ADD_INGRID, ADD_INGRIDS, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
+    POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS,
+    TBurgerStateActions
 } from "../actions/burgerState";
 
+type TBurgerState = {
+    ingrid: ReadonlyArray<IIngregient> | [],
+    selectedItems: ReadonlyArray<IIngregient> | [],
+    selectedItemBuns: object,
+    isLoading: boolean,
+    hasError: boolean,
+    orderNumber: number | null,
+}
 
-const initialState = {
+const initialState: TBurgerState = {
     ingrid: [],
     selectedItems: [],
     selectedItemBuns: {},
     isLoading: false,
     hasError: false,
     orderNumber: null,
-    currentIngrid:{}
 };
 
-export const burgerReducer = (state = initialState, action) => {
+
+
+export const burgerReducer = (state = initialState, action: TBurgerStateActions):TBurgerState => {
     switch (action.type) {
 
         case GET_INGRID_REQUEST: {
@@ -27,11 +37,12 @@ export const burgerReducer = (state = initialState, action) => {
             };
         }
         case GET_INGRID_SUCCESS: {
+
             return {
                 ...state,
                 isLoading: false,
                 hasError: false,
-                ingrid: action.ingrid.data
+                ingrid: action.ingrid
             };
         }
         case GET_INGRID_FAILED: {
@@ -72,9 +83,9 @@ export const burgerReducer = (state = initialState, action) => {
                 isLoading: false,
                 hasError: false,
                 orderNumber: action.orderNumber,
-                selectedItems:[],
-                selectedItemBuns:{}
-};
+                selectedItems: [],
+                selectedItemBuns: {}
+            };
         }
         case DELETE_INGRIDIENT: {
             return {
@@ -88,12 +99,7 @@ export const burgerReducer = (state = initialState, action) => {
                 selectedItems: [...action.payload]
             }
         }
-        case CURRENT_INGRID:{
-            return {
-                ...state,
-                currentIngrid: action.payload
-            }
-        }
+       
         default: {
             return state;
         }

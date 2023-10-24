@@ -40,7 +40,7 @@ const Ingredients = ({ data, handleItemClick }) => {
                 // на котором была открыта наша модалка
                 state={{ background: location }}>
                 <div className={`${BurgerIngredientsStyles.content}`}
-                    onClick={() => { handleItemClick(data) }}
+                    onClick={() => { handleItemClick() }}
                     style={{ opacity }}
                     ref={ref} >
                     {count[data._id] && <Counter count={count[data._id]} size="default" extraClass="m-1" />}
