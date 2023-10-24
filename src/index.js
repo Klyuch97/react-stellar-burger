@@ -13,15 +13,15 @@ import { wsActions, wsUrl } from "./utils/constants";
 
 
 
-const composeEnhancers =
+export const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk,
+export const enhancer = composeEnhancers(applyMiddleware(thunk,
   socketMiddleware(wsUrl, wsActions)));
 
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

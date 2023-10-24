@@ -1,3 +1,4 @@
+import { AppDispatch, AppThunk } from "../../types";
 import { IUser } from "../../types/types";
 import { fetchWithRefresh, request } from "../../utils/api";
 import { FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER__FAILED, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_AUTH_CHECKED, SET_USER, UPDATE_USER_INFO_FAILED, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS } from "../constants";
@@ -128,8 +129,8 @@ export const getUser: any = () => {
     };
 };
 
-export const checkUserAuth: any = () => {
-    return (dispatch: any) => {
+export const checkUserAuth: AppThunk = () => {
+    return (dispatch: AppDispatch) => {
         if (localStorage.getItem("accessToken")) {
             dispatch(getUser())
                 .catch(() => {

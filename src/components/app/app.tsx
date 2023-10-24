@@ -11,7 +11,6 @@ import { Profile } from "../../pages/profile/profile";
 import { Ingredient } from "../../pages/ingredient/ingredient";
 import Modal from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { useDispatch } from 'react-redux';
 import { getIngrid } from "../../services/actions/burgerState";
 import { checkUserAuth } from "../../services/actions/autnUser";
 import { OnlyUnAuth, OnlyAuth } from "../../utils/protected-route";
@@ -23,6 +22,9 @@ import { FeedOrderInfo } from "../../pages/feed-order-info/feed-order-info";
 import { ProfileOrders } from "../profile-orders/profile-orders";
 import { OrderUserInfoPopup } from "../order-user-info-popup/order-user-info-popup";
 import { ProfileOrderInfo } from "../../pages/profile-order-info/profile-order-info";
+import { useDispatch } from "../../services/hooks";
+
+
 
 
 function App() {

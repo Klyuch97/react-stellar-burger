@@ -6,6 +6,7 @@ import {
   ADD_INGRID, ADD_INGRIDS, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
   POST_ORDER_NUMBER_SUCCESS, DELETE_INGRIDIENT, CHANGE_CARTS
 } from '../constants';
+import { AppDispatch, AppThunk } from '../../types';
 
 
 // export const GET_INGRID_REQUEST: 'GET_INGRID_REQUEST' = 'GET_INGRID_REQUEST';
@@ -80,10 +81,9 @@ export const getIngridSuccessAction = (ingrid: ReadonlyArray<IIngregient>): IGet
 
 
 
-export const getIngrid: any = () => {
-  return async (dispatch: any) => {
+export const getIngrid: AppThunk = () => {
+  return async (dispatch: AppDispatch) => {
     dispatch(getIngridAction());
-
     try {
       const response = await request("ingredients");
       dispatch(getIngridSuccessAction(response.data));
@@ -94,8 +94,8 @@ export const getIngrid: any = () => {
   };
 };
 
-export const postOrderSubmit: any = (ingredient: Array<string>) => {
-  return async (dispatch: any) => {
+export const postOrderSubmit: AppThunk = (ingredient: Array<string>) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(getPostOrderAction())
     try {
       const response = await request("orders", {
