@@ -14,3 +14,8 @@ export interface IIngregient {
     key?:string,
 }
 
+
+export interface IUser {
+    email:string, 
+    name: string
+}

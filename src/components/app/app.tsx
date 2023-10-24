@@ -30,9 +30,10 @@ function App() {
   const navigate = useNavigate();
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getIngrid());
-   // dispatch(checkUserAuth());
+    dispatch(checkUserAuth());
   }, [dispatch]);
   const handleModalClose = () => {
     // Возвращаемся к предыдущему пути при закрытии модалки

@@ -1,20 +1,29 @@
+import { IUser } from "../../types/types";
+import {TAuthUserActions
+} from "../actions/autnUser";
 import {
     REGISTER_FAILED, REGISTER_SUCCESS, REGISTER_REQUEST, GET_USER_REQUEST,
     GET_USER_SUCCESS, GET_USER__FAILED, SET_AUTH_CHECKED, SET_USER,
     LOGOUT_SUCCESS, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS,
     UPDATE_USER_INFO_FAILED , UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS,
     FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS,
-    RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED
-} from "../actions/autnUser";
+    RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from "../constants/index"
 
-const initialState = {
+type TAuthUserState = {
+    user: null | IUser,
+    loading: boolean,
+    error: boolean,
+    isAuthChecked: boolean,
+}
+
+const initialState:TAuthUserState = {
     user: null,
     loading: false,
     error: false,
     isAuthChecked: false,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action:TAuthUserActions):TAuthUserState => {
     switch (action.type) {
         case REGISTER_REQUEST:
             return {
@@ -24,7 +33,7 @@ export const userReducer = (state = initialState, action) => {
         case REGISTER_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+               user: action.user,
                 loading: false,
                 error: false,
             };
@@ -42,7 +51,7 @@ export const userReducer = (state = initialState, action) => {
         case GET_USER_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+                user: action.user,
                 loading: false,
                 error: false,
             };
@@ -75,7 +84,7 @@ export const userReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+                user: action.user,
                 loading: false,
                 error: false,
             };
@@ -93,7 +102,7 @@ export const userReducer = (state = initialState, action) => {
         case UPDATE_USER_INFO_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
+                user: action.user,
                 loading: false,
                 error: false,
             };
@@ -113,7 +122,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: false,
-                user: action.payload,
+                user: action.user,
             };
         case FORGOT_PASSWORD_FAILED:
             return {
