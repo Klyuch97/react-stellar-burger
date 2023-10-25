@@ -2,9 +2,8 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import BurgerConstructorStyles from '../burger-constructor.module.css';
 import { DELETE_INGRIDIENT, CHANGE_CARTS, DECREMENT } from '../../../services/constants';
 import { FC, useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import { XYCoord, useDrag, useDrop } from 'react-dnd';
 import { IIngregient } from '../../../types/types';
-import { any } from 'prop-types';
 import { useDispatch, useSelector } from '../../../services/hooks';
 
 interface IIngredientElement {
@@ -28,11 +27,11 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
 
     const [, drop] = useDrop({
         accept: "ingrid",
-        hover: (item:IIngregient, monitor) => {
+        hover: (item:any, monitor) => {
             if (!ref.current) {
                 return
             }
-            const dragIndex = index;
+            const dragIndex = item.index;
             const hoverIndex = index;
             if (dragIndex === hoverIndex) {
                 return
@@ -40,9 +39,8 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             const hoverMiddleY =
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            const clientOffset: any | null = monitor.getClientOffset()
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top
-
+            const clientOffset: XYCoord | null = monitor.getClientOffset()
+            const hoverClientY = clientOffset!.y - hoverBoundingRect.top
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return
             }
@@ -50,7 +48,7 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
                 return
             }
             moveCart(dragIndex, hoverIndex)
-            index = hoverIndex
+            item.index = hoverIndex
         }
     })
 
