@@ -1,9 +1,12 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { FC } from 'react';
 import TabStyles from '../tabs/tabs.module.css';
+interface ITab {
+    current: string,
+    handleTabClick: (currentTab: string) => void
+}
 
-const Tabs = ({ current, handleTabClick }) => {
-
+const Tabs: FC<ITab> = ({ current, handleTabClick }) => {
     return (
         <div className={`${TabStyles.page} mb-10`}>
             <Tab value="one" active={current === 'one'}

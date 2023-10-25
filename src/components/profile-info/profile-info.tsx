@@ -1,11 +1,11 @@
 import styles from "./profile-info.module.css";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FC, ReactHTMLElement, useEffect } from "react";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useUser } from "../../hooks/user";
 import { updateUserInfo } from "../../services/actions/autnUser";
+import { useDispatch, useSelector } from "../../services/hooks";
 
-export const ProfileInfo = () => {
+export const ProfileInfo: FC = () => {
     const userData = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
     const inputRef = React.useRef(null)
@@ -18,13 +18,13 @@ export const ProfileInfo = () => {
         return name === userData.name && mail === userData.email && password === "" ? true : false;
     }
 
-    const cancelChanges = () => {
+    const cancelChanges = (): void => {
         setName(userData.name);
         setMail(userData.email);
         setPassword("")
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
 
         const userData = {
