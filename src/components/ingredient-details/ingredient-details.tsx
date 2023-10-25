@@ -14,8 +14,8 @@ export const IngredientDetails: FC = () => {
     }, [dispatch]);
     const { id } = useParams();
     const ingrids = useSelector((state) => state.burger.ingrid);
-    const data:IIngregient = ingrids.find((elem: IIngregient) => elem._id === id);
-    
+    const data: IIngregient | undefined = ingrids.find((elem: IIngregient) => elem._id === id);
+
     return (
         <>
             {data && <div>

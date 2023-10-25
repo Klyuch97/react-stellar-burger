@@ -13,13 +13,13 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
     const IngredientId = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent: Array<IIngregient> = IngredientId.map((data: string) => {
+    const ingredientsCurrent: any = IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
 
-    const uniqueId: Array<IIngregient> = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+    const uniqueId: any = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
         if (!acc.find((data) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
@@ -38,7 +38,7 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
         );
     }, [ingredientsCurrent]);
 
-    const Status = ():JSX.Element => {
+    const Status = (): JSX.Element => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>
                 : <p className={`text text_type_main-default`}>Готовится</p>

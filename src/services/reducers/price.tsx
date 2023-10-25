@@ -4,7 +4,7 @@ import { INCREMENT, DECREMENT, RESET} from "../constants/index"
 
 type TPriceState = {
     selectedItems: ReadonlyArray<IIngregient> | [],
-    selectedItemBuns: object,
+    selectedItemBuns: { [key: string]: any },
     totalPrice: number,
     price: number,
     priceBuns: number,

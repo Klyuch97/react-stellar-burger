@@ -4,9 +4,11 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { useUser } from "../../hooks/user";
 import { updateUserInfo } from "../../services/actions/autnUser";
 import { useDispatch, useSelector } from "../../services/hooks";
+import { IUser } from "../../types/types";
 
 export const ProfileInfo: FC = () => {
-    const userData = useSelector((state) => state.user.user)
+    const userData: any = useSelector((state) => state.user.user)
+    
     const dispatch = useDispatch();
     const inputRef: React.MutableRefObject<null> = React.useRef(null)
     const { name, mail, password, setName, setMail, setPassword } = useUser();
@@ -14,7 +16,7 @@ export const ProfileInfo: FC = () => {
         setName(userData.name);
         setMail(userData.email)
     }, [setName, setMail]);
-    const CheckData = ():boolean => {
+    const CheckData = (): boolean => {
         return name === userData.name && mail === userData.email && password === "" ? true : false;
     }
 

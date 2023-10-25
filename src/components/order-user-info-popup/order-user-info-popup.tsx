@@ -13,12 +13,12 @@ export const OrderUserInfoPopup: FC = () => {
     const messageSocket = useSelector(state => state.feed.messages.orders);
     const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
     const IngredientId: string[] = data && data.ingredients;
-    const ingredientsCurrent: Array<IIngregient> = IngredientId && IngredientId.map((data: string) => {
+    const ingredientsCurrent:any= IngredientId && IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
-    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+    const uniqueId= ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
         if (!acc.find(data => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
@@ -26,7 +26,7 @@ export const OrderUserInfoPopup: FC = () => {
     }, []
     );
 
-    const totalPrice:number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const totalPrice= ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
 
     const Status = ():JSX.Element => {
         return (

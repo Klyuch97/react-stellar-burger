@@ -123,7 +123,7 @@ export const getUser: AppThunk = () => {
 };
 
 export const checkUserAuth: AppThunk = () => {
-    return (dispatch: AppDispatch) => {
+    return (dispatch: any) => {
         if (localStorage.getItem("accessToken")) {
             dispatch(getUser())
                 .catch(() => {

@@ -9,7 +9,7 @@ import { TBurgerStateActions } from "../actions/burgerState";
 type TBurgerState = {
     ingrid: ReadonlyArray<IIngregient> | [],
     selectedItems: ReadonlyArray<IIngregient> | [],
-    selectedItemBuns: object,
+    selectedItemBuns: { [key: string]: any },
     isLoading: boolean,
     hasError: boolean,
     orderNumber: number | null,

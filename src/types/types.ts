@@ -18,9 +18,9 @@ export interface IIngregient {
 
 
 export interface IUser {
-    email?: string,
-    name?: string,
-    password?: string
+    email?: string | null,
+    name?: string | null,
+    password?: string | null
 }
 
 export interface IOrderDetails {
@@ -33,7 +33,7 @@ export interface IOrderDetails {
     _id: string,
 }
 
-export interface IIngredientsItem{
+export interface IIngredientsItem {
     data: IIngregient,
-    ingredientsCurrent:Array<IIngregient>
+    ingredientsCurrent: Array<IIngregient>
 }

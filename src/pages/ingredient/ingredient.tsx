@@ -7,7 +7,7 @@ import { IIngregient } from "../../types/types";
 export const Ingredient: FC = () => {
     const { id } = useParams();
     const ingrids = useSelector((state) => state.burger.ingrid);
-    const currentElem: IIngregient = ingrids.find((elem: IIngregient) => elem._id === id);
+    const currentElem= ingrids.find((elem: IIngregient) => elem._id === id);
 
     return (
         <>

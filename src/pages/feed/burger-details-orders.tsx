@@ -14,7 +14,7 @@ export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
     const IngredientId: string[] = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent: Array<IIngregient> = IngredientId.map((data: string) => {
+    const ingredientsCurrent: any = IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });

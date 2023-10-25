@@ -3,7 +3,7 @@ import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_SUCCESS, WS_GE
 
 type TWsState = {
     wsConnected: boolean,
-    messages: object
+    messages: { [key: string]: any },
 }
 
 const initialState:TWsState = {

@@ -27,21 +27,21 @@ export const ProfileOrderInfo: FC = () => {
 
     const IngredientId: string[] = data && data.ingredients;
 
-    const ingredientsCurrent: Array<IIngregient> = IngredientId && IngredientId.map((data: string) => {
+    const ingredientsCurrent: any = IngredientId && IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
-    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: any, currentValue: any) => {
         if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []);
 
-    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: any) => sum += item.price, 0);
 
-    const Status = ():JSX.Element => {
+    const Status = (): JSX.Element => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default mb-15 ${s.status}`}>Выполнен</p>
                 : <p className={`text text_type_main-default mb-15`}>Готовится</p>
@@ -55,7 +55,7 @@ export const ProfileOrderInfo: FC = () => {
                 {<Status />}
                 <p className={`text text_type_main-medium mb-6`}>Состав:</p>
                 <div className={`${s.items} custom-scroll mb-10 `}>
-                    {uniqueId.map((data:IIngregient, index:number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                    {uniqueId.map((data: IIngregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
                 </div>
                 <div className={`${s.timePrice}`}>
                     <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>

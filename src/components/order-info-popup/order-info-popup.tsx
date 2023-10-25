@@ -14,13 +14,13 @@ export const OrderInfoPopup: FC = () => {
     const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
 
     const IngredientId: string[] = data && data.ingredients;
-    const ingredientsCurrent: Array<IIngregient> = IngredientId && IngredientId.map((data: string) => {
+    const ingredientsCurrent: any= IngredientId && IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
 
-    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+    const uniqueId: any = ingredientsCurrent && ingredientsCurrent.reduce((acc:any, currentValue:any) => {
         if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
@@ -29,7 +29,7 @@ export const OrderInfoPopup: FC = () => {
     );
 
 
-    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item:any) => sum += item.price, 0);
 
     const Status = ():JSX.Element => {
         return (
