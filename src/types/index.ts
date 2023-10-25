@@ -5,15 +5,15 @@ import { TBurgerStateActions } from "../services/actions/burgerState";
 import { TPriceStateActions } from "../services/actions/price";
 import { ThunkAction } from "redux-thunk";
 import { rootReducer } from "../services/reducers";
+import { TWsActions } from "../services/actions/web-socket";
 
 
 
 type TApplicationActions =
-    | TBurgerStateActions
-    | TAuthUserActions
-    | TPriceStateActions;
-
-
+  | TBurgerStateActions
+  | TAuthUserActions
+  | TPriceStateActions
+  | TWsActions;
 
 
 
