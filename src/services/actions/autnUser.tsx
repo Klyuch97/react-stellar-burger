@@ -244,10 +244,6 @@ export const updateUserInfo = (userData: IUser) => {
                 body: JSON.stringify(userData),
             });
             if (response.success) {
-                // dispatch({
-                //     type: "UPDATE_USER_INFO_SUCCESS",
-                //     payload: response.user,
-                // });
                 dispatch(updateUserInfoSuccessAction(response.user));
                 dispatch(setUser(response.user));
             } else {

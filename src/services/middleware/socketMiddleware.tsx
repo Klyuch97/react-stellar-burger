@@ -1,8 +1,21 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
-  return store => {
-    let socket = null;
+import { Middleware } from "redux";
 
-    return next => action => {
+type WebSocketActions = {
+  wsInit: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onMessage: string;
+  wsInitUserOrder: string;
+};
+
+//не совсем понимаю как здесь затипизировать правильно socketMiddleware
+
+export const socketMiddleware = (wsUrl: string, wsActions: WebSocketActions): Middleware => {
+  return (store) => {
+    let socket: WebSocket | null = null;
+
+    return (next) => (action) => {
       const { dispatch, getState } = store;
       const { user } = getState().user;
       const { type, payload } = action;
