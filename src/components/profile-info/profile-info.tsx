@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "../../services/hooks";
 export const ProfileInfo: FC = () => {
     const userData = useSelector((state) => state.user.user)
     const dispatch = useDispatch();
-    const inputRef = React.useRef(null)
+    const inputRef: React.MutableRefObject<null> = React.useRef(null)
     const { name, mail, password, setName, setMail, setPassword } = useUser();
     useEffect(() => {
         setName(userData.name);
         setMail(userData.email)
     }, [setName, setMail]);
-    const CheckData = () => {
+    const CheckData = ():boolean => {
         return name === userData.name && mail === userData.email && password === "" ? true : false;
     }
 

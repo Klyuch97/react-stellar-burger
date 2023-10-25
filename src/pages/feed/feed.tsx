@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./feed.module.css"
 import { useEffect } from "react";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/actions/web-socket";
 import { BurgerDetailsOrders } from "./burger-details-orders";
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/constants";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { IIngregient, IOrderDetails } from "../../types/types";
 
 
 
@@ -20,18 +21,18 @@ export const Feed = () => {
 
     const messagesOrdersNotFilter = messageSocket.orders;
 
-    const messagesOrders = [];
+    const messagesOrders: Array<IOrderDetails> = [];
 
-    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach(item => {
-        if (item.ingredients.every(ingredient => ingredient !== null)) {
+    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item: IOrderDetails) => {
+        if (item.ingredients.every((ingredient: string) => ingredient !== null)) {
             messagesOrders.push(item);
         }
     });
 
-    const doneStatusOrder = [];
-    const pendingStatusOrder = [];
+    const doneStatusOrder: Array<IOrderDetails> = [];
+    const pendingStatusOrder: Array<IOrderDetails> = [];
 
-    messagesOrders && messagesOrders.map((data, index) => {
+    messagesOrders && messagesOrders.map((data: IOrderDetails) => {
         if (data.status === "done") {
             doneStatusOrder.push(data);
         } else if (data.status === "pending") {
@@ -39,20 +40,19 @@ export const Feed = () => {
         }
     });
 
-
     return (
         <div className={`${styles.content}`}>
             <p className={`${styles.text} mb-5 text text_type_main-large`}>Лента заказов</p>
             <div className={styles.block}>
                 <div className={`${styles.orderFeed} custom-scroll`}>
-                    {messagesOrders && messagesOrders.map((data, index) => <BurgerDetailsOrders data={data} key={data._id} />)}
+                    {messagesOrders && messagesOrders.map((data: IOrderDetails) => <BurgerDetailsOrders data={data} key={data._id} />)}
                 </div>
                 <div className={styles.statusFeed}>
                     <div className={styles.ordersBoard}>
                         <div className={`mr-9`}>
                             <p className={`text text_type_main-medium pb-6`}>Готовы:</p>
                             <div className={styles.table}>
-                                {doneStatusOrder && doneStatusOrder.map((data, index) =>
+                                {doneStatusOrder && doneStatusOrder.map((data: IOrderDetails, index: number) =>
                                     index < 20 && <p key={index} className={`${styles.numberDone} pb-2 text text_type_digits-default `}>{data.number}</p>
                                 )}
                             </div>
@@ -60,7 +60,7 @@ export const Feed = () => {
                         <div>
                             <p className={`text text_type_main-medium pb-6`}>В работе:</p>
                             <div className={styles.table}>
-                                {pendingStatusOrder && pendingStatusOrder.map((data, index) =>
+                                {pendingStatusOrder && pendingStatusOrder.map((data: IOrderDetails, index: number) =>
                                     index < 20 && <p key={index} className={`pb-2 text text_type_digits-default `}>{data.number}</p>
                                 )}
                             </div>

@@ -1,14 +1,17 @@
-import {
-    WS_CONNECTION_SUCCESS, WS_CONNECTION_CLOSED,
-    WS_CONNECTION_ERROR, WS_GET_MESSAGE
-} from "../actions/web-socket";
+import {TWsActions} from "../actions/web-socket";
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE } from "../constants";
 
-const initialState = {
+type TWsState = {
+    wsConnected: boolean,
+    messages: object
+}
+
+const initialState:TWsState = {
     wsConnected: false,
     messages: {}
 };
 
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action:TWsActions):TWsState => {
     switch (action.type) {
         case WS_CONNECTION_SUCCESS:
             return {
@@ -32,8 +35,8 @@ export const wsReducer = (state = initialState, action) => {
         case WS_GET_MESSAGE:
             return {
                 ...state,
-                messages: action.payload,
-            };
+                messages: action.payload
+           };
 
         default:
             return state;

@@ -1,8 +1,5 @@
-import {
-    WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR,
-    WS_CONNECTION_START, WS_CONNECTION_SUCCESS,
-    WS_GET_MESSAGE, WS_INIT_USER_ORDER_START
-} from "../services/actions/web-socket";
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_INIT_USER_ORDER_START } from "../services/constants";
+
 
 
 export const wsUrl = "wss://norma.nomoreparties.space/orders"

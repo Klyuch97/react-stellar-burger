@@ -1,9 +1,4 @@
 import { IIngregient } from "../../types/types";
-
-// export const INCREMENT = "INCREMENT";
-// export const DECREMENT = "DECREMENT";
-// export const RESET = "RESET";
-
 import { DECREMENT, INCREMENT, RESET } from "../constants";
 
 

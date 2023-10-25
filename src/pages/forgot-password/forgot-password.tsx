@@ -1,18 +1,18 @@
-import React from "react";
+import React, { FC, SyntheticEvent } from "react";
 import styles from "../login/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { forgotPassword } from "../../services/actions/autnUser";
-import { useDispatch } from "react-redux";
 import { useUser } from "../../hooks/user";
+import { useDispatch } from "../../services/hooks";
 
 
-export const ForgotPassword = () => {
+export const ForgotPassword:FC = () => {
     const dispatch = useDispatch();
     const { mail, setMail } = useUser();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:SyntheticEvent):void =>{
         e.preventDefault();
         const userData = {
             email: mail,

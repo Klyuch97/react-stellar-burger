@@ -9,21 +9,23 @@ import { useDispatch, useSelector } from '../../../services/hooks';
 
 interface IIngredientElement {
     data: IIngregient,
-    handleItemClick:() => void
+    handleItemClick: () => void
 }
 
-const Ingredients:FC<IIngredientElement> = ({ data, handleItemClick }) => {
+const Ingredients: FC<IIngredientElement> = ({ data, handleItemClick }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const location = useLocation();
     const id = data['_id'];
 
-    const ingredient = [...selectedItems, selectedItemBuns];
-    const count = useMemo(() => {
+    const ingredient:any[] = [...selectedItems, selectedItemBuns];
+
+    const count: { [key: string]: number } = useMemo(() => {
         return ingredient.reduce(
-            (acc, item) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item:IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredient]);
+    
 
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({

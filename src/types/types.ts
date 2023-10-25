@@ -18,8 +18,9 @@ export interface IIngregient {
 
 
 export interface IUser {
-    email: string,
-    name: string
+    email?: string,
+    name?: string,
+    password?: string
 }
 
 export interface IOrderDetails {

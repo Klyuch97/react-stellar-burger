@@ -13,12 +13,13 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
     const IngredientId = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent = IngredientId.map((data: string) => {
+    const ingredientsCurrent: Array<IIngregient> = IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+
+    const uniqueId: Array<IIngregient> = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
         if (!acc.find((data) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
@@ -26,9 +27,9 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
     }, []
     );
 
-    const totalPrice = ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
 
-    const id = data['_id'];
+    const id: string = data['_id'];
 
     const count: { [key: string]: number } = useMemo(() => {
         return ingredientsCurrent.reduce(
@@ -37,7 +38,7 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
         );
     }, [ingredientsCurrent]);
 
-    const Status = () => {
+    const Status = ():JSX.Element => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>
                 : <p className={`text text_type_main-default`}>Готовится</p>
@@ -62,7 +63,7 @@ export const ProfileOrderUser: FC<IProfileOrder> = ({ data }) => {
                     {<Status />}
                     <div className={`${s.imgAndPrice} pb-6 pt-6`}>
                         <div className={s.containerImage}>
-                            {uniqueId.map((data:IIngregient, index: number) =>
+                            {uniqueId.map((data: IIngregient, index: number) =>
                                 index < 7 && <div className={s.frame} key={index}
                                     style={{ zIndex: 10 - index }}>
                                     <img src={data.image_mobile} className={s.image}

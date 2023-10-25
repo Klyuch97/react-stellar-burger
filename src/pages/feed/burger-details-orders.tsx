@@ -1,36 +1,44 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed.module.css"
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import BurgerIngredientsStyles from "../../components/burger-Ingredients/burger-Ingredients.module.css"
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
+import { IIngregient, IOrderDetails } from "../../types/types";
+import { useSelector } from "../../services/hooks";
 
+interface IBurgerDetailsOrders {
+    data: IOrderDetails
+}
 
-export const BurgerDetailsOrders = ({ data }) => {
+export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
-    const IngredientId = data.ingredients;
+    const IngredientId: string[] = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent = IngredientId.map((data) => {
-        const item = ingrid.find(item => item._id === data);
+    const ingredientsCurrent: Array<IIngregient> = IngredientId.map((data: string) => {
+        const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
-    const totalPrice = ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
-    const id = data['_id'];
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
-        if (!acc.find(data => data._id === currentValue._id)) {
+    const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const id: string = data['_id'];
+
+    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+        if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []
     );
 
-    const count = useMemo(() => {
+    const count: { [key: string]: number } = useMemo(() => {
         return ingredientsCurrent.reduce(
-            (acc, item) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item: IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredientsCurrent]);
+
+
+
     return (
 
         <Link
@@ -49,12 +57,12 @@ export const BurgerDetailsOrders = ({ data }) => {
                 <p className={`${styles.burgerName} text text_type_main-medium pb-6`}>{data.name}</p>
                 <div className={`${styles.imgAndPrice} pb-6`}>
                     <div className={styles.containerImage}>
-                        {uniqueId.map((data, index) =>
+                        {uniqueId.map((data: IIngregient, index: number) =>
                             index < 7 && <div className={styles.frame} key={index}
                                 style={{ zIndex: 10 - index }}>
                                 <img src={data.image_mobile} className={styles.image}
-                                 style={count[data._id] > 1 ? { opacity: "60%" } : {}} />
-                                 {count[data._id] > 1 && <span className={`${styles.count} text text_type_main-medium`}>+{count[data._id]}</span>}
+                                    style={count[data._id] > 1 ? { opacity: "60%" } : {}} />
+                                {count[data._id] > 1 && <span className={`${styles.count} text text_type_main-medium`}>+{count[data._id]}</span>}
                             </div>)}
                     </div>
                     <div className={styles.price}>

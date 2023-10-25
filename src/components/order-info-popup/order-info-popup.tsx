@@ -11,14 +11,16 @@ export const OrderInfoPopup: FC = () => {
     const { ingrid } = useSelector(store => store.burger);
     const { id } = useParams();
     const messageSocket = useSelector(state => state.feed.messages.orders);
-    const data = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
-    const IngredientId = data && data.ingredients;
-    const ingredientsCurrent = IngredientId && IngredientId.map((data: string) => {
+    const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
+
+    const IngredientId: string[] = data && data.ingredients;
+    const ingredientsCurrent: Array<IIngregient> = IngredientId && IngredientId.map((data: string) => {
         const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+
+    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
         if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
@@ -26,9 +28,10 @@ export const OrderInfoPopup: FC = () => {
     }, []
     );
 
-    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
 
-    const Status = () => {
+    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+
+    const Status = ():JSX.Element => {
         return (
             data.status === "done" ? <p className={`text text_type_main-default ${s.statusDone}`}>Выполнен</p>
                 : <p className={`text text_type_main-default  ${s.statusPending}`}>Готовится</p>

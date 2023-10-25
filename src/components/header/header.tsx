@@ -6,8 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 const Header = () => {
     const location = useLocation();
-    const isActive = location.pathname === "/profile" || location.pathname === "/profile/orders";
-    const isActiveLenta = location.pathname === "/feed";
+    const isActive:boolean = location.pathname === "/profile" || location.pathname === "/profile/orders";
+    const isActiveLenta:boolean = location.pathname === "/feed";
+    
     return (
         <header className={headerStyles.header}>
             <div className={`${headerStyles.content} mt-4 mb-4`}>

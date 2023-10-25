@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, FC } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
@@ -9,15 +9,15 @@ import { IIngregient } from '../../types/types';
 
 
 
-const BurgerIngredients = () => {
+const BurgerIngredients:FC = () => {
     const { ingrid, isLoading, hasError } = useSelector(state => state.burger);
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
 
     const [buns, sauces, mains] = useMemo(() => {
-        const filteredBuns = ingrid.filter((item: IIngregient) => item.type === 'bun');
-        const filteredSauces = ingrid.filter((item: IIngregient) => item.type === 'sauce');
-        const filteredMains = ingrid.filter((item: IIngregient) => item.type === 'main');
+        const filteredBuns:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'bun');
+        const filteredSauces:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'sauce');
+        const filteredMains:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'main');
 
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);

@@ -1,16 +1,16 @@
 import styles from "./login.module.css";
-import React from "react";
+import React, { ChangeEvent, FC, SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { LogIn } from "../../services/actions/autnUser";
 import { useUser } from "../../hooks/user";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 
-export const Login = () => {
+export const Login:FC = () => {
     const { mail, password, setMail, setPassword } = useUser();
     const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:SyntheticEvent<Element, Event>):void => {
         e.preventDefault();
         const userData = {
             email: mail,
@@ -26,14 +26,14 @@ export const Login = () => {
             <div className={`${styles.data} mb-20`}>
                 <h1 className={`${styles.title} mb-6 text text_type_main-medium`}>Вход</h1>
                 <EmailInput
-                    onChange={e => setMail(e.target.value)}
+                    onChange={(e:ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                     value={mail}
                     name={'email'}
                     isIcon={false}
                     extraClass="mb-6"
                 />
                 <PasswordInput
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     value={password}
                     name={'password'}
                     extraClass="mb-6"

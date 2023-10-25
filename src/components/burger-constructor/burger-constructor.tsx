@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { IIngregient } from '../../types/types';
 
-const BurgerConstructor:FC = () => {
+const BurgerConstructor: FC = () => {
     const navigate = useNavigate()
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const { totalPrice } = useSelector(state => state.price);
@@ -25,7 +25,7 @@ const BurgerConstructor:FC = () => {
         collect: monitor => ({
             isHover: monitor.canDrop()
         }),
-        drop: (item:IIngregient) => {
+        drop: (item: IIngregient) => {
             dispatch(addItem(item));
             dispatch({ type: INCREMENT, payload: item });
 
@@ -37,31 +37,31 @@ const BurgerConstructor:FC = () => {
         collect: monitor => ({
             isHoverItems: monitor.canDrop()
         }),
-        drop: (item:IIngregient) => {
+        drop: (item: IIngregient) => {
             dispatch(addItems(item));
             dispatch({ type: INCREMENT, payload: item });
         }
     })
 
-    const handleOrderSubmit = async () => {
+    const handleOrderSubmit = async (): Promise<void> => {
         if (user === null) {
             return (navigate('/login'))
         }
         else {
-            const ingredientId = selectedItems.map((item:IIngregient) => item._id);
-            const ingredientBunsId = selectedItemBuns._id;
-            const ingredient = [...ingredientId, ingredientBunsId, ingredientBunsId];
+            const ingredientId: Array<string> = selectedItems.map((item: IIngregient) => item._id);
+            const ingredientBunsId: string = selectedItemBuns._id;
+            const ingredient:Array<string> = [...ingredientId, ingredientBunsId, ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
             dispatch({ type: RESET })
             openModal()
         }
 
     }
-    const closeModals = () => {
+    const closeModals = ():void => {
         closeModal()
     }
 
-    const DefaultBun = () => {
+    const DefaultBun = ():JSX.Element => {
         return (
             <div className={`${BurgerConstructorStyles.defaultBun}`}>
                 <p className="text text_type_main-medium">Перенесите булку сюда!</p>
@@ -69,7 +69,7 @@ const BurgerConstructor:FC = () => {
         )
     }
 
-    const DefaultItems = () => {
+    const DefaultItems = ():JSX.Element => {
         return (
             <div className={BurgerConstructorStyles.defaultItems}>
                 <p className="text text_type_main-medium">Добавьте ингредиенты!</p>
@@ -93,7 +93,7 @@ const BurgerConstructor:FC = () => {
                 <ul className={`${BurgerConstructorStyles.containerScroll} 
                 ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
                     ref={dropTargets}>
-                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid:IIngregient, index:number) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
+                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid: IIngregient, index: number) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
                 <div className={`pl-8 mb-4 ${BurgerConstructorStyles.ingridientsBun}`}

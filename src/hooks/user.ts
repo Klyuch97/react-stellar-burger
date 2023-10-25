@@ -9,7 +9,7 @@ export const useUser = () => {
     const [codeMail, setCodeMail] = useState<string>('')
 
     return {
-        name, mail, password, setName,
-        newPassword, codeMail, setMail, setPassword, setNewPassword, setCodeMail
+        name, mail, password, setName, newPassword, codeMail,
+        setMail, setPassword, setNewPassword, setCodeMail
     }
 }

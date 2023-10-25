@@ -44,8 +44,6 @@ export const registerSuccessAction = (user: IUser): IRegisterSuccess => ({
 });
 
 
-
-
 export interface IGetUserRequest {
     readonly type: typeof GET_USER_REQUEST;
 }
@@ -54,7 +52,7 @@ export interface IGetUserFailed {
 }
 export interface IGetUserSuccess {
     readonly type: typeof GET_USER_SUCCESS;
-    readonly user: any
+    readonly user: IUser
 }
 
 export const getUserRequestAction = (): IGetUserRequest => ({
@@ -81,7 +79,7 @@ export const setUser = (user: IUser | null): ISetUser => ({
 });
 
 export const registerUser = (userData: IUser) => {
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(registerRequestAction())
         try {
             const response = await request("auth/register", {
@@ -94,10 +92,6 @@ export const registerUser = (userData: IUser) => {
             if (response.success) {
                 localStorage.setItem("refreshToken", response.refreshToken);
                 localStorage.setItem("accessToken", response.accessToken);
-                // dispatch({
-                //     type: "REGISTER_SUCCESS",
-                //     payload: response.user,
-                // });
                 dispatch(registerSuccessAction(response.user));
             } else {
                 dispatch(registerFailedAction());
@@ -108,8 +102,8 @@ export const registerUser = (userData: IUser) => {
     };
 };
 
-export const getUser: any = () => {
-    return async (dispatch: any) => {
+export const getUser: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
         dispatch(getUserRequestAction());
         try {
             const response = await fetchWithRefresh("auth/user", {
@@ -119,7 +113,6 @@ export const getUser: any = () => {
                     authorization: localStorage.getItem('accessToken')
                 }
             });
-            //dispatch({ type: GET_USER_SUCCESS, user: response.user });
             dispatch(getUserSuccessAction(response.user));
             dispatch(setUser(response.user));
         } catch (error) {
@@ -145,8 +138,8 @@ export const checkUserAuth: AppThunk = () => {
     };
 };
 
-export const logOut: any = () => {
-    return async (dispatch: any) => {
+export const logOut: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
         dispatch(loginRequestAction());
         try {
             const response = await request("auth/logout", {
@@ -192,7 +185,7 @@ export const loginSuccessAction = (user: IUser): IGetUserSuccess => ({
 });
 
 export const LogIn = (userData: IUser) => {
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(loginRequestAction());
         try {
             const response = await fetchWithRefresh("auth/login", {
@@ -205,10 +198,6 @@ export const LogIn = (userData: IUser) => {
             if (response.success) {
                 localStorage.setItem("refreshToken", response.refreshToken);
                 localStorage.setItem("accessToken", response.accessToken);
-                // dispatch({
-                //     type: "LOGIN_SUCCESS",
-                //     payload: response.user,
-                // });
                 dispatch(loginSuccessAction(response.user));
             } else {
                 dispatch(loginFailedAction());
@@ -243,7 +232,7 @@ export const updateUserInfoSuccessAction = (user: IUser): IUpdateUserInfoSuccess
 
 
 export const updateUserInfo = (userData: IUser) => {
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(updateUserInfoRequestAction())
         try {
             const response = await fetchWithRefresh("auth/user", {
@@ -295,7 +284,7 @@ export const forgotPasswordSuccessAction = (user: IUser): IForgotPasswordSuccess
 
 
 export const forgotPassword = (userData: IUser, pageResetPassword: () => void) => {
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(forgotPasswordRequestAction())
         try {
             const response = await request("password-reset", {
@@ -306,10 +295,6 @@ export const forgotPassword = (userData: IUser, pageResetPassword: () => void) =
                 body: JSON.stringify(userData),
             });
             if (response.success) {
-                // dispatch({
-                //     type: "FORGOT_PASSWORD_SUCCESS",
-                //     payload: response.user,
-                // });
                 dispatch(forgotPasswordSuccessAction(response.user));
                 dispatch(setUser(response.user));
                 localStorage.setItem('resetPasswordFlag', 'true');
@@ -345,8 +330,8 @@ export const resetPasswordSuccessAction = (): IResetPasswordSuccess => ({
     type: RESET_PASSWORD_SUCCESS
 });
 
-export const resetPassword = (newPassword: number, code: string, pageLogin: () => void) => {
-    return async (dispatch: any) => {
+export const resetPassword = (newPassword: string, code: string, pageLogin: () => void) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(resetPasswordRequestAction());
         try {
             const response = await request("password-reset/reset", {
@@ -357,9 +342,6 @@ export const resetPassword = (newPassword: number, code: string, pageLogin: () =
                 body: JSON.stringify({ password: newPassword, token: code })
             });
             if (response.success) {
-                // dispatch({
-                //     type: "RESET_PASSWORD_SUCCESS",
-                // });
                 dispatch(resetPasswordSuccessAction());
                 pageLogin();
                 localStorage.removeItem('resetPasswordFlag');

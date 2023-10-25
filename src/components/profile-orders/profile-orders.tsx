@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
-import { WS_CONNECTION_CLOSED, WS_INIT_USER_ORDER_START } from "../../services/actions/web-socket";
 import s from "./profile-orders.module.css"
 import { ProfileOrderUser } from "./profile-order";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { IOrderDetails } from "../../types/types";
+import { WS_CONNECTION_CLOSED, WS_INIT_USER_ORDER_START } from "../../services/constants";
 
 export const ProfileOrders:FC = () => {
     const dispatch = useDispatch()
@@ -15,8 +15,9 @@ export const ProfileOrders:FC = () => {
     }, [dispatch]);
 
     const messageSocket = useSelector(state => state.feed.messages);
-    const messagesOrdersNotFilter = messageSocket.orders;
+    const messagesOrdersNotFilter:Array<IOrderDetails> = messageSocket.orders;
     const messagesOrders:Array<IOrderDetails> = [];
+    
     
     messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item:IOrderDetails) => {
         if (item.ingredients.every((ingredient:string) => ingredient !== null)) {

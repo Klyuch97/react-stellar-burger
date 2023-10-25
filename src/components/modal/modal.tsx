@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalStyles from './modal.module.css'
 import ModalOverLay from '../modal-overlay/modal-overlay';
-import PropTypes from 'prop-types';
 
 interface IModal {
     onClose: () => void,
@@ -13,7 +12,7 @@ interface IModal {
 const Modal: FC<IModal> = ({ children, onClose, }) => {
 
     React.useEffect(() => {
-        const closeEsc = (evt: any) => {
+        const closeEsc = (evt: { key: string; }) => {
             if (evt.key === "Escape") {
                 onClose();
             }
@@ -41,10 +40,6 @@ const Modal: FC<IModal> = ({ children, onClose, }) => {
     )
 }
 
-// Modal.propTypes = {
-//     onClose: PropTypes.func.isRequired,
-//     children: PropTypes.element
-// }
 
 export default Modal;
 
