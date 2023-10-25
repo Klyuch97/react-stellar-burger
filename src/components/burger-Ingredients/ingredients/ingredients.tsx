@@ -1,14 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from '../../../utils/prop-types';
-import { useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
-import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { IIngregient } from '../../../types/types';
+import { useDispatch, useSelector } from '../../../services/hooks';
 
+interface IIngredientElement {
+    data: IIngregient,
+    handleItemClick:() => void
+}
 
-const Ingredients = ({ data, handleItemClick }) => {
+const Ingredients:FC<IIngredientElement> = ({ data, handleItemClick }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const location = useLocation();
     const id = data['_id'];
@@ -56,8 +60,6 @@ const Ingredients = ({ data, handleItemClick }) => {
     )
 }
 
-Ingredients.propTypes = {
-    data: ingredientPropType
-}
+
 
 export default Ingredients;

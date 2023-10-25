@@ -1,11 +1,11 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorStyles from '../burger-constructor.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { DELETE_INGRIDIENT, CHANGE_CARTS, DECREMENT } from '../../../services/constants';
 import { FC, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { IIngregient } from '../../../types/types';
 import { any } from 'prop-types';
+import { useDispatch, useSelector } from '../../../services/hooks';
 
 interface IIngredientElement {
     data: IIngregient,
@@ -14,9 +14,9 @@ interface IIngredientElement {
 
 const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
     const id = data._id;
-    const { selectedItems } = useSelector((state: any) => state.burger);
+    const { selectedItems } = useSelector((state) => state.burger);
     const dispatch = useDispatch();
-    const moveCart = (dragIndex: any, hoverIndex: any) => {
+    const moveCart = (dragIndex:number, hoverIndex:number) => {
         const dragCard = selectedItems[dragIndex];
         const newCarts = [...selectedItems];
         newCarts.splice(dragIndex, 1);
@@ -28,11 +28,11 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
 
     const [, drop] = useDrop({
         accept: "ingrid",
-        hover: (item: any, monitor) => {
+        hover: (item:IIngregient, monitor) => {
             if (!ref.current) {
                 return
             }
-            const dragIndex = item.index;
+            const dragIndex = index;
             const hoverIndex = index;
             if (dragIndex === hoverIndex) {
                 return
@@ -50,7 +50,7 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
                 return
             }
             moveCart(dragIndex, hoverIndex)
-            item.index = hoverIndex
+            index = hoverIndex
         }
     })
 

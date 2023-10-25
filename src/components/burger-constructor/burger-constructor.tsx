@@ -1,18 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import BurgerConstructorStyles from '../burger-constructor/burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingridients from './ingridients-additives/ingridients-additives';
 import Modal from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { useDispatch, useSelector } from 'react-redux';
 import { postOrderSubmit } from '../../services/actions/burgerState';
 import { useDrop } from 'react-dnd';
 import { addItem, addItems } from '../../services/actions/burgerState';
 import { INCREMENT, RESET } from '../../services/constants/index';
 import { useModal } from '../../hooks/modal';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/hooks';
+import { IIngregient } from '../../types/types';
 
-const BurgerConstructor = () => {
+const BurgerConstructor:FC = () => {
     const navigate = useNavigate()
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const { totalPrice } = useSelector(state => state.price);
@@ -24,7 +25,7 @@ const BurgerConstructor = () => {
         collect: monitor => ({
             isHover: monitor.canDrop()
         }),
-        drop: (item) => {
+        drop: (item:IIngregient) => {
             dispatch(addItem(item));
             dispatch({ type: INCREMENT, payload: item });
 
@@ -36,7 +37,7 @@ const BurgerConstructor = () => {
         collect: monitor => ({
             isHoverItems: monitor.canDrop()
         }),
-        drop: (item) => {
+        drop: (item:IIngregient) => {
             dispatch(addItems(item));
             dispatch({ type: INCREMENT, payload: item });
         }
@@ -47,7 +48,7 @@ const BurgerConstructor = () => {
             return (navigate('/login'))
         }
         else {
-            const ingredientId = selectedItems.map(item => item._id);
+            const ingredientId = selectedItems.map((item:IIngregient) => item._id);
             const ingredientBunsId = selectedItemBuns._id;
             const ingredient = [...ingredientId, ingredientBunsId, ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
@@ -92,7 +93,7 @@ const BurgerConstructor = () => {
                 <ul className={`${BurgerConstructorStyles.containerScroll} 
                 ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
                     ref={dropTargets}>
-                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid, index) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
+                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid:IIngregient, index:number) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
                 <div className={`pl-8 mb-4 ${BurgerConstructorStyles.ingridientsBun}`}

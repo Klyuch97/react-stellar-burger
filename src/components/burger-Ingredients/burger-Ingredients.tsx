@@ -2,28 +2,27 @@ import React, { useMemo, useEffect, useState } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients/burger-Ingredients.module.css';
 import Tabs from '../tabs/tabs';
 import Ingredients from './ingredients/ingredients';
-import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { useModal } from '../../hooks/modal';
-import { CURRENT_INGRID } from '../../services/actions/burgerState';
+import { useDispatch, useSelector } from '../../services/hooks';
+import { IIngregient } from '../../types/types';
 
 
 
 const BurgerIngredients = () => {
     const { ingrid, isLoading, hasError } = useSelector(state => state.burger);
-
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
 
     const [buns, sauces, mains] = useMemo(() => {
-        const filteredBuns = ingrid.filter(item => item.type === 'bun');
-        const filteredSauces = ingrid.filter(item => item.type === 'sauce');
-        const filteredMains = ingrid.filter(item => item.type === 'main');
+        const filteredBuns = ingrid.filter((item: IIngregient) => item.type === 'bun');
+        const filteredSauces = ingrid.filter((item: IIngregient) => item.type === 'sauce');
+        const filteredMains = ingrid.filter((item: IIngregient) => item.type === 'main');
 
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
 
-    const [current, setCurrent] = React.useState('one');
+    const [current, setCurrent] = React.useState<string>('one');
     const [bunsRef, bunsInView] = useInView({ threshold: 0.1 });
     const [sausesRef, sausesInView] = useInView({ threshold: 0.1 });
     const [mainsRef, mainInView] = useInView({ threshold: 0.1 });
@@ -38,34 +37,42 @@ const BurgerIngredients = () => {
         }
     }, [bunsInView, sausesInView, mainInView]);
 
-    const handleTabClick = (currentTab) => {
+    const handleTabClick = (currentTab: string): void => {
         setCurrent(currentTab);
         switch (currentTab) {
             case 'one':
-                document.getElementById('bunsTab').scrollIntoView({ behavior: "smooth" });
+                const bunsTab = document.getElementById('bunsTab');
+                if (bunsTab) {
+                    bunsTab.scrollIntoView({ behavior: "smooth" });
+                }
                 break;
             case 'two':
-                document.getElementById('saucesTab').scrollIntoView({ behavior: "smooth" });
+                const saucesTab = document.getElementById('saucesTab');
+                if (saucesTab) {
+                    saucesTab.scrollIntoView({ behavior: "smooth" });
+                }
                 break;
             case 'three':
-                document.getElementById('mainsTab').scrollIntoView({ behavior: "smooth" });
+                const mainsTab = document.getElementById('mainsTab');
+                if (mainsTab) {
+                    mainsTab.scrollIntoView({ behavior: "smooth" });
+                }
                 break;
             default:
                 break;
         }
     };
-    const handleItemClick = () => {
-        openModal()
-        // dispatch({ type: CURRENT_INGRID, payload: item })
-    }
 
+    const handleItemClick = (): void => {
+        openModal()
+    }
 
     return (
         <section className={BurgerIngredientsStyles.page}>
             <h1 className='text text_type_main-large mt-10 pb-5'>
                 Соберите бургер
             </h1>
-            <Tabs current={current} setCurrent={setCurrent} handleTabClick={handleTabClick} />
+            <Tabs current={current} handleTabClick={handleTabClick} />
             <ul className={`${BurgerIngredientsStyles.li} custom-scroll`}>
                 <li className={BurgerIngredientsStyles.ul} ref={bunsRef} id='bunsTab' >
                     <h2 className='mb-6 text text_type_main-medium'>Булки</h2>
@@ -76,7 +83,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            buns.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            buns.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul} ref={sausesRef} id='saucesTab'>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -86,7 +93,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            sauces.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
@@ -97,7 +104,7 @@ const BurgerIngredients = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mains.map((ingrid, index) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            mains.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
             </ul>

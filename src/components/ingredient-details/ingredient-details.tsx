@@ -1,19 +1,20 @@
 import IngridDetailsStyles from './ingredient-details.module.css'
 import { ingredientPropType } from '../../utils/prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getIngrid } from '../../services/actions/burgerState';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from '../../services/hooks';
+import { IIngregient } from '../../types/types';
 
 
-export const IngredientDetails = () => {
+export const IngredientDetails: FC = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getIngrid());
     }, [dispatch]);
     const { id } = useParams();
     const ingrids = useSelector((state) => state.burger.ingrid);
-    const data = ingrids.find((elem) => elem._id === id);
+    const data = ingrids.find((elem: IIngregient) => elem._id === id);
     return (
         <>
             {data && <div>
@@ -46,6 +47,3 @@ export const IngredientDetails = () => {
     )
 }
 
-IngredientDetails.propTypes = {
-    data: ingredientPropType
-}

@@ -1,30 +1,32 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components"
-import s from "./order-user-info-popup.module.css"
+import s from "./order-info-popup.module.css"
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { IngredientItems } from "./ingridinets-items";
+import { useSelector } from "../../services/hooks";
+import { FC } from "react";
+import { IIngregient, IOrderDetails } from "../../types/types";
 
 
-export const OrderUserInfoPopup = () => {
+export const OrderInfoPopup: FC = () => {
     const { ingrid } = useSelector(store => store.burger);
     const { id } = useParams();
     const messageSocket = useSelector(state => state.feed.messages.orders);
-    const data = messageSocket && messageSocket.find((elem) => elem._id === id);
+    const data = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
     const IngredientId = data && data.ingredients;
-    const ingredientsCurrent = IngredientId && IngredientId.map((data) => {
-        const item = ingrid.find(item => item._id === data);
+    const ingredientsCurrent = IngredientId && IngredientId.map((data: string) => {
+        const item = ingrid.find((item: IIngregient) => item._id === data);
         return item;
     });
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc, currentValue) => {
-        if (!acc.find(data => data._id === currentValue._id)) {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
+        if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []
     );
 
-    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum, item) => sum += item.price, 0);
+    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
 
     const Status = () => {
         return (
@@ -40,7 +42,7 @@ export const OrderUserInfoPopup = () => {
                 {<Status />}
                 <p className={`text text_type_main-medium mb-6 mt-15 ${s.compound}`}>Состав:</p>
                 <div className={`${s.items} custom-scroll `}>
-                    {uniqueId.map((data, index) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                    {uniqueId.map((data: IIngregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
                 </div>
                 <div className={`${s.timePrice} mt-10 mb-10`}>
                     <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>

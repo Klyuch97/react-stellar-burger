@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import OrderdetailsStyles from './order-details.module.css'
 import doneImage from '../../images/done.png'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 
-export const OrderDetails = () => {
+export const OrderDetails:FC = () => {
     const { isLoading, hasError, orderNumber, ingrid } = useSelector(state => state.burger);
 
     return (
