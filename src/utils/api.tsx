@@ -1,3 +1,4 @@
+import { log } from "console";
 import { IIngregient, IOrderDetails, IUser } from "../types/types";
 
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
@@ -7,7 +8,7 @@ interface IExtendedResponse extends Response {
   success: boolean;
   data?: Array<IIngregient>;
   message?: string;
-  accessToken?: string | undefined;
+  accessToken?: string;
   refreshToken?: string;
   user?: IUser;
   name?: string;
@@ -25,7 +26,7 @@ const checkSuccess = (res: IExtendedResponse) => {
   return Promise.reject(`Ответ не success: ${res}`);
 };
 
-export const request = (endpoint: string, options?: any) => {
+export const request = (endpoint: string, options?: object) => {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess)
@@ -47,7 +48,7 @@ export const fetchWithRefresh = async (endpoint: string, options: any) => {
     const res = await fetch(`${BASE_URL}${endpoint}`, options);
     return await checkResponse(res);
 
-  } catch (err: any) {
+  } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {

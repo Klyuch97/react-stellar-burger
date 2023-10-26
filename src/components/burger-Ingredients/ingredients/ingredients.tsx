@@ -18,9 +18,8 @@ const Ingredients: FC<IIngredientElement> = ({ data, handleItemClick }) => {
     const id = data['_id'];
 
     const ingredient: IIngregient | {
-        [key: string]: any
+        [key: string]: any;
     } = [...selectedItems, selectedItemBuns];
-
 
     const count: { [key: string]: number } = useMemo(() => {
         return ingredient.reduce(

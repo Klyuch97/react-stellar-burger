@@ -23,24 +23,27 @@ export const FeedOrderInfo = () => {
 
     const messageSocket = useSelector(state => state.feed.messages.orders);
 
-    const data: IOrderDetails = messageSocket && messageSocket.find((elem: any) => elem._id === id);
+    const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
 
 
     const IngredientId: string[] = data && data.ingredients;
 
-    const ingredientsCurrent:any = IngredientId && IngredientId.map((data: string) => {
-        const item = ingrid.find((item: IIngregient) => item._id === data);
-        return item;
-    });
+    const ingredientsCurrent: IIngregient[] | undefined = IngredientId && IngredientId
+        .map((data: string) =>
+            ingrid.find((item: IIngregient) =>
+                item._id === data))
+        .filter((item: IIngregient | undefined): item is IIngregient =>
+            item !== undefined);
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc:any, currentValue:any) => {
+
+    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
         if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []);
 
-    const totalPrice = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item:any) => sum += item.price, 0);
+    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
 
     const Status = (): JSX.Element => {
         return (
