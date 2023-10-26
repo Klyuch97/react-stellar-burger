@@ -11,7 +11,7 @@ import {
     RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED
 } from "../constants/index"
 
-type TAuthUserState = {
+export type TAuthUserState = {
     user: IUser | null,
     loading: boolean,
     error: boolean,

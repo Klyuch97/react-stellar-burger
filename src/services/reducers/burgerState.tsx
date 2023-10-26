@@ -6,7 +6,7 @@ import {
 } from "../constants/index";
 import { TBurgerStateActions } from "../actions/burgerState";
 
-type TBurgerState = {
+export type TBurgerState = {
     ingrid: ReadonlyArray<IIngregient> | [],
     selectedItems: ReadonlyArray<IIngregient> | [],
     selectedItemBuns: { [key: string]: any },

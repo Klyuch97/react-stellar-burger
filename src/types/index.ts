@@ -9,7 +9,7 @@ import { TWsActions } from "../services/actions/web-socket";
 
 
 
-type TApplicationActions =
+export type TApplicationActions =
   | TBurgerStateActions
   | TAuthUserActions
   | TPriceStateActions
@@ -21,5 +21,4 @@ export type AppDispatch = typeof store.dispatch;
 export type AppThunk<TReturn = void> = ActionCreator<
   ThunkAction<TReturn, Action, RootState, TApplicationActions>
 >;
-
 

@@ -1,7 +1,13 @@
-import { AppDispatch, AppThunk } from "../../types";
+import { ThunkDispatch } from "redux-thunk";
+import { AppDispatch, AppThunk, RootState, TApplicationActions } from "../../types";
 import { IUser } from "../../types/types";
 import { fetchWithRefresh, request } from "../../utils/api";
 import { FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER__FAILED, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_AUTH_CHECKED, SET_USER, UPDATE_USER_INFO_FAILED, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS } from "../constants";
+import { Action, EmptyObject } from "redux";
+import { TBurgerState } from "../reducers/burgerState";
+import { TPriceState } from "../reducers/price";
+import { TWsState } from "../reducers/web-socket";
+import { TAuthUserState } from "../reducers/autnUser";
 
 
 
@@ -130,9 +136,9 @@ export const getUser: AppThunk = () => {
 };
 
 export const checkUserAuth: AppThunk = () => {
-    return (dispatch: any) => {
+    return (dispatch: ThunkDispatch<Action<any>, RootState, TApplicationActions>) => {
         if (localStorage.getItem("accessToken")) {
-            dispatch(getUser())
+            Promise.resolve(dispatch(getUser()))
                 .catch(() => {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");

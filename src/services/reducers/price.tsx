@@ -2,7 +2,7 @@ import { IIngregient } from "../../types/types";
 import { TPriceStateActions } from "../actions/price";
 import { INCREMENT, DECREMENT, RESET} from "../constants/index"
 
-type TPriceState = {
+export type TPriceState = {
     selectedItems: ReadonlyArray<IIngregient> | [],
     selectedItemBuns: { [key: string]: any },
     totalPrice: number,

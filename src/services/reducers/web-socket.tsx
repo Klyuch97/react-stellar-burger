@@ -1,7 +1,7 @@
 import {TWsActions} from "../actions/web-socket";
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE } from "../constants";
 
-type TWsState = {
+export type TWsState = {
     wsConnected: boolean,
     messages: { [key: string]: any },
 }
