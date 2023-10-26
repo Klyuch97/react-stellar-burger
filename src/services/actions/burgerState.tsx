@@ -75,7 +75,9 @@ export const getIngrid: AppThunk = () => {
     dispatch(getIngridAction());
     try {
       const response = await request("ingredients");
-      dispatch(getIngridSuccessAction(response.data));
+      if (response.data) {
+        dispatch(getIngridSuccessAction(response.data));
+      }
     } catch (error) {
       dispatch(getIngridFailedAction());
       alert(`Ошибка: ${error}`);
@@ -95,8 +97,11 @@ export const postOrderSubmit: AppThunk = (ingredient: Array<string>) => {
         },
         body: JSON.stringify({ ingredients: ingredient }),
       });
-      const orderNumber = response.order.number;
-      dispatch(getPostOrderSuccessAction(orderNumber))
+      if (response.order) {
+        const orderNumber = response.order.number;
+        dispatch(getPostOrderSuccessAction(orderNumber))
+      }
+
     }
     catch (error) {
       dispatch(getPostOrderFailedAction())

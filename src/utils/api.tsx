@@ -1,10 +1,24 @@
+import { IIngregient, IOrderDetails, IUser } from "../types/types";
+
 export const BASE_URL = 'https://norma.nomoreparties.space/api/';
 
-const checkResponse = (res: any) => {
-  return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
+
+interface IExtendedResponse extends Response {
+  success: boolean;
+  data?: Array<IIngregient>;
+  message?: string;
+  accessToken?: string | undefined;
+  refreshToken?: string;
+  user?: IUser;
+  name?: string;
+  order?: IOrderDetails
+}
+
+const checkResponse = (res: Response) => {
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-const checkSuccess = (res: any) => {
+const checkSuccess = (res: IExtendedResponse) => {
   if (res && res.success) {
     return res;
   }
@@ -15,7 +29,6 @@ export const request = (endpoint: string, options?: any) => {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess)
-
 };
 
 export const refreshToken = () => {

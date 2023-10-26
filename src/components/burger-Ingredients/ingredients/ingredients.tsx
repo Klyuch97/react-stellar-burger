@@ -17,15 +17,18 @@ const Ingredients: FC<IIngredientElement> = ({ data, handleItemClick }) => {
     const location = useLocation();
     const id = data['_id'];
 
-    const ingredient:any[] = [...selectedItems, selectedItemBuns];
+    const ingredient: IIngregient | {
+        [key: string]: any
+    } = [...selectedItems, selectedItemBuns];
+
 
     const count: { [key: string]: number } = useMemo(() => {
         return ingredient.reduce(
-            (acc: { [key: string]: number }, item:IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item: IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredient]);
-    
+
 
     const dispatch = useDispatch();
     const [{ opacity }, ref] = useDrag({

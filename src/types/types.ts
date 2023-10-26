@@ -1,4 +1,4 @@
-import { number } from "prop-types"
+
 
 export interface IIngregient {
     calories: number,

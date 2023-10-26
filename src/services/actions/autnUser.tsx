@@ -90,9 +90,16 @@ export const registerUser = (userData: IUser) => {
                 body: JSON.stringify(userData),
             });
             if (response.success) {
-                localStorage.setItem("refreshToken", response.refreshToken);
-                localStorage.setItem("accessToken", response.accessToken);
-                dispatch(registerSuccessAction(response.user));
+                if (response.refreshToken) {
+                    localStorage.setItem("refreshToken", response.refreshToken);
+                }
+                if (response.accessToken) {
+                    localStorage.setItem("accessToken", response.accessToken);
+                }
+                if (response.user) {
+                    dispatch(registerSuccessAction(response.user));
+                }
+
             } else {
                 dispatch(registerFailedAction());
             }
@@ -291,8 +298,11 @@ export const forgotPassword = (userData: IUser, pageResetPassword: () => void) =
                 body: JSON.stringify(userData),
             });
             if (response.success) {
-                dispatch(forgotPasswordSuccessAction(response.user));
-                dispatch(setUser(response.user));
+                if (response.user) {
+                    dispatch(forgotPasswordSuccessAction(response.user));
+                    dispatch(setUser(response.user));
+                }
+
                 localStorage.setItem('resetPasswordFlag', 'true');
                 pageResetPassword();
 

@@ -14,11 +14,12 @@ export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
     const IngredientId: string[] = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent: any = IngredientId.map((data: string) => {
-        const item = ingrid.find((item: IIngregient) => item._id === data);
-        return item;
-    });
-
+    const ingredientsCurrent: IIngregient[] | undefined = IngredientId && IngredientId
+    .map((data: string) =>
+        ingrid.find((item: IIngregient) =>
+            item._id === data))
+    .filter((item: IIngregient | undefined): item is IIngregient =>
+        item !== undefined);
     const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
     const id: string = data['_id'];
 

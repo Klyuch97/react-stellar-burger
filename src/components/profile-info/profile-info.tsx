@@ -1,5 +1,5 @@
 import styles from "./profile-info.module.css";
-import React, { FC, ReactHTMLElement, useEffect } from "react";
+import React, { ChangeEvent, FC, ReactHTMLElement, useEffect } from "react";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useUser } from "../../hooks/user";
 import { updateUserInfo } from "../../services/actions/autnUser";
@@ -7,23 +7,25 @@ import { useDispatch, useSelector } from "../../services/hooks";
 import { IUser } from "../../types/types";
 
 export const ProfileInfo: FC = () => {
-    const userData: any = useSelector((state) => state.user.user)
-    
+    const userData: IUser | null = useSelector((state) => state.user.user)
+
     const dispatch = useDispatch();
     const inputRef: React.MutableRefObject<null> = React.useRef(null)
     const { name, mail, password, setName, setMail, setPassword } = useUser();
     useEffect(() => {
-        setName(userData.name);
-        setMail(userData.email)
-    }, [setName, setMail]);
+        if (userData) {
+            setName(userData.name || '');
+            setMail(userData.email || '');
+        }
+    }, [userData, setName, setMail]);
     const CheckData = (): boolean => {
-        return name === userData.name && mail === userData.email && password === "" ? true : false;
+        return name === userData?.name && mail === userData?.email && password === "" ? true : false;
     }
 
     const cancelChanges = (): void => {
-        setName(userData.name);
-        setMail(userData.email);
-        setPassword("")
+        setName(userData?.name ?? "");
+        setMail(userData?.email ?? "");
+        setPassword("");
     }
 
     const handleSubmit = (e: React.FormEvent): void => {
@@ -43,7 +45,7 @@ export const ProfileInfo: FC = () => {
             <Input
                 type={'text'}
                 placeholder={'Имя'}
-                onChange={e => setName(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                 icon={'EditIcon'}
                 value={name}
                 name={'name'}
@@ -54,7 +56,7 @@ export const ProfileInfo: FC = () => {
                 extraClass="mb-6"
             />
             <Input
-                onChange={e => setMail(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setMail(e.target.value)}
                 value={mail}
                 name={'email'}
                 placeholder="Логин"
@@ -62,7 +64,7 @@ export const ProfileInfo: FC = () => {
                 extraClass="mb-6"
             />
             <PasswordInput
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 value={password}
                 name={'password'}
                 icon="EditIcon"
