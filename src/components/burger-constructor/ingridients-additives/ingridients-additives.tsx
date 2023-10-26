@@ -27,7 +27,7 @@ const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
 
     const [, drop] = useDrop({
         accept: "ingrid",
-        hover: (item:any, monitor) => {
+        hover: (item: { index: number }, monitor) => {
             if (!ref.current) {
                 return
             }

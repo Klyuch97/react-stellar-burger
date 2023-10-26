@@ -1,7 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientPropType } from '../../../utils/prop-types';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { IIngregient } from '../../../types/types';
