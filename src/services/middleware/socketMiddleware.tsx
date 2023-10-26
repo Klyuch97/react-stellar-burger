@@ -9,7 +9,6 @@ type WebSocketActions = {
   wsInitUserOrder: string;
 };
 
-//не совсем понимаю как здесь затипизировать правильно socketMiddleware
 
 export const socketMiddleware = (wsUrl: string, wsActions: WebSocketActions): Middleware => {
   return (store) => {
