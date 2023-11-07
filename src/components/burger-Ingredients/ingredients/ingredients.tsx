@@ -3,26 +3,26 @@ import BurgerIngredientsStyles from '../burger-Ingredients.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
-import { IIngregient } from '../../../types/types';
+import { Ingregient } from '../../../types/types';
 import { useDispatch, useSelector } from '../../../services/hooks';
 
-interface IIngredientElement {
-    data: IIngregient,
+type IngredientElement = {
+    data: Ingregient,
     handleItemClick: () => void
 }
 
-const Ingredients: FC<IIngredientElement> = ({ data, handleItemClick }) => {
+const Ingredients: FC<IngredientElement> = ({ data, handleItemClick }) => {
     const { selectedItemBuns, selectedItems } = useSelector(state => state.burger);
     const location = useLocation();
     const id = data['_id'];
 
-    const ingredient: IIngregient | {
+    const ingredient: Ingregient | {
         [key: string]: any;
     } = [...selectedItems, selectedItemBuns];
 
     const count: { [key: string]: number } = useMemo(() => {
         return ingredient.reduce(
-            (acc: { [key: string]: number }, item: IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item: Ingregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredient]);

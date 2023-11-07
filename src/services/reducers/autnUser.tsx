@@ -1,4 +1,4 @@
-import { IUser } from "../../types/types";
+import { User } from "../../types/types";
 import {
     TAuthUserActions
 } from "../actions/autnUser";
@@ -12,7 +12,7 @@ import {
 } from "../constants/index"
 
 export type TAuthUserState = {
-    user: IUser | null,
+    user: User | null,
     loading: boolean,
     error: boolean,
     isAuthChecked: boolean,

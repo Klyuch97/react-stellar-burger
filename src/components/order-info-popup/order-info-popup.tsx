@@ -4,25 +4,25 @@ import { useParams } from "react-router-dom";
 import { IngredientItems } from "./ingridinets-items";
 import { useSelector } from "../../services/hooks";
 import { FC } from "react";
-import { IIngregient, IOrderDetails } from "../../types/types";
+import { Ingregient, OrderDetails } from "../../types/types";
 
 
 export const OrderInfoPopup: FC = () => {
     const { ingrid } = useSelector(store => store.burger);
     const { id } = useParams();
     const messageSocket = useSelector(state => state.feed.messages.orders);
-    const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
+    const data: OrderDetails = messageSocket && messageSocket.find((elem: OrderDetails) => elem._id === id);
 
     const IngredientId: string[] = data && data.ingredients;
-    const ingredientsCurrent: IIngregient[] | undefined = IngredientId && IngredientId
+    const ingredientsCurrent: Ingregient[] | undefined = IngredientId && IngredientId
         .map((data: string) =>
-            ingrid.find((item: IIngregient) => item._id === data))
-        .filter((item: IIngregient | undefined): item is IIngregient  =>
+            ingrid.find((item: Ingregient) => item._id === data))
+        .filter((item: Ingregient | undefined): item is Ingregient  =>
             item !== undefined);
 
 
-    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc:IIngregient[], currentValue:IIngregient) => {
-        if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
+    const uniqueId = ingredientsCurrent && ingredientsCurrent.reduce((acc:Ingregient[], currentValue:Ingregient) => {
+        if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
@@ -30,7 +30,7 @@ export const OrderInfoPopup: FC = () => {
     );
 
 
-    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item:IIngregient) => sum += item.price, 0);
+    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item:Ingregient) => sum += item.price, 0);
 
     const Status = (): JSX.Element => {
         return (
@@ -46,7 +46,7 @@ export const OrderInfoPopup: FC = () => {
                 {<Status />}
                 <p className={`text text_type_main-medium mb-6 mt-15 ${s.compound}`}>Состав:</p>
                 <div className={`${s.items} custom-scroll `}>
-                    {uniqueId.map((data: IIngregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                    {uniqueId.map((data: Ingregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
                 </div>
                 <div className={`${s.timePrice} mt-10 mb-10`}>
                     <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>

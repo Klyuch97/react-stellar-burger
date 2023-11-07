@@ -5,9 +5,9 @@ import {
 } from 'react-redux';
 import { AppDispatch, AppThunk, RootState } from '../types';
 
-interface IAppDispatch {
+type TAppDispatch= {
   (): AppDispatch | AppThunk;
 }
 
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
-export const useDispatch: IAppDispatch = dispatchHook;
+export const useDispatch: TAppDispatch = dispatchHook;

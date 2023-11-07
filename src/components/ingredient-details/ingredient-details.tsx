@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getIngrid } from '../../services/actions/burgerState';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { IIngregient } from '../../types/types';
+import { Ingregient } from '../../types/types';
 
 
 export const IngredientDetails: FC = () => {
@@ -14,7 +14,7 @@ export const IngredientDetails: FC = () => {
     }, [dispatch]);
     const { id } = useParams();
     const ingrids = useSelector((state) => state.burger.ingrid);
-    const data: IIngregient | undefined = ingrids.find((elem: IIngregient) => elem._id === id);
+    const data: Ingregient | undefined = ingrids.find((elem: Ingregient) => elem._id === id);
 
     return (
         <>

@@ -5,7 +5,7 @@ import Ingredients from './ingredients/ingredients';
 import { useInView } from 'react-intersection-observer';
 import { useModal } from '../../hooks/modal';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { IIngregient } from '../../types/types';
+import { Ingregient } from '../../types/types';
 
 
 
@@ -15,9 +15,9 @@ const BurgerIngredients:FC = () => {
     const dispatch = useDispatch();
 
     const [buns, sauces, mains] = useMemo(() => {
-        const filteredBuns:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'bun');
-        const filteredSauces:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'sauce');
-        const filteredMains:Array<IIngregient> = ingrid.filter((item: IIngregient) => item.type === 'main');
+        const filteredBuns:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'bun');
+        const filteredSauces:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'sauce');
+        const filteredMains:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'main');
 
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
@@ -83,7 +83,7 @@ const BurgerIngredients:FC = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            buns.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            buns.map((ingrid: Ingregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div> </li>
                 <li className={BurgerIngredientsStyles.ul} ref={sausesRef} id='saucesTab'>
                     <h2 className='mb-6 text text_type_main-medium'>Соусы</h2>
@@ -93,7 +93,7 @@ const BurgerIngredients:FC = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            sauces.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            sauces.map((ingrid: Ingregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
                 <li className={BurgerIngredientsStyles.ul} ref={mainsRef} id='mainsTab'>
@@ -104,7 +104,7 @@ const BurgerIngredients:FC = () => {
                         {!isLoading &&
                             !hasError &&
                             ingrid.length &&
-                            mains.map((ingrid: IIngregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
+                            mains.map((ingrid: Ingregient) => <Ingredients key={ingrid._id} data={ingrid} handleItemClick={handleItemClick} />)}
                     </div>
                 </li>
             </ul>

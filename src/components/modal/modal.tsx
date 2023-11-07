@@ -4,12 +4,12 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalStyles from './modal.module.css'
 import ModalOverLay from '../modal-overlay/modal-overlay';
 
-interface IModal {
+type Modal ={
     onClose: () => void,
     children?: ReactNode
 }
 
-const Modal: FC<IModal> = ({ children, onClose, }) => {
+const Modal: FC<Modal> = ({ children, onClose, }) => {
 
     React.useEffect(() => {
         const closeEsc = (evt: { key: string; }) => {

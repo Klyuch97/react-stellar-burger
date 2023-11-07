@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { BurgerDetailsOrders } from "./burger-details-orders";
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/constants";
 import { useDispatch, useSelector } from "../../services/hooks";
-import { IIngregient, IOrderDetails } from "../../types/types";
+import { Ingregient, OrderDetails } from "../../types/types";
 
 
 
@@ -21,18 +21,18 @@ export const Feed = () => {
 
     const messagesOrdersNotFilter = messageSocket.orders;
 
-    const messagesOrders: Array<IOrderDetails> = [];
+    const messagesOrders: Array<OrderDetails> = [];
 
-    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item: IOrderDetails) => {
+    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item: OrderDetails) => {
         if (item.ingredients.every((ingredient: string) => ingredient !== null)) {
             messagesOrders.push(item);
         }
     });
 
-    const doneStatusOrder: Array<IOrderDetails> = [];
-    const pendingStatusOrder: Array<IOrderDetails> = [];
+    const doneStatusOrder: Array<OrderDetails> = [];
+    const pendingStatusOrder: Array<OrderDetails> = [];
 
-    messagesOrders && messagesOrders.map((data: IOrderDetails) => {
+    messagesOrders && messagesOrders.map((data: OrderDetails) => {
         if (data.status === "done") {
             doneStatusOrder.push(data);
         } else if (data.status === "pending") {
@@ -45,14 +45,14 @@ export const Feed = () => {
             <p className={`${styles.text} mb-5 text text_type_main-large`}>Лента заказов</p>
             <div className={styles.block}>
                 <div className={`${styles.orderFeed} custom-scroll`}>
-                    {messagesOrders && messagesOrders.map((data: IOrderDetails) => <BurgerDetailsOrders data={data} key={data._id} />)}
+                    {messagesOrders && messagesOrders.map((data: OrderDetails) => <BurgerDetailsOrders data={data} key={data._id} />)}
                 </div>
                 <div className={styles.statusFeed}>
                     <div className={styles.ordersBoard}>
                         <div className={`mr-9`}>
                             <p className={`text text_type_main-medium pb-6`}>Готовы:</p>
                             <div className={styles.table}>
-                                {doneStatusOrder && doneStatusOrder.map((data: IOrderDetails, index: number) =>
+                                {doneStatusOrder && doneStatusOrder.map((data: OrderDetails, index: number) =>
                                     index < 20 && <p key={index} className={`${styles.numberDone} pb-2 text text_type_digits-default `}>{data.number}</p>
                                 )}
                             </div>
@@ -60,7 +60,7 @@ export const Feed = () => {
                         <div>
                             <p className={`text text_type_main-medium pb-6`}>В работе:</p>
                             <div className={styles.table}>
-                                {pendingStatusOrder && pendingStatusOrder.map((data: IOrderDetails, index: number) =>
+                                {pendingStatusOrder && pendingStatusOrder.map((data: OrderDetails, index: number) =>
                                     index < 20 && <p key={index} className={`pb-2 text text_type_digits-default `}>{data.number}</p>
                                 )}
                             </div>

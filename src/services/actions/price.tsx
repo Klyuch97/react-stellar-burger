@@ -1,22 +1,22 @@
-import { IIngregient } from "../../types/types";
+import { Ingregient } from "../../types/types";
 import { DECREMENT, INCREMENT, RESET } from "../constants";
 
 
-export interface IIncrementPrice {
+export type IncrementPrice = {
   readonly type: typeof INCREMENT;
-  payload: IIngregient;
+  payload: Ingregient;
 }
 
-export interface IDecrementPrice {
+export type DecrementPrice = {
   readonly type: typeof DECREMENT;
-  payload: IIngregient;
+  payload: Ingregient;
 }
 
-export interface IResetPrice {
+export type ResetPrice = {
   readonly type: typeof RESET;
 }
 
 export type TPriceStateActions =
-| IIncrementPrice
-| IDecrementPrice
-| IResetPrice;
+  | IncrementPrice
+  | DecrementPrice
+  | ResetPrice;

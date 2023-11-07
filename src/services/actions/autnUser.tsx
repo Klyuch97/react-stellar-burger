@@ -1,86 +1,86 @@
 import { ThunkDispatch } from "redux-thunk";
 import { AppDispatch, AppThunk, RootState, TApplicationActions } from "../../types";
-import { IUser } from "../../types/types";
+import { User } from "../../types/types";
 import { fetchWithRefresh, request } from "../../utils/api";
 import { FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER__FAILED, LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_SUCCESS, REGISTER_FAILED, REGISTER_REQUEST, REGISTER_SUCCESS, RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, SET_AUTH_CHECKED, SET_USER, UPDATE_USER_INFO_FAILED, UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS } from "../constants";
-import { Action} from "redux";
+import { Action } from "redux";
 
 
 
-export interface ISetAuthCheked {
+export type SetAuthCheked = {
     readonly type: typeof SET_AUTH_CHECKED;
     payload: boolean;
 }
-export interface ISetUser {
+export type SetUser = {
     readonly type: typeof SET_USER;
-    payload: IUser | null;
+    payload: User | null;
 }
 
-export interface ILogoutSuccess {
+export type LogoutSuccess = {
     readonly type: typeof LOGOUT_SUCCESS;
 }
-export const logOutSuccessAction = (): ILogoutSuccess => ({
+export const logOutSuccessAction = (): LogoutSuccess => ({
     type: LOGOUT_SUCCESS
 });
 
-export interface IRegisterSuccess {
+export type RegisterSuccess = {
     readonly type: typeof REGISTER_SUCCESS;
-    readonly user: IUser
+    readonly user: User
 }
-export interface IRegisterFailed {
+export type RegisterFailed = {
     readonly type: typeof REGISTER_FAILED;
 }
-export interface IRegisterRequest {
+export type RegisterRequest = {
     readonly type: typeof REGISTER_REQUEST;
 }
 
-export const registerRequestAction = (): IRegisterRequest => ({
+export const registerRequestAction = (): RegisterRequest => ({
     type: REGISTER_REQUEST
 });
-export const registerFailedAction = (): IRegisterFailed => ({
+export const registerFailedAction = (): RegisterFailed => ({
     type: REGISTER_FAILED
 });
-export const registerSuccessAction = (user: IUser): IRegisterSuccess => ({
+export const registerSuccessAction = (user: User): RegisterSuccess => ({
     type: REGISTER_SUCCESS,
     user
 });
 
 
-export interface IGetUserRequest {
+export type GetUserRequest = {
     readonly type: typeof GET_USER_REQUEST;
 }
-export interface IGetUserFailed {
+export type GetUserFailed = {
     readonly type: typeof GET_USER__FAILED;
 }
-export interface IGetUserSuccess {
+export type GetUserSuccess = {
     readonly type: typeof GET_USER_SUCCESS;
-    readonly user: IUser
+    readonly user: User
 }
 
-export const getUserRequestAction = (): IGetUserRequest => ({
+export const getUserRequestAction = (): GetUserRequest => ({
     type: GET_USER_REQUEST
 });
-export const getUserFailedAction = (): IGetUserFailed => ({
+export const getUserFailedAction = (): GetUserFailed => ({
     type: GET_USER__FAILED
 });
-export const getUserSuccessAction = (user: IUser): IGetUserSuccess => ({
+export const getUserSuccessAction = (user: User): GetUserSuccess => ({
     type: GET_USER_SUCCESS,
     user
 });
 
 
 
-export const setAuthChecked = (value: boolean): ISetAuthCheked => ({
+export const setAuthChecked = (value: boolean): SetAuthCheked => ({
     type: SET_AUTH_CHECKED,
     payload: value,
 });
 
-export const setUser = (user: IUser | null): ISetUser => ({
+export const setUser = (user: User | null): SetUser => ({
     type: SET_USER,
     payload: user,
 });
 
-export const registerUser = (userData: IUser) => {
+export const registerUser = (userData: User) => {
     return async (dispatch: AppDispatch) => {
         dispatch(registerRequestAction())
         try {
@@ -171,29 +171,29 @@ export const logOut: AppThunk = () => {
     };
 };
 
-export interface ILoginRequest {
+export type LoginRequest = {
     readonly type: typeof LOGIN_REQUEST;
 }
-export interface ILoginFailed {
+export type LoginFailed = {
     readonly type: typeof LOGIN_FAILED;
 }
-export interface ILoginSuccess {
+export type LoginSuccess = {
     readonly type: typeof LOGIN_SUCCESS;
-    readonly user: IUser
+    readonly user: User
 }
 
-export const loginRequestAction = (): IGetUserRequest => ({
+export const loginRequestAction = (): GetUserRequest => ({
     type: GET_USER_REQUEST
 });
-export const loginFailedAction = (): IGetUserFailed => ({
+export const loginFailedAction = (): GetUserFailed => ({
     type: GET_USER__FAILED
 });
-export const loginSuccessAction = (user: IUser): IGetUserSuccess => ({
+export const loginSuccessAction = (user: User): GetUserSuccess => ({
     type: GET_USER_SUCCESS,
     user
 });
 
-export const LogIn = (userData: IUser) => {
+export const LogIn = (userData: User) => {
     return async (dispatch: AppDispatch) => {
         dispatch(loginRequestAction());
         try {
@@ -217,30 +217,30 @@ export const LogIn = (userData: IUser) => {
     };
 };
 
-export interface IUpdateUserInfoRequest {
+export type UpdateUserInfoRequest = {
     readonly type: typeof UPDATE_USER_INFO_REQUEST;
 }
-export interface IUpdateUserInfoFailed {
+export type UpdateUserInfoFailed = {
     readonly type: typeof UPDATE_USER_INFO_FAILED;
 }
-export interface IUpdateUserInfoSuccess {
+export type UpdateUserInfoSuccess = {
     readonly type: typeof UPDATE_USER_INFO_SUCCESS;
-    readonly user: IUser
+    readonly user: User
 }
 
-export const updateUserInfoRequestAction = (): IUpdateUserInfoRequest => ({
+export const updateUserInfoRequestAction = (): UpdateUserInfoRequest => ({
     type: UPDATE_USER_INFO_REQUEST
 });
-export const updateUserInfoFailedAction = (): IUpdateUserInfoFailed => ({
+export const updateUserInfoFailedAction = (): UpdateUserInfoFailed => ({
     type: UPDATE_USER_INFO_FAILED
 });
-export const updateUserInfoSuccessAction = (user: IUser): IUpdateUserInfoSuccess => ({
+export const updateUserInfoSuccessAction = (user: User): UpdateUserInfoSuccess => ({
     type: UPDATE_USER_INFO_SUCCESS,
     user
 });
 
 
-export const updateUserInfo = (userData: IUser) => {
+export const updateUserInfo = (userData: User) => {
     return async (dispatch: AppDispatch) => {
         dispatch(updateUserInfoRequestAction())
         try {
@@ -265,30 +265,30 @@ export const updateUserInfo = (userData: IUser) => {
 };
 
 
-export interface IForgotPasswordRequest {
+export type ForgotPasswordRequest = {
     readonly type: typeof FORGOT_PASSWORD_REQUEST;
 }
-export interface IForgotPasswordFailed {
+export type ForgotPasswordFailed = {
     readonly type: typeof FORGOT_PASSWORD_FAILED;
 }
-export interface IForgotPasswordSuccess {
+export type ForgotPasswordSuccess = {
     readonly type: typeof FORGOT_PASSWORD_SUCCESS;
-    readonly user: IUser
+    readonly user: User
 }
 
-export const forgotPasswordRequestAction = (): IForgotPasswordRequest => ({
+export const forgotPasswordRequestAction = (): ForgotPasswordRequest => ({
     type: FORGOT_PASSWORD_REQUEST
 });
-export const forgotPasswordFailedAction = (): IForgotPasswordFailed => ({
+export const forgotPasswordFailedAction = (): ForgotPasswordFailed => ({
     type: FORGOT_PASSWORD_FAILED
 });
-export const forgotPasswordSuccessAction = (user: IUser): IForgotPasswordSuccess => ({
+export const forgotPasswordSuccessAction = (user: User): ForgotPasswordSuccess => ({
     type: FORGOT_PASSWORD_SUCCESS,
     user
 });
 
 
-export const forgotPassword = (userData: IUser, pageResetPassword: () => void) => {
+export const forgotPassword = (userData: User, pageResetPassword: () => void) => {
     return async (dispatch: AppDispatch) => {
         dispatch(forgotPasswordRequestAction())
         try {
@@ -317,24 +317,24 @@ export const forgotPassword = (userData: IUser, pageResetPassword: () => void) =
     };
 };
 
-export interface IResetPasswordRequest {
+export type ResetPasswordRequest = {
     readonly type: typeof RESET_PASSWORD_REQUEST;
 }
-export interface IResetPasswordFailed {
+export type ResetPasswordFailed = {
     readonly type: typeof RESET_PASSWORD_FAILED;
 }
-export interface IResetPasswordSuccess {
+export type ResetPasswordSuccess = {
     readonly type: typeof RESET_PASSWORD_SUCCESS;
 }
 
 
-export const resetPasswordRequestAction = (): IResetPasswordRequest => ({
+export const resetPasswordRequestAction = (): ResetPasswordRequest => ({
     type: RESET_PASSWORD_REQUEST
 });
-export const resetPasswordFailedAction = (): IResetPasswordFailed => ({
+export const resetPasswordFailedAction = (): ResetPasswordFailed => ({
     type: RESET_PASSWORD_FAILED
 });
-export const resetPasswordSuccessAction = (): IResetPasswordSuccess => ({
+export const resetPasswordSuccessAction = (): ResetPasswordSuccess => ({
     type: RESET_PASSWORD_SUCCESS
 });
 
@@ -366,24 +366,24 @@ export const resetPassword = (newPassword: string, code: string, pageLogin: () =
 
 
 export type TAuthUserActions =
-    | ISetAuthCheked
-    | ISetUser
-    | ILogoutSuccess
-    | IRegisterSuccess
-    | IRegisterFailed
-    | IRegisterRequest
-    | IGetUserRequest
-    | IGetUserFailed
-    | IGetUserSuccess
-    | ILoginRequest
-    | ILoginFailed
-    | ILoginSuccess
-    | IUpdateUserInfoRequest
-    | IUpdateUserInfoFailed
-    | IUpdateUserInfoSuccess
-    | IForgotPasswordRequest
-    | IForgotPasswordFailed
-    | IForgotPasswordSuccess
-    | IResetPasswordRequest
-    | IResetPasswordFailed
-    | IResetPasswordSuccess;
+    | SetAuthCheked
+    | SetUser
+    | LogoutSuccess
+    | RegisterSuccess
+    | RegisterFailed
+    | RegisterRequest
+    | GetUserRequest
+    | GetUserFailed
+    | GetUserSuccess
+    | LoginRequest
+    | LoginFailed
+    | LoginSuccess
+    | UpdateUserInfoRequest
+    | UpdateUserInfoFailed
+    | UpdateUserInfoSuccess
+    | ForgotPasswordRequest
+    | ForgotPasswordFailed
+    | ForgotPasswordSuccess
+    | ResetPasswordRequest
+    | ResetPasswordFailed
+    | ResetPasswordSuccess;

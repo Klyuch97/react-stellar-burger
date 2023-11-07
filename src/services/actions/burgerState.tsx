@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { request } from "../../utils/api";
-import { IIngregient } from '../../types/types';
+import { Ingregient } from '../../types/types';
 import {
   GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
   ADD_INGRID, ADD_INGRIDS, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
@@ -9,61 +9,61 @@ import {
 import { AppDispatch, AppThunk } from '../../types';
 
 
-export interface IGetIngridRequest {
+export type GetIngridRequest = {
   readonly type: typeof GET_INGRID_REQUEST;
 }
-export interface IGetIngridSuccess {
+export type GetIngridSuccess = {
   readonly type: typeof GET_INGRID_SUCCESS;
-  readonly ingrid: ReadonlyArray<IIngregient>
+  readonly ingrid: ReadonlyArray<Ingregient>
 }
-export interface IGetIngridFailed {
+export type GetIngridFailed = {
   readonly type: typeof GET_INGRID_FAILED;
 }
-export interface IPostOrderRequest {
+export type PostOrderRequest = {
   readonly type: typeof POST_ORDER_NUMBER_REQUEST;
 }
-export interface IPostOrderSuccess {
+export type PostOrderSuccess = {
   readonly type: typeof POST_ORDER_NUMBER_SUCCESS;
   readonly orderNumber: number
 }
-export interface IPostOrderFailed {
+export type PostOrderFailed = {
   readonly type: typeof POST_ORDER_NUMBER_FAILED;
 }
-export interface IAddIngrid {
+export type AddIngrid = {
   readonly type: typeof ADD_INGRID,
-  item: IIngregient
+  item: Ingregient
 }
-export interface IAddIngrids {
+export type AddIngrids = {
   readonly type: typeof ADD_INGRIDS,
-  item: IIngregient
+  item: Ingregient
 }
-export interface IDeleteIngredient {
+export type DeleteIngredient = {
   readonly type: typeof DELETE_INGRIDIENT,
-  payload: IIngregient
+  payload: Ingregient
 }
-export interface IChangeCarts {
+export type ChangeCarts = {
   readonly type: typeof CHANGE_CARTS,
-  payload: ReadonlyArray<IIngregient>
+  payload: ReadonlyArray<Ingregient>
 }
 
-export const getPostOrderAction = (): IPostOrderRequest => ({
+export const getPostOrderAction = (): PostOrderRequest => ({
   type: POST_ORDER_NUMBER_REQUEST
 });
-export const getPostOrderFailedAction = (): IPostOrderFailed => ({
+export const getPostOrderFailedAction = (): PostOrderFailed => ({
   type: POST_ORDER_NUMBER_FAILED
 });
-export const getPostOrderSuccessAction = (orderNumber: number): IPostOrderSuccess => ({
+export const getPostOrderSuccessAction = (orderNumber: number): PostOrderSuccess => ({
   type: POST_ORDER_NUMBER_SUCCESS,
   orderNumber
 });
-export const getIngridAction = (): IGetIngridRequest => ({
+export const getIngridAction = (): GetIngridRequest => ({
   type: GET_INGRID_REQUEST
 });
 
-export const getIngridFailedAction = (): IGetIngridFailed => ({
+export const getIngridFailedAction = (): GetIngridFailed => ({
   type: GET_INGRID_FAILED
 });
-export const getIngridSuccessAction = (ingrid: ReadonlyArray<IIngregient>): IGetIngridSuccess => ({
+export const getIngridSuccessAction = (ingrid: ReadonlyArray<Ingregient>): GetIngridSuccess => ({
   type: GET_INGRID_SUCCESS,
   ingrid
 });
@@ -112,28 +112,28 @@ export const postOrderSubmit: AppThunk = (ingredient: Array<string>) => {
   }
 }
 
-export const addItem = (item: IIngregient): IAddIngrid => ({
+export const addItem = (item: Ingregient): AddIngrid => ({
   type: ADD_INGRID,
   item,
 });
 
-export const addItems = (item: IIngregient): IAddIngrids => {
+export const addItems = (item: Ingregient): AddIngrids => {
   const newItem = { ...item, key: uuidv4() };
 
   return { type: ADD_INGRIDS, item: newItem };
 }
 
 export type TBurgerStateActions =
-  | IAddIngrid
-  | IAddIngrids
-  | IGetIngridFailed
-  | IGetIngridRequest
-  | IGetIngridSuccess
-  | IPostOrderFailed
-  | IPostOrderRequest
-  | IPostOrderSuccess
-  | IDeleteIngredient
-  | IChangeCarts;
+  | AddIngrid
+  | AddIngrids
+  | GetIngridFailed
+  | GetIngridRequest
+  | GetIngridSuccess
+  | PostOrderFailed
+  | PostOrderRequest
+  | PostOrderSuccess
+  | DeleteIngredient
+  | ChangeCarts;
 
 
 

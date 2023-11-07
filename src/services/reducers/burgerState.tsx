@@ -1,4 +1,4 @@
-import { IIngregient } from "../../types/types";
+import { Ingregient } from "../../types/types";
 import {
     GET_INGRID_FAILED, GET_INGRID_REQUEST, GET_INGRID_SUCCESS,
     ADD_INGRID, ADD_INGRIDS, POST_ORDER_NUMBER_FAILED, POST_ORDER_NUMBER_REQUEST,
@@ -7,8 +7,8 @@ import {
 import { TBurgerStateActions } from "../actions/burgerState";
 
 export type TBurgerState = {
-    ingrid: ReadonlyArray<IIngregient> | [],
-    selectedItems: ReadonlyArray<IIngregient> | [],
+    ingrid: ReadonlyArray<Ingregient> | [],
+    selectedItems: ReadonlyArray<Ingregient> | [],
     selectedItemBuns: { [key: string]: any },
     isLoading: boolean,
     hasError: boolean,

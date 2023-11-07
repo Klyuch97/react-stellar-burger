@@ -3,15 +3,15 @@ import BurgerConstructorStyles from '../burger-constructor.module.css';
 import { DELETE_INGRIDIENT, CHANGE_CARTS, DECREMENT } from '../../../services/constants';
 import { FC, useRef } from 'react';
 import { XYCoord, useDrag, useDrop } from 'react-dnd';
-import { IIngregient } from '../../../types/types';
+import { Ingregient } from '../../../types/types';
 import { useDispatch, useSelector } from '../../../services/hooks';
 
-interface IIngredientElement {
-    data: IIngregient,
+type IngredientElement = {
+    data: Ingregient,
     index: number,
 }
 
-const Ingridients: FC<IIngredientElement> = ({ data, index }) => {
+const Ingridients: FC<IngredientElement> = ({ data, index }) => {
     const id = data._id;
     const { selectedItems } = useSelector((state) => state.burger);
     const dispatch = useDispatch();

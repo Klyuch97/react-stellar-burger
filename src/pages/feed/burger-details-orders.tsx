@@ -3,28 +3,28 @@ import styles from "./feed.module.css"
 import { Link, useLocation } from "react-router-dom";
 import BurgerIngredientsStyles from "../../components/burger-Ingredients/burger-Ingredients.module.css"
 import { FC, useMemo } from "react";
-import { IIngregient, IOrderDetails } from "../../types/types";
+import { Ingregient, OrderDetails } from "../../types/types";
 import { useSelector } from "../../services/hooks";
 
-interface IBurgerDetailsOrders {
-    data: IOrderDetails
+type BurgerDetailsOrders = {
+    data: OrderDetails
 }
 
-export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
+export const BurgerDetailsOrders: FC<BurgerDetailsOrders> = ({ data }) => {
     const { ingrid } = useSelector(store => store.burger);
     const IngredientId: string[] = data.ingredients;
     const location = useLocation();
-    const ingredientsCurrent: IIngregient[] | undefined = IngredientId && IngredientId
-    .map((data: string) =>
-        ingrid.find((item: IIngregient) =>
-            item._id === data))
-    .filter((item: IIngregient | undefined): item is IIngregient =>
-        item !== undefined);
-    const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const ingredientsCurrent: Ingregient[] | undefined = IngredientId && IngredientId
+        .map((data: string) =>
+            ingrid.find((item: Ingregient) =>
+                item._id === data))
+        .filter((item: Ingregient | undefined): item is Ingregient =>
+            item !== undefined);
+    const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: Ingregient) => sum += item.price, 0);
     const id: string = data['_id'];
 
-    const uniqueId: IIngregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
-        if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
+    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+        if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
@@ -33,7 +33,7 @@ export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
 
     const count: { [key: string]: number } = useMemo(() => {
         return ingredientsCurrent.reduce(
-            (acc: { [key: string]: number }, item: IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item: Ingregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredientsCurrent]);
@@ -58,7 +58,7 @@ export const BurgerDetailsOrders: FC<IBurgerDetailsOrders> = ({ data }) => {
                 <p className={`${styles.burgerName} text text_type_main-medium pb-6`}>{data.name}</p>
                 <div className={`${styles.imgAndPrice} pb-6`}>
                     <div className={styles.containerImage}>
-                        {uniqueId.map((data: IIngregient, index: number) =>
+                        {uniqueId.map((data: Ingregient, index: number) =>
                             index < 7 && <div className={styles.frame} key={index}
                                 style={{ zIndex: 10 - index }}>
                                 <img src={data.image_mobile} className={styles.image}

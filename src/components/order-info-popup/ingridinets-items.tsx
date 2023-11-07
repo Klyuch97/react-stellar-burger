@@ -1,7 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import s from "./order-info-popup.module.css"
 import { FC, useMemo } from "react";
-import { IIngredientsItem, IIngregient } from "../../types/types";
+import { IIngredientsItem, Ingregient } from "../../types/types";
 
 
 
@@ -9,7 +9,7 @@ import { IIngredientsItem, IIngregient } from "../../types/types";
 export const IngredientItems:FC<IIngredientsItem> = ({ data, ingredientsCurrent }) => {
     const count: { [key: string]: number } = useMemo(() => {
         return ingredientsCurrent.reduce(
-            (acc: { [key: string]: number }, item:IIngregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
+            (acc: { [key: string]: number }, item:Ingregient) => ({ ...acc, [item._id]: (acc[item._id] || 0) + 1 }),
             {}
         );
     }, [ingredientsCurrent]);

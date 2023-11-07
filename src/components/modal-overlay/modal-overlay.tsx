@@ -1,11 +1,11 @@
 import React, { FC } from "react"
 import ModalOverlayStyles from './modal-overlay.module.css'
 
-interface IModalOverlay {
+type ModalOverlay = {
     onClose: () => void;
 }
 
-const ModalOverLay: FC<IModalOverlay> = ({ onClose }) => {
+const ModalOverLay: FC<ModalOverlay> = ({ onClose }) => {
     return (
         <div className={ModalOverlayStyles.overlay} onClick={onClose}></div>
     )

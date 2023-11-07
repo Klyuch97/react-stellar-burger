@@ -1,15 +1,15 @@
 
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../services/hooks";
-import { FC, ReactElement} from "react";
+import { FC, ReactElement } from "react";
 
-interface IProtected {
+type Protected = {
   onlyUnAuth?: boolean,
   component: ReactElement
 }
 
 
-const Protected: FC<IProtected> = ({ onlyUnAuth = false, component }) => {
+const Protected: FC<Protected> = ({ onlyUnAuth = false, component }) => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   // при этом результат этой проверки не имеет значения, важно только,
   // что сам факт проверки имел место.
@@ -41,7 +41,7 @@ const Protected: FC<IProtected> = ({ onlyUnAuth = false, component }) => {
   return component;
 };
 
-export const OnlyAuth: FC<IProtected> = Protected;
-export const OnlyUnAuth: FC<IProtected> = ({ component }) => (
+export const OnlyAuth: FC<Protected> = Protected;
+export const OnlyUnAuth: FC<Protected> = ({ component }) => (
   <Protected onlyUnAuth={true} component={component} />
 );

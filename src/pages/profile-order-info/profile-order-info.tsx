@@ -5,7 +5,7 @@ import { IngredientItems } from "../../components/order-info-popup/ingridinets-i
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { WS_CONNECTION_CLOSED, WS_INIT_USER_ORDER_START } from "../../services/constants";
 import { useDispatch, useSelector } from "../../services/hooks";
-import { IIngregient, IOrderDetails } from "../../types/types";
+import { Ingregient, OrderDetails } from "../../types/types";
 
 
 export const ProfileOrderInfo: FC = () => {
@@ -23,25 +23,25 @@ export const ProfileOrderInfo: FC = () => {
 
     const messageSocket = useSelector(state => state.feed.messages.orders);
 
-    const data: IOrderDetails = messageSocket && messageSocket.find((elem: IOrderDetails) => elem._id === id);
+    const data: OrderDetails = messageSocket && messageSocket.find((elem: OrderDetails) => elem._id === id);
 
     const IngredientId: string[] = data && data.ingredients;
 
-    const ingredientsCurrent: IIngregient[] | undefined = IngredientId && IngredientId
+    const ingredientsCurrent: Ingregient[] | undefined = IngredientId && IngredientId
         .map((data: string) =>
-            ingrid.find((item: IIngregient) =>
+            ingrid.find((item: Ingregient) =>
                 item._id === data))
-        .filter((item: IIngregient | undefined): item is IIngregient =>
+        .filter((item: Ingregient | undefined): item is Ingregient =>
             item !== undefined);
 
-    const uniqueId: Array<IIngregient> = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<IIngregient>, currentValue: IIngregient) => {
-        if (!acc.find((data: IIngregient) => data._id === currentValue._id)) {
+    const uniqueId: Array<Ingregient> = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+        if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }
         return acc;
     }, []);
 
-    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: IIngregient) => sum += item.price, 0);
+    const totalPrice: number = ingredientsCurrent && ingredientsCurrent.reduce((sum: number, item: Ingregient) => sum += item.price, 0);
 
     const Status = (): JSX.Element => {
         return (
@@ -57,7 +57,7 @@ export const ProfileOrderInfo: FC = () => {
                 {<Status />}
                 <p className={`text text_type_main-medium mb-6`}>Состав:</p>
                 <div className={`${s.items} custom-scroll mb-10 `}>
-                    {uniqueId.map((data: IIngregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
+                    {uniqueId.map((data: Ingregient, index: number) => <IngredientItems data={data} key={index} ingredientsCurrent={ingredientsCurrent} />)}
                 </div>
                 <div className={`${s.timePrice}`}>
                     <p className={`text text_type_main-default`}><FormattedDate date={new Date(data.createdAt)} /></p>

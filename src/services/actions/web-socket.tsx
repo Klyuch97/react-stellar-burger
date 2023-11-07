@@ -1,49 +1,49 @@
-import { IOrderDetails } from "../../types/types";
+import { OrderDetails } from "../../types/types";
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_INIT_USER_ORDER_START } from "../constants";
 
 
 
 
-export interface IWsConnectStart {
+export type WsConnectStart = {
   readonly type: typeof WS_CONNECTION_START;
 }
-export interface IWsConnectSuccess {
+export type WsConnectSuccess = {
   readonly type: typeof WS_CONNECTION_SUCCESS;
 }
-export interface IWsConnectError {
+export type WsConnectError = {
   readonly type: typeof WS_CONNECTION_ERROR;
 }
-export interface IWsConnectClosed {
+export type WsConnectClosed = {
   readonly type: typeof WS_CONNECTION_CLOSED;
 }
-export interface IWsGetMessage {
+export type WsGetMessage = {
   readonly type: typeof WS_GET_MESSAGE;
   readonly payload: {
-    orders: Array<IOrderDetails>;
+    orders: Array<OrderDetails>;
     success: boolean;
     total: number;
     totalToday: number;
   }
-  
+
 }
-export interface IWsInitUserOrderStart {
+export type WsInitUserOrderStart = {
   readonly type: typeof WS_INIT_USER_ORDER_START;
 }
 
-export const wsConnectionSuccess = (): IWsConnectSuccess => ({
+export const wsConnectionSuccess = (): WsConnectSuccess => ({
   type: WS_CONNECTION_SUCCESS
 });
 
-export const wsConnectionError = (): IWsConnectError => ({
+export const wsConnectionError = (): WsConnectError => ({
   type: WS_CONNECTION_ERROR
 });
 
-export const wsConnectionClosed = (): IWsConnectClosed => ({
+export const wsConnectionClosed = (): WsConnectClosed => ({
   type: WS_CONNECTION_CLOSED,
 });
 
-export const wsGetMessage = (message:{
-  orders: Array<IOrderDetails>;
+export const wsGetMessage = (message: {
+  orders: Array<OrderDetails>;
   success: boolean;
   total: number;
   totalToday: number;
@@ -53,9 +53,9 @@ export const wsGetMessage = (message:{
 });
 
 export type TWsActions =
-  | IWsConnectClosed
-  | IWsConnectError
-  | IWsConnectStart
-  | IWsConnectSuccess
-  | IWsGetMessage
-  | IWsInitUserOrderStart;
+  | WsConnectClosed
+  | WsConnectError
+  | WsConnectStart
+  | WsConnectSuccess
+  | WsGetMessage
+  | WsInitUserOrderStart;

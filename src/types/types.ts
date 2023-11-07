@@ -1,6 +1,6 @@
 
 
-export interface IIngregient {
+export type Ingregient = {
     calories: number,
     carbohydrates: number,
     fat: number,
@@ -17,13 +17,13 @@ export interface IIngregient {
 }
 
 
-export interface IUser {
+export type User = {
     email?: string | null,
     name?: string | null,
     password?: string | null
 }
 
-export interface IOrderDetails {
+export type OrderDetails = {
     createdAt: string,
     ingredients: Array<string>
     name: string,
@@ -33,7 +33,7 @@ export interface IOrderDetails {
     _id: string,
 }
 
-export interface IIngredientsItem {
-    data: IIngregient,
-    ingredientsCurrent: Array<IIngregient>
+export type IIngredientsItem = {
+    data: Ingregient,
+    ingredientsCurrent: Array<Ingregient>
 }

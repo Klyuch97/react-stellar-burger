@@ -11,7 +11,7 @@ import { INCREMENT, RESET } from '../../services/constants/index';
 import { useModal } from '../../hooks/modal';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/hooks';
-import { IIngregient } from '../../types/types';
+import { Ingregient } from '../../types/types';
 
 const BurgerConstructor: FC = () => {
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ const BurgerConstructor: FC = () => {
         collect: monitor => ({
             isHover: monitor.canDrop()
         }),
-        drop: (item: IIngregient) => {
+        drop: (item: Ingregient) => {
             dispatch(addItem(item));
             dispatch({ type: INCREMENT, payload: item });
 
@@ -37,7 +37,7 @@ const BurgerConstructor: FC = () => {
         collect: monitor => ({
             isHoverItems: monitor.canDrop()
         }),
-        drop: (item: IIngregient) => {
+        drop: (item: Ingregient) => {
             dispatch(addItems(item));
             dispatch({ type: INCREMENT, payload: item });
         }
@@ -48,7 +48,7 @@ const BurgerConstructor: FC = () => {
             return (navigate('/login'))
         }
         else {
-            const ingredientId: Array<string> = selectedItems.map((item: IIngregient) => item._id);
+            const ingredientId: Array<string> = selectedItems.map((item: Ingregient) => item._id);
             const ingredientBunsId: string = selectedItemBuns._id;
             const ingredient:Array<string> = [...ingredientId, ingredientBunsId, ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
@@ -93,7 +93,7 @@ const BurgerConstructor: FC = () => {
                 <ul className={`${BurgerConstructorStyles.containerScroll} 
                 ${isHoverItems ? BurgerConstructorStyles.onHover : ""} custom-scroll`}
                     ref={dropTargets}>
-                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid: IIngregient, index: number) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
+                    {selectedItems.length === 0 ? <DefaultItems /> : selectedItems.map((ingrid: Ingregient, index: number) => <Ingridients key={ingrid.key} data={ingrid} index={index} />)
                     }
                 </ul>
                 <div className={`pl-8 mb-4 ${BurgerConstructorStyles.ingridientsBun}`}

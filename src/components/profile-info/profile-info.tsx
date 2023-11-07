@@ -4,10 +4,10 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { useUser } from "../../hooks/user";
 import { updateUserInfo } from "../../services/actions/autnUser";
 import { useDispatch, useSelector } from "../../services/hooks";
-import { IUser } from "../../types/types";
+import { User } from "../../types/types";
 
 export const ProfileInfo: FC = () => {
-    const userData: IUser | null = useSelector((state) => state.user.user)
+    const userData: User | null = useSelector((state) => state.user.user)
 
     const dispatch = useDispatch();
     const inputRef: React.MutableRefObject<null> = React.useRef(null)

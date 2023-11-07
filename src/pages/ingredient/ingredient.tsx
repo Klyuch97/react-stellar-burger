@@ -2,12 +2,12 @@ import React, { FC } from "react";
 import styles from "./ingredient.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../services/hooks";
-import { IIngregient } from "../../types/types";
+import { Ingregient } from "../../types/types";
 
 export const Ingredient: FC = () => {
     const { id } = useParams();
     const ingrids = useSelector((state) => state.burger.ingrid);
-    const currentElem= ingrids.find((elem: IIngregient) => elem._id === id);
+    const currentElem= ingrids.find((elem: Ingregient) => elem._id === id);
 
     return (
         <>
