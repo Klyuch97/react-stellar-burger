@@ -48,20 +48,20 @@ const BurgerConstructor: FC = () => {
             return (navigate('/login'))
         }
         else {
-            const ingredientId: Array<string> = selectedItems.map((item: Ingregient) => item._id);
+            const ingredientId: string[] = selectedItems.map((item: Ingregient) => item._id);
             const ingredientBunsId: string = selectedItemBuns._id;
-            const ingredient:Array<string> = [...ingredientId, ingredientBunsId, ingredientBunsId];
+            const ingredient: string[] = [...ingredientId, ingredientBunsId, ingredientBunsId];
             dispatch(postOrderSubmit(ingredient))
             dispatch({ type: RESET })
             openModal()
         }
 
     }
-    const closeModals = ():void => {
+    const closeModals = (): void => {
         closeModal()
     }
 
-    const DefaultBun = ():JSX.Element => {
+    const DefaultBun = (): JSX.Element => {
         return (
             <div className={`${BurgerConstructorStyles.defaultBun}`}>
                 <p className="text text_type_main-medium">Перенесите булку сюда!</p>
@@ -69,7 +69,7 @@ const BurgerConstructor: FC = () => {
         )
     }
 
-    const DefaultItems = ():JSX.Element => {
+    const DefaultItems = (): JSX.Element => {
         return (
             <div className={BurgerConstructorStyles.defaultItems}>
                 <p className="text text_type_main-medium">Добавьте ингредиенты!</p>

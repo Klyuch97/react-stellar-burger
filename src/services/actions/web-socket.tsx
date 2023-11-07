@@ -19,7 +19,7 @@ export type WsConnectClosed = {
 export type WsGetMessage = {
   readonly type: typeof WS_GET_MESSAGE;
   readonly payload: {
-    orders: Array<OrderDetails>;
+    orders: OrderDetails[];
     success: boolean;
     total: number;
     totalToday: number;
@@ -43,7 +43,7 @@ export const wsConnectionClosed = (): WsConnectClosed => ({
 });
 
 export const wsGetMessage = (message: {
-  orders: Array<OrderDetails>;
+  orders: OrderDetails[];
   success: boolean;
   total: number;
   totalToday: number;

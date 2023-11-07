@@ -34,7 +34,7 @@ export const ProfileOrderInfo: FC = () => {
         .filter((item: Ingregient | undefined): item is Ingregient =>
             item !== undefined);
 
-    const uniqueId: Array<Ingregient> = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Ingregient[], currentValue: Ingregient) => {
         if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

@@ -36,7 +36,7 @@ export const FeedOrderInfo = () => {
             item !== undefined);
 
 
-    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reduce((acc: Ingregient[], currentValue: Ingregient) => {
         if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

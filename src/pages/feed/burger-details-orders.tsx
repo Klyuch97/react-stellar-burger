@@ -23,7 +23,7 @@ export const BurgerDetailsOrders: FC<BurgerDetailsOrders> = ({ data }) => {
     const totalPrice: number = ingredientsCurrent.reduce((sum: number, item: Ingregient) => sum += item.price, 0);
     const id: string = data['_id'];
 
-    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Ingregient[], currentValue: Ingregient) => {
         if (!acc.find((data: Ingregient) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

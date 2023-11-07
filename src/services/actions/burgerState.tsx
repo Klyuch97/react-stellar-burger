@@ -85,7 +85,7 @@ export const getIngrid: AppThunk = () => {
   };
 };
 
-export const postOrderSubmit: AppThunk = (ingredient: Array<string>) => {
+export const postOrderSubmit: AppThunk = (ingredient: string[]) => {
   return async (dispatch: AppDispatch) => {
     dispatch(getPostOrderAction())
     try {

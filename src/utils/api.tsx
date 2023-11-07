@@ -16,7 +16,7 @@ export const BASE_URL = 'https://norma.nomoreparties.space/api/';
 // }
 type ExtendedResponse = Response & {
   success: boolean;
-  data?: Array<Ingregient>;
+  data?: Ingregient[];
   message?: string;
   accessToken?: string;
   refreshToken?: string;

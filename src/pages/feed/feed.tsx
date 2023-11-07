@@ -21,7 +21,7 @@ export const Feed = () => {
 
     const messagesOrdersNotFilter = messageSocket.orders;
 
-    const messagesOrders: Array<OrderDetails> = [];
+    const messagesOrders: OrderDetails[] = [];
 
     messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item: OrderDetails) => {
         if (item.ingredients.every((ingredient: string) => ingredient !== null)) {
@@ -29,8 +29,8 @@ export const Feed = () => {
         }
     });
 
-    const doneStatusOrder: Array<OrderDetails> = [];
-    const pendingStatusOrder: Array<OrderDetails> = [];
+    const doneStatusOrder: OrderDetails[] = [];
+    const pendingStatusOrder: OrderDetails[] = [];
 
     messagesOrders && messagesOrders.map((data: OrderDetails) => {
         if (data.status === "done") {

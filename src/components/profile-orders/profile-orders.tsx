@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "../../services/hooks";
 import { OrderDetails } from "../../types/types";
 import { WS_CONNECTION_CLOSED, WS_INIT_USER_ORDER_START } from "../../services/constants";
 
-export const ProfileOrders:FC = () => {
+export const ProfileOrders: FC = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch({ type: WS_INIT_USER_ORDER_START });
@@ -15,19 +15,19 @@ export const ProfileOrders:FC = () => {
     }, [dispatch]);
 
     const messageSocket = useSelector(state => state.feed.messages);
-    const messagesOrdersNotFilter:Array<OrderDetails> = messageSocket.orders;
-    const messagesOrders:Array<OrderDetails> = [];
-    
-    
-    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item:OrderDetails) => {
-        if (item.ingredients.every((ingredient:string) => ingredient !== null)) {
-           messagesOrders.push(item);
+    const messagesOrdersNotFilter: OrderDetails[] = messageSocket.orders;
+    const messagesOrders: OrderDetails[] = [];
+
+
+    messagesOrdersNotFilter && messagesOrdersNotFilter.forEach((item: OrderDetails) => {
+        if (item.ingredients.every((ingredient: string) => ingredient !== null)) {
+            messagesOrders.push(item);
         }
     });
 
     return (
         <div className={`${s.content} custom-scroll`}>
-            {messagesOrders && messagesOrders.map((data:OrderDetails) => <ProfileOrderUser data={data} key={data._id} />).reverse()}
+            {messagesOrders && messagesOrders.map((data: OrderDetails) => <ProfileOrderUser data={data} key={data._id} />).reverse()}
         </div>
     )
 }

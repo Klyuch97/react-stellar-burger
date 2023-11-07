@@ -5,7 +5,7 @@ import { FC, useMemo } from 'react';
 import { useSelector } from '../../services/hooks';
 import { Ingregient, OrderDetails } from '../../types/types';
 
-type ProfileOrder ={
+type ProfileOrder = {
     data: OrderDetails
 }
 
@@ -21,7 +21,7 @@ export const ProfileOrderUser: FC<ProfileOrder> = ({ data }) => {
             item !== undefined);
 
 
-    const uniqueId: Ingregient[]= ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Array<Ingregient>, currentValue: Ingregient) => {
+    const uniqueId: Ingregient[] = ingredientsCurrent && ingredientsCurrent.reverse().reduce((acc: Ingregient[], currentValue: Ingregient) => {
         if (!acc.find((data) => data._id === currentValue._id)) {
             acc.push(currentValue);
         }

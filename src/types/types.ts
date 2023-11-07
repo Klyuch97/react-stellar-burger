@@ -25,7 +25,7 @@ export type User = {
 
 export type OrderDetails = {
     createdAt: string,
-    ingredients: Array<string>
+    ingredients: string[],
     name: string,
     number: number,
     status: string,
@@ -35,5 +35,5 @@ export type OrderDetails = {
 
 export type IIngredientsItem = {
     data: Ingregient,
-    ingredientsCurrent: Array<Ingregient>
+    ingredientsCurrent: Ingregient[]
 }

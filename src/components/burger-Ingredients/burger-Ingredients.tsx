@@ -9,15 +9,15 @@ import { Ingregient } from '../../types/types';
 
 
 
-const BurgerIngredients:FC = () => {
+const BurgerIngredients: FC = () => {
     const { ingrid, isLoading, hasError } = useSelector(state => state.burger);
     const { isModalOpen, openModal, closeModal } = useModal();
     const dispatch = useDispatch();
 
     const [buns, sauces, mains] = useMemo(() => {
-        const filteredBuns:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'bun');
-        const filteredSauces:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'sauce');
-        const filteredMains:Array<Ingregient> = ingrid.filter((item: Ingregient) => item.type === 'main');
+        const filteredBuns: Ingregient[] = ingrid.filter((item: Ingregient) => item.type === 'bun');
+        const filteredSauces: Ingregient[] = ingrid.filter((item: Ingregient) => item.type === 'sauce');
+        const filteredMains: Ingregient[] = ingrid.filter((item: Ingregient) => item.type === 'main');
 
         return [filteredBuns, filteredSauces, filteredMains];
     }, [ingrid]);
