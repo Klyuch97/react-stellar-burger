@@ -31,3 +31,10 @@
 .active{
     color: white;
 }
+
+.activeUser{
+    max-width: 134px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
